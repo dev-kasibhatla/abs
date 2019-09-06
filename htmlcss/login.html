@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/834927bd13.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/login.css">
+
+    <title> Login </title>
+</head>
+<body>
+    <div class="container-fluid" id="mainNav">
+    	
+    <!-- Image and text -->
+    <nav class="navbar navbar-light  ">
+        <a class="navbar-brand text-primary" href="#">
+            <!-- <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
+                alt=""><i class="fas fa-home"></i> -->
+                <i class="fas fa-home"></i>
+           <span id="NavTitle">Accounts</span> 
+        </a>
+    </nav>
+    </div>
+    <div id="mainbody" class="container-fluid ">
+        <div class="row">
+            <div id="old-user" class="col-lg-6 col-md-12  d-flex flex-column justify-content-center">
+                <div id="login-content" class="container-fluid" >
+                    <form action="">
+                        <section class="container-fluid"> 
+                        
+                            <h2 class="display-2" id="headings">Log In</h2>
+                           
+                            <p>
+                                <label for="mail" class="align-content-center" >
+                                    <span id="email" class="display-5" >Group E-mail :</span>
+                                    
+                                </label>
+                                <input type="email" id="mail" name="usermail">
+                            </p>
+                            <p>
+                                <label for="pwd" class="align-content-center" >
+                                    <span class="display-5 pass" >Password: </span>
+                                    
+                                </label>
+                                <input type="password" id="pwd" name="password">
+                            </p>
+                            <div class="container-fluid row d-flex ">
+                                <div class="col-6 d-flex justify-content-center">
+                                    <button  id="common_button" class="display-4">Submit</button>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center">
+                                    <button id="common_button" type="" class="display-4">Reset</button>
+                                </div>
+                            </div>
+                        </section>
+                    </form>
+                
+                </div>
+            </div>
+           
+           
+           
+            <div id="new-user" class="col-md-12 col-lg-6 ">
+                
+                
+                    <form action="">
+                   <h2 class="display-2 text-align-left " id="heading">Create An Account</h2>
+                        <section class="container-fluid">
+                
+                            
+                            <div  id="new-acc-details"	class=" container-fluid">
+                            
+                                <p>
+                                    <label for="Group-Name" class="align-content-center">
+                                        <span id="gname" class="display-5">Group Name</span>
+                                        
+                                    </label>
+                                    <input type="text" id="Group-Name" name="grp name" required>
+                                </p>
+                                <p>
+                                    <label for="school" class="align-content-center">
+                                        <span id="school-name" class="display-5">Select School</span>
+                                        
+                                    </label>
+                                    <select id="school" name="school options" placeholder="Select school..." required >
+                                        <option id="disabled-option" value="" disabled selected>Select school...</option>
+                                        <option value="mns">MNS</option>
+                                        <option value="mit">MIT</option>
+                                        <option value="bsm">BSM</option>
+                                        <option value="ssrvm">SSRVM</option>
+                                        <option value="rosary">Rosary</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <label for="mail" class="align-content-center" >
+                                        <span id="grp-email" class="display-5">Group E-mail :</span>
+                                        
+                                    </label>
+                                    <input type="email" id="mail" name="usermail" required placeholder="group@school.com">
+                            </p>
+                            <p>
+                                <label for="mentor-name" class="align-content-center">
+                                    <span id="mentor-name" class="display-5">Mentor Name </span>
+                            
+                                </label>
+                                <input type="text" id="mentor-name" name="usermail" required placeholder="Required Field">
+                            </p>
+                            <p>
+                                <label for="mail" class="align-content-center">
+                                    <span id="email" class="display-5">Mentor E-mail </span>
+                                    
+                                </label>
+                                <input type="email" id="mail" name="mentormail" required placeholder="mentor@school">
+                            </p>
+                            <p>
+                                <label for="dept" class="align-content-center">
+                                    <span id="email" class="display-5">Mentor Dept.</span>
+                                    
+                                </label>
+                                <input type="email" id="mail" name="mentor-dept" required placeholder="Mentor Department in School">
+                            </p>
+                            <p>
+                                <label for="pwd" class="align-content-center" >
+                                    <span class="display-5 pass">Password: </span>
+                                    
+                                </label>
+                                <input type="password" id="pwd" name="password" required>
+                            </p>
+                            <p>
+                               <button id="submitButton"><i class="fas fa-long-arrow-alt-right fa-2x"></i></button>
+                                
+                            </p>
+                        </div>
+                            
+                        </section>
+                    </form>
+                
+                
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/javascript/login.js"></script>
+    <script src="assets/javascript/lib/jquery-3.4.1.min.js"></script>
+</body>
+</html>

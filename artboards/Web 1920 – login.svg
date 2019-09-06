@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1, .cls-13, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-Web_1920_2);
+      }
+
+      .cls-3 {
+        stroke: #4e7dff;
+      }
+
+      .cls-4 {
+        fill: #04f;
+        font-size: 40px;
+        font-family: ArialRoundedMTBold, Arial Rounded MT;
+      }
+
+      .cls-5 {
+        fill: #f1f9ff;
+        stroke-width: 2px;
+      }
+
+      .cls-5, .cls-9 {
+        stroke: #bce0fd;
+      }
+
+      .cls-10, .cls-14, .cls-18, .cls-23, .cls-6, .cls-7 {
+        fill: #2699fb;
+      }
+
+      .cls-7 {
+        stroke: #2699fb;
+      }
+
+      .cls-12, .cls-20, .cls-21, .cls-8, .cls-9 {
+        fill: #fff;
+      }
+
+      .cls-8 {
+        stroke: #7fc4fd;
+      }
+
+      .cls-11 {
+        fill: #bce0fd;
+      }
+
+      .cls-11, .cls-14 {
+        font-size: 14px;
+        font-family: ArialMT, Arial;
+      }
+
+      .cls-12 {
+        font-size: 10px;
+      }
+
+      .cls-12, .cls-17, .cls-18, .cls-21 {
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
+      }
+
+      .cls-13 {
+        stroke: #707070;
+      }
+
+      .cls-15 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-16 {
+        clip-path: url(#clip-path-6);
+      }
+
+      .cls-17 {
+        fill: #9e9e9e;
+        font-size: 13px;
+      }
+
+      .cls-18 {
+        font-size: 30px;
+      }
+
+      .cls-19 {
+        clip-path: url(#clip-path-7);
+      }
+
+      .cls-21 {
+        font-size: 15px;
+      }
+
+      .cls-22, .cls-23 {
+        stroke: none;
+      }
+
+      .cls-24 {
+        filter: url(#Line_11);
+      }
+    </style>
+    <filter id="Line_11" x="-5" y="109.5" width="1927" height="19" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="16" height="16"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect class="cls-1" width="9.4" height="6.1"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <rect class="cls-1" width="184" height="50"/>
+    </clipPath>
+    <clipPath id="clip-Web_1920_2">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_2" data-name="Web 1920 – 2" class="cls-2">
+    <rect class="cls-20" width="1920" height="1080"/>
+    <g class="cls-24" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <line id="Line_11-2" data-name="Line 11" class="cls-3" x2="1909" transform="translate(4 116)"/>
+    </g>
+    <text id="ACCOUNT" class="cls-4" transform="translate(229 71)"><tspan x="0" y="0">ACCOUNT</tspan></text>
+    <g id="home_icon_final" data-name="home icon final" transform="translate(140 31)">
+      <g id="Forward_Arrow" data-name="Forward Arrow" transform="translate(-220 -650)">
+        <g id="Rectangle_608" data-name="Rectangle 608" class="cls-5" transform="translate(220 650)">
+          <rect class="cls-22" width="50" height="50" rx="10"/>
+          <rect class="cls-1" x="1" y="1" width="48" height="48" rx="9"/>
+        </g>
+      </g>
+      <g id="home_icon" data-name="home icon" transform="translate(-220 -717)">
+        <g id="Polygon_1" data-name="Polygon 1" class="cls-6" transform="translate(229 727)">
+          <path class="cls-22" d="M 31.76613807678223 15.5 L 1.233862161636353 15.5 L 16.5 0.6964724063873291 L 31.76613807678223 15.5 Z"/>
+          <path class="cls-23" d="M 16.5 1.39295482635498 L 2.467735290527344 15 L 30.53226470947266 15 L 16.5 1.39295482635498 M 16.5 0 L 33 16 L 0 16 L 16.5 0 Z"/>
+        </g>
+        <g id="Rectangle_1094" data-name="Rectangle 1094" class="cls-7" transform="translate(234 742)">
+          <rect class="cls-22" width="23" height="14"/>
+          <rect class="cls-1" x="0.5" y="0.5" width="22" height="13"/>
+        </g>
+        <g id="Rectangle_1095" data-name="Rectangle 1095" class="cls-8" transform="translate(243 749)">
+          <rect class="cls-22" width="5" height="7"/>
+          <rect class="cls-1" x="0.5" y="0.5" width="4" height="6"/>
+        </g>
+      </g>
+    </g>
+    <g id="Input_-_Required_Field" data-name="Input - Required Field" transform="translate(891 121)">
+      <g id="Rectangle_555" data-name="Rectangle 555" class="cls-9" transform="translate(270 190)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <rect id="Rectangle_582" data-name="Rectangle 582" class="cls-10" width="100" height="50" transform="translate(170 190)"/>
+      <text id="Required_Field" data-name="Required Field" class="cls-11" transform="translate(290 220)"><tspan x="0" y="0">Required Field</tspan></text>
+      <text id="GROUP_NAME" data-name="GROUP NAME" class="cls-12" transform="translate(186 219)"><tspan x="0" y="0">GROUP NAME</tspan></text>
+    </g>
+    <g id="Input_-_Required_Field-2" data-name="Input - Required Field" transform="translate(891 422)">
+      <g id="Rectangle_555-2" data-name="Rectangle 555" class="cls-9" transform="translate(270 190)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <rect id="Rectangle_582-2" data-name="Rectangle 582" class="cls-10" width="100" height="50" transform="translate(170 189)"/>
+      <text id="Required_Field-2" data-name="Required Field" class="cls-11" transform="translate(290 220)"><tspan x="0" y="0">Required Field</tspan></text>
+      <text id="MENTOR_NAME" data-name="MENTOR NAME" class="cls-12" transform="translate(183 219)"><tspan x="0" y="0">MENTOR NAME</tspan></text>
+    </g>
+    <g id="Input_-_Required_Field-3" data-name="Input - Required Field" transform="translate(891 623)">
+      <g id="Rectangle_555-3" data-name="Rectangle 555" class="cls-9" transform="translate(270 190)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <rect id="Rectangle_582-3" data-name="Rectangle 582" class="cls-10" width="100" height="50" transform="translate(170 189)"/>
+      <text id="Required_Field-3" data-name="Required Field" class="cls-11" transform="translate(290 220)"><tspan x="0" y="0">Required Field</tspan></text>
+      <text id="MENTOR_DEPT." data-name="MENTOR DEPT." class="cls-12" transform="translate(183 219)"><tspan x="0" y="0">MENTOR DEPT.</tspan></text>
+    </g>
+    <line id="Line_12" data-name="Line 12" class="cls-13" y2="673" transform="translate(958.5 300)"/>
+    <g id="Input_-_Error_Message" data-name="Input - Error Message" transform="translate(891 41)">
+      <g id="Rectangle_562" data-name="Rectangle 562" class="cls-8" transform="translate(270 470)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <text id="error_mail.com" data-name="error@mail.com" class="cls-14" transform="translate(290 500)"><tspan x="0" y="0">error@mail.com</tspan></text>
+      <g id="Attention" class="cls-15" transform="translate(594 487)">
+        <path id="Path_35" data-name="Path 35" class="cls-10" d="M8,0a8,8,0,1,0,8,8A8.024,8.024,0,0,0,8,0ZM9.1,12.2H6.9V10.3H9.2v1.9Zm.1-7.4L8.6,9.2H7.4L6.8,4.8v-1H9.3v1Z"/>
+      </g>
+      <rect id="Rectangle_586" data-name="Rectangle 586" class="cls-10" width="100" height="50" transform="translate(170 470)"/>
+      <text id="GROUP_EMAIL" data-name="GROUP EMAIL" class="cls-12" transform="translate(185 499)"><tspan x="0" y="0">GROUP EMAIL</tspan></text>
+    </g>
+    <g id="Input_-_Error_Message-2" data-name="Input - Error Message" transform="translate(397 554)">
+      <g id="Rectangle_562-2" data-name="Rectangle 562" class="cls-8" transform="translate(100)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <text id="error_mail.com-2" data-name="error@mail.com" class="cls-14" transform="translate(120 30)"><tspan x="0" y="0">error@mail.com</tspan></text>
+      <g id="Attention-2" data-name="Attention" class="cls-15" transform="translate(424 17)">
+        <path id="Path_35-2" data-name="Path 35" class="cls-10" d="M8,0a8,8,0,1,0,8,8A8.024,8.024,0,0,0,8,0ZM9.1,12.2H6.9V10.3H9.2v1.9Zm.1-7.4L8.6,9.2H7.4L6.8,4.8v-1H9.3v1Z"/>
+      </g>
+      <rect id="Rectangle_586-2" data-name="Rectangle 586" class="cls-10" width="100" height="50"/>
+      <text id="GROUP_EMAIL-2" data-name="GROUP EMAIL" class="cls-12" transform="translate(15 29)"><tspan x="0" y="0">GROUP EMAIL</tspan></text>
+    </g>
+    <g id="Input_-_Error_Message-3" data-name="Input - Error Message" transform="translate(397 654)">
+      <g id="Rectangle_562-3" data-name="Rectangle 562" class="cls-8" transform="translate(100)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <text id="_" data-name="**********" class="cls-14" transform="translate(120 30)"><tspan x="0" y="0">**********</tspan></text>
+      <g id="Attention-3" data-name="Attention" class="cls-15" transform="translate(424 17)">
+        <path id="Path_35-3" data-name="Path 35" class="cls-10" d="M8,0a8,8,0,1,0,8,8A8.024,8.024,0,0,0,8,0ZM9.1,12.2H6.9V10.3H9.2v1.9Zm.1-7.4L8.6,9.2H7.4L6.8,4.8v-1H9.3v1Z"/>
+      </g>
+      <rect id="Rectangle_586-3" data-name="Rectangle 586" class="cls-10" width="100" height="50"/>
+      <text id="PASSWORD" class="cls-12" transform="translate(21 29)"><tspan x="0" y="0">PASSWORD</tspan></text>
+    </g>
+    <g id="Input_-_Error_Message-4" data-name="Input - Error Message" transform="translate(891 443)">
+      <g id="Rectangle_562-4" data-name="Rectangle 562" class="cls-8" transform="translate(270 470)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <text id="_2" data-name="**********" class="cls-14" transform="translate(290 500)"><tspan x="0" y="0">**********</tspan></text>
+      <g id="Attention-4" data-name="Attention" class="cls-15" transform="translate(594 487)">
+        <path id="Path_35-4" data-name="Path 35" class="cls-10" d="M8,0a8,8,0,1,0,8,8A8.024,8.024,0,0,0,8,0ZM9.1,12.2H6.9V10.3H9.2v1.9Zm.1-7.4L8.6,9.2H7.4L6.8,4.8v-1H9.3v1Z"/>
+      </g>
+      <rect id="Rectangle_586-4" data-name="Rectangle 586" class="cls-10" width="100" height="50" transform="translate(170 470)"/>
+      <text id="PASSWORD-2" data-name="PASSWORD" class="cls-12" transform="translate(191 499)"><tspan x="0" y="0">PASSWORD</tspan></text>
+    </g>
+    <g id="Input_-_Error_Message-5" data-name="Input - Error Message" transform="translate(891 242)">
+      <g id="Rectangle_562-5" data-name="Rectangle 562" class="cls-8" transform="translate(270 470)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <text id="error_mail.com-3" data-name="error@mail.com" class="cls-14" transform="translate(290 500)"><tspan x="0" y="0">error@mail.com</tspan></text>
+      <g id="Attention-5" data-name="Attention" class="cls-15" transform="translate(594 487)">
+        <path id="Path_35-5" data-name="Path 35" class="cls-10" d="M8,0a8,8,0,1,0,8,8A8.024,8.024,0,0,0,8,0ZM9.1,12.2H6.9V10.3H9.2v1.9Zm.1-7.4L8.6,9.2H7.4L6.8,4.8v-1H9.3v1Z"/>
+      </g>
+      <rect id="Rectangle_586-5" data-name="Rectangle 586" class="cls-10" width="100" height="50" transform="translate(170 470)"/>
+      <text id="MENTOR_EMAIL" data-name="MENTOR EMAIL" class="cls-12" transform="translate(220 499)"><tspan x="-38.518" y="0">MENTOR EMAIL</tspan></text>
+    </g>
+    <g id="Dropdown_-_Empty" data-name="Dropdown - Empty" transform="translate(888 -179)">
+      <g id="Rectangle_563" data-name="Rectangle 563" class="cls-9" transform="translate(270 590)">
+        <rect class="cls-22" width="360" height="50"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="359" height="49"/>
+      </g>
+      <text id="Select_an_option" data-name="Select an option" class="cls-11" transform="translate(290 620)"><tspan x="0" y="0">Select an option</tspan></text>
+      <g id="Dropdown" class="cls-16" transform="translate(599 612.001)">
+        <path id="Path_36" data-name="Path 36" class="cls-10" d="M6.7,8.1,2,3.4,3.4,2,6.7,5.3,10,2l1.4,1.4Z" transform="translate(-2 -2)"/>
+      </g>
+      <rect id="Rectangle_587" data-name="Rectangle 587" class="cls-10" width="100" height="50" transform="translate(173 590)"/>
+      <text id="SELECT_SCHOOL" data-name="SELECT SCHOOL" class="cls-12" transform="translate(180 619)"><tspan x="0" y="0">SELECT SCHOOL</tspan></text>
+    </g>
+    <text id="This_will_be_your_user_name" data-name="This will be your user name" class="cls-17" transform="translate(1645 541)"><tspan x="-85.246" y="0">This will be your user name</tspan></text>
+    <text id="ADMIN_APPROVES_ALL_NEW_ACCOUNTS" data-name="ADMIN APPROVES ALL NEW 
+ACCOUNTS" class="cls-17" transform="translate(1652 989)"><tspan x="-91.847" y="0">ADMIN APPROVES ALL NEW </tspan><tspan x="-36.832" y="15">ACCOUNTS</tspan></text>
+    <text id="Create_an_Account" data-name="Create an Account" class="cls-18" transform="translate(1061 260)"><tspan x="0" y="0">Create an Account</tspan></text>
+    <text id="Log_In" data-name="Log In" class="cls-18" transform="translate(397 498)"><tspan x="0" y="0">Log In</tspan></text>
+    <g id="Button" class="cls-19" transform="translate(1560 913)">
+      <rect id="Rectangle_112" data-name="Rectangle 112" class="cls-10" width="184" height="50" rx="4"/>
+      <g id="Symbol_18_1" data-name="Symbol 18 – 1" transform="translate(84.27 17)">
+        <path id="Path_10" data-name="Path 10" class="cls-20" d="M8,0,6.545,1.455l5.506,5.506H0V9.039H12.052L6.545,14.545,8,16l8-8Z"/>
+      </g>
+    </g>
+    <g id="CTA" transform="translate(649 754)">
+      <rect id="Rectangle_119" data-name="Rectangle 119" class="cls-10" width="208" height="48" rx="4"/>
+      <text id="SUBMIT" class="cls-21" transform="translate(103 28)"><tspan x="-28.748" y="0">SUBMIT</tspan></text>
+    </g>
+    <g id="CTA-2" data-name="CTA" transform="translate(397 754)">
+      <rect id="Rectangle_119-2" data-name="Rectangle 119" class="cls-10" width="208" height="48" rx="4"/>
+      <text id="RESET" class="cls-21" transform="translate(103 28)"><tspan x="-25.005" y="0">RESET</tspan></text>
+    </g>
+  </g>
+</svg>

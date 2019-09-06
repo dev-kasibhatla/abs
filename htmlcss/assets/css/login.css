@@ -1,0 +1,418 @@
+body {
+    background-color: white;
+} 
+
+#mainNav{
+	padding:  0;
+}
+.navbar{
+    height: 100px;
+	width: 100%;
+	
+	padding:0;		
+   
+    
+    
+}
+
+.navbar-brand{
+    height: 90%;
+    font-size: 3.5rem;
+    color:turquoise;
+
+}
+#NavTitle{
+    padding: 10%; 
+}
+
+
+.fa-home{
+    
+    width : 2rem;
+}
+
+ 
+.fa-long-arrow-alt-right{
+    width: 80%;
+    /* background-color:turquoise; */
+    background-color: rgb(0, 153, 255);
+}
+
+#new-acc-details{
+	width:120%;
+	
+	
+}
+
+#old-user{
+    height:100%;
+    /* background-color: aqua; */
+
+}
+
+#login-content{
+    margin:auto;
+    height: 50%;
+
+}
+
+#new-user section{
+    padding-left:4%;
+    border-collapse: collapse;
+    border-left: 5px solid blueviolet;  
+}
+  
+
+.row{
+    text-align: center;
+    
+    height: 70rem;
+    
+
+}
+section{
+
+    font-size: 2rem;
+    text-align: left;
+}
+
+span{
+   
+    padding-top: 1rem;
+    padding-bottom: 1rem;    
+}
+
+
+label{
+    padding: 2% 0.6%;
+    height: 5rem;
+    width: fit-content;
+    text-align: center;
+    float : left;
+    background-color: rgb(0, 153, 255);
+    color: white;
+	font-size:1.5rem;
+    font-weight:500;
+}
+
+#new-user{
+    height:100%;
+    /* background-color: blueviolet; */
+    text-align:center;
+     
+}
+
+.pass{
+    width:20%;
+    /* text-align: center; */
+}
+
+
+input{
+    padding-left: 1%;
+    width:50%;
+    height:5rem;
+}
+select{
+    padding-left: 1%;
+    width:50%;
+    height:5rem;
+}
+
+#common_button{
+    height: 4rem;
+    width: fit-content;
+    text-align: center;
+    background-color:  rgb(0, 153, 255);
+    color:white;
+    font-size: 2.6rem;
+    font-weight: 600;
+
+    
+}
+
+
+#disabled-option{
+    color:grey;
+}
+
+p{
+    margin-bottom:7%;
+}
+
+h2{
+    margin-bottom: 9%;
+    color:darkcyan;
+}
+
+#new-user h2{
+    
+    text-align:left;
+}
+
+#submitButton{
+    height: 1%;
+    width: 30%;
+    text-align: center;
+    background-color:  rgb(0, 153, 255);
+    color:white;
+    font-size: 2.6rem;
+    font-weight: 600;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 992px){
+	body {
+    background-color: white;
+} 
+
+.navbar{
+    height: 50px;
+   
+    
+    
+}
+
+.navbar-brand{
+    height: 90%;
+    font-size: 3.5rem;
+    color:turquoise;
+
+}
+#NavTitle{
+    padding: 10%; 
+}
+
+
+.fa-home{
+    
+    width : 2rem;
+}
+
+ 
+.fa-long-arrow-alt-right{
+    width: 80%;
+    /* background-color:turquoise; */
+    background-color: rgb(0, 153, 255);
+}
+
+
+#old-user{
+    height:100%;
+    border-bottom: 5px solid blueviolet;
+
+}
+
+#login-content{
+    margin:auto;
+    height: 50%;
+
+}
+
+#new-user section{
+	width:100%;
+    padding-left:2%;
+    border-collapse: collapse;
+    border-left: 0px solid blueviolet;  
+}
+  
+
+.row{
+    text-align: center;
+    
+    height: 70rem;
+    
+
+}
+section{
+
+    font-size: 1rem;
+    text-align: left;
+}
+
+span{
+/*    margin:  auto 0.5rem ;*/
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;    
+}
+
+
+label{
+    padding: 2% 0.6%;
+    height: 5rem;
+    width: 30%;
+    text-align: center;
+    float : left;
+    background-color: rgb(0, 153, 255);
+    color: white;
+	font-size: 1.2rem;
+    font-weight:500;
+}
+
+#new-user{
+    height:100%;
+    /* background-color: blueviolet; */
+    text-align:center;
+     
+}
+	
+ 	
+.pass{
+    width:20%;
+    /* text-align: center; */
+}
+
+
+input{
+    padding-left: 1%;
+    width:70%;
+    height:5rem;
+}
+select{
+    padding-left: 1%;
+    width:70%;
+    height:5rem;
+}
+
+#button{
+    height: 4rem;
+    width: fit-content;
+    text-align: center;
+    background-color:  rgb(0, 153, 255);
+    color:white;
+    font-size: 2.6rem;
+    font-weight: 600;
+
+    
+}
+
+
+#disabled-option{
+    color:grey;
+}
+
+p{
+    margin-bottom:7%;
+}
+
+h2{
+    margin-bottom: 10%;
+    color:darkcyan;
+}
+
+#new-user h2{
+    
+    text-align:left;
+}
+
+#submitButton{
+    height: 1%;
+    width: 30%;
+    text-align: center;
+    background-color:  rgb(0, 153, 255);
+    color:white;
+    font-size: 2.6rem;
+    font-weight: 600;
+
+}
+	#heading{
+		padding-left: 5%;
+		font-size: 5rem; 
+	}
+}

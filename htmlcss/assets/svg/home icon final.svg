@@ -1,0 +1,22 @@
+<svg id="home_icon_final" data-name="home icon final" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <g id="Forward_Arrow" data-name="Forward Arrow" transform="translate(-220 -650)">
+    <g id="Rectangle_608" data-name="Rectangle 608" transform="translate(220 650)" fill="#f1f9ff" stroke="#bce0fd" stroke-width="2">
+      <rect width="50" height="50" rx="10" stroke="none"/>
+      <rect x="1" y="1" width="48" height="48" rx="9" fill="none"/>
+    </g>
+  </g>
+  <g id="home_icon" data-name="home icon" transform="translate(-220 -717)">
+    <g id="Polygon_1" data-name="Polygon 1" transform="translate(229 727)" fill="#2699fb">
+      <path d="M 31.76613807678223 15.5 L 1.233862161636353 15.5 L 16.5 0.6964724063873291 L 31.76613807678223 15.5 Z" stroke="none"/>
+      <path d="M 16.5 1.39295482635498 L 2.467735290527344 15 L 30.53226470947266 15 L 16.5 1.39295482635498 M 16.5 0 L 33 16 L 0 16 L 16.5 0 Z" stroke="none" fill="#2699fb"/>
+    </g>
+    <g id="Rectangle_1094" data-name="Rectangle 1094" transform="translate(234 742)" fill="#2699fb" stroke="#2699fb" stroke-width="1">
+      <rect width="23" height="14" stroke="none"/>
+      <rect x="0.5" y="0.5" width="22" height="13" fill="none"/>
+    </g>
+    <g id="Rectangle_1095" data-name="Rectangle 1095" transform="translate(243 749)" fill="#fff" stroke="#7fc4fd" stroke-width="1">
+      <rect width="5" height="7" stroke="none"/>
+      <rect x="0.5" y="0.5" width="4" height="6" fill="none"/>
+    </g>
+  </g>
+</svg>
