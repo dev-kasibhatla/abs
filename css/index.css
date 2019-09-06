@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+* {box-sizing: border-box;}
+
+
+/* Style the header with a grey background and some padding */
+.header {
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding: 20px 5px;
+	margin-right: 2.5%;
+	margin-left: 2.5%;
+}
+
+/* Style the header links */
+.header a {
+	float: left;
+	color: black;
+	text-align: center;
+	padding-top: 1px;
+	padding-right: 4px;
+	padding-left: 4px;
+	padding-bottom: 1px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 20px;
+	margin-right: 5px;
+	margin-left: 5px;
+	border-radius: 4px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 0px;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+	background-color: #FFFFFF;
+	color: #007AFF;
+}
+
+#header_logo:hover{	
+	background-color: #FFFFFF;
+	color:black;
+
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+	float: right;
+	width = "40%";
+	margin-right: 3%;
+}
+.calendar_header {
+	background-color: #FFFFFF;
+	padding-top: 20px;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-family: Tahoma;
+	font-weight: bold;
+	margin-left: 2.5%;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding: 20px 10px;
+	box-shadow: 1px 1px 2px 1px #737373;
+	margin-right: 2.5%;
+	margin-left: 2.5%;
+}
+.cal_col {
+	width: 13.2%;
+	height: 15%;
+	margin: 5px;
+	float: left;
+}
+.footer {
+	margin-right: 2.5%;
+	margin-bottom: 5px;
+	margin-left: 2.5%;
+	
+	padding: 10px;
+	margin-top: 5px;
+	right: 1%;
+	left: 1%;
+	position: absolute;
+	bottom: 5%;
+}
+a {
+	color: blue;
+	text-decoration: none;
+	bottom: 5%;
+	position: relative;
+}
+
+
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+	.cal_col{
+		float:none;
+	}
+	.footer{
+	bottom: auto;
+	right: 1%;
+	left: 1%;
+	position: static;
+	}
+}
+@media screen and (max-height: 500px){
+	.footer{
+	bottom: auto;
+	right: 1%;
+	left: 1%;
+	position: static;
+	}
+	
+	
+}
