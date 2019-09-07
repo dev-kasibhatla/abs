@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Account);
+      }
+
+      .cls-2 {
+        fill: #fafafa;
+      }
+
+      .cls-13, .cls-3 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #4e7dff;
+      }
+
+      .cls-4 {
+        fill: #04f;
+      }
+
+      .cls-4, .cls-5 {
+        font-size: 40px;
+      }
+
+      .cls-12, .cls-4, .cls-5 {
+        font-family: ArialRoundedMTBold, Arial Rounded MT;
+      }
+
+      .cls-12, .cls-6 {
+        font-size: 35px;
+      }
+
+      .cls-10, .cls-11, .cls-6, .cls-7, .cls-8, .cls-9 {
+        font-family: ArialMT, Arial;
+      }
+
+      .cls-11, .cls-7 {
+        fill: #4ea1ff;
+      }
+
+      .cls-7 {
+        font-size: 22px;
+      }
+
+      .cls-10, .cls-11, .cls-8, .cls-9 {
+        font-size: 20px;
+      }
+
+      .cls-9 {
+        fill: red;
+      }
+
+      .cls-10 {
+        fill: #009f10;
+      }
+
+      .cls-12 {
+        fill: #676767;
+      }
+
+      .cls-13 {
+        stroke: #707070;
+      }
+
+      .cls-14 {
+        fill: #fff;
+      }
+
+      .cls-15 {
+        filter: url(#Line_13);
+      }
+    </style>
+    <filter id="Line_13" x="-3" y="113.5" width="1927" height="19" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Account">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Account" class="cls-1">
+    <rect class="cls-14" width="1920" height="1080"/>
+    <rect id="Rectangle_1096" data-name="Rectangle 1096" class="cls-2" width="399" height="95" rx="14" transform="translate(1103 406)"/>
+    <g class="cls-15" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <line id="Line_13-2" data-name="Line 13" class="cls-3" x2="1909" transform="translate(6 120)"/>
+    </g>
+    <text id="ACCOUNT-2" data-name="ACCOUNT" class="cls-4" transform="translate(151 71)"><tspan x="0" y="0">ACCOUNT</tspan></text>
+    <text id="Account_Name" data-name="Account Name" class="cls-5" transform="translate(645 236)"><tspan x="0" y="0">Account Name</tspan></text>
+    <text id="Mentor_Name" data-name="Mentor Name" class="cls-5" transform="translate(997 236)"><tspan x="0" y="0">Mentor Name</tspan></text>
+    <text id="Your_Schedule" data-name="Your Schedule" class="cls-6" transform="translate(1103 340)"><tspan x="0" y="0">Your Schedule</tspan></text>
+    <text id="Actions" class="cls-6" transform="translate(329 340)"><tspan x="0" y="0">Actions</tspan></text>
+    <text id="Book_slot_s_" data-name="Book slot(s)" class="cls-7" transform="translate(329 438)"><tspan x="0" y="0">Book slot(s)</tspan></text>
+    <text id="View_Booking_History" data-name="View Booking History" class="cls-7" transform="translate(329 504)"><tspan x="0" y="0">View Booking History</tspan></text>
+    <text id="View_Account_Details" data-name="View Account Details" class="cls-7" transform="translate(329 570)"><tspan x="0" y="0">View Account Details</tspan></text>
+    <text id="Change_Password" data-name="Change Password" class="cls-7" transform="translate(329 702)"><tspan x="0" y="0">Change Password</tspan></text>
+    <text id="Change_email" data-name="Change email" class="cls-7" transform="translate(329 636)"><tspan x="0" y="0">Change email</tspan></text>
+    <text id="DD_MM_YYYY" data-name="DD/MM/YYYY" class="cls-8" transform="translate(1123 434)"><tspan x="0" y="0">DD/MM/YYYY</tspan></text>
+    <text id="Status:" class="cls-8" transform="translate(1123 461)"><tspan x="0" y="0">Status:</tspan></text>
+    <text id="Cancel" class="cls-9" transform="translate(1123 488)"><tspan x="0" y="0">Cancel</tspan></text>
+    <text id="Confirmed_by_Mentor" data-name="Confirmed by Mentor" class="cls-10" transform="translate(1200 461)"><tspan x="0" y="0">Confirmed by Mentor</tspan></text>
+    <text id="Slot_s_:" data-name="Slot(s):" class="cls-8" transform="translate(1304 434)"><tspan x="0" y="0">Slot(s):</tspan></text>
+    <text id="_8-9_9-10" data-name="8-9, 9-10" class="cls-8" transform="translate(1375 434)"><tspan x="0" y="0">8-9, 9-10</tspan></text>
+    <g id="Group_2" data-name="Group 2">
+      <rect id="Rectangle_1097" data-name="Rectangle 1097" class="cls-2" width="399" height="95" rx="14" transform="translate(1103 406)"/>
+      <text id="DD_MM_YYYY-2" data-name="DD/MM/YYYY" class="cls-8" transform="translate(1123 434)"><tspan x="0" y="0">DD/MM/YYYY</tspan></text>
+      <text id="Status:-2" data-name="Status:" class="cls-8" transform="translate(1123 461)"><tspan x="0" y="0">Status:</tspan></text>
+      <text id="Cancel-2" data-name="Cancel" class="cls-9" transform="translate(1123 488)"><tspan x="0" y="0">Cancel</tspan></text>
+      <text id="Confirmed_by_Mentor-2" data-name="Confirmed by Mentor" class="cls-10" transform="translate(1200 461)"><tspan x="0" y="0">Confirmed by Mentor</tspan></text>
+      <text id="Slot_s_:-2" data-name="Slot(s):" class="cls-8" transform="translate(1304 434)"><tspan x="0" y="0">Slot(s):</tspan></text>
+      <text id="_8-9_9-10-2" data-name="8-9, 9-10" class="cls-8" transform="translate(1375 434)"><tspan x="0" y="0">8-9, 9-10</tspan></text>
+    </g>
+    <g id="Group_3" data-name="Group 3" transform="translate(0 115)">
+      <rect id="Rectangle_1097-2" data-name="Rectangle 1097" class="cls-2" width="399" height="95" rx="14" transform="translate(1103 406)"/>
+      <text id="DD_MM_YYYY-3" data-name="DD/MM/YYYY" class="cls-8" transform="translate(1123 434)"><tspan x="0" y="0">DD/MM/YYYY</tspan></text>
+      <text id="Status:-3" data-name="Status:" class="cls-8" transform="translate(1123 461)"><tspan x="0" y="0">Status:</tspan></text>
+      <text id="Cancel-3" data-name="Cancel" class="cls-9" transform="translate(1123 488)"><tspan x="0" y="0">Cancel</tspan></text>
+      <text id="Pending_Confirmation" data-name="Pending Confirmation" class="cls-11" transform="translate(1200 461)"><tspan x="0" y="0">Pending Confirmation</tspan></text>
+      <text id="Slot_s_:-3" data-name="Slot(s):" class="cls-8" transform="translate(1304 434)"><tspan x="0" y="0">Slot(s):</tspan></text>
+      <text id="_11-12" data-name="11-12" class="cls-8" transform="translate(1375 434)"><tspan x="0" y="0">11-12</tspan></text>
+    </g>
+    <g id="Group_4" data-name="Group 4" transform="translate(0 239)">
+      <rect id="Rectangle_1097-3" data-name="Rectangle 1097" class="cls-2" width="399" height="95" rx="14" transform="translate(1103 406)"/>
+      <text id="DD_MM_YYYY-4" data-name="DD/MM/YYYY" class="cls-8" transform="translate(1123 434)"><tspan x="0" y="0">DD/MM/YYYY</tspan></text>
+      <text id="Status:-4" data-name="Status:" class="cls-8" transform="translate(1123 461)"><tspan x="0" y="0">Status:</tspan></text>
+      <text id="Rejected_by_Mentor" data-name="Rejected by Mentor" class="cls-9" transform="translate(1200 461)"><tspan x="0" y="0">Rejected by Mentor</tspan></text>
+      <text id="Slot_s_:-4" data-name="Slot(s):" class="cls-8" transform="translate(1304 434)"><tspan x="0" y="0">Slot(s):</tspan></text>
+      <text id="_17-18_18-19" data-name="17-18,18-19" class="cls-8" transform="translate(1375 434)"><tspan x="0" y="0">17-18,18-19</tspan></text>
+    </g>
+    <text id="HOME" class="cls-12" transform="translate(1600 72)"><tspan x="0" y="0">HOME</tspan></text>
+    <line id="Line_14" data-name="Line 14" class="cls-13" y2="673" transform="translate(960.5 326.5)"/>
+  </g>
+</svg>
