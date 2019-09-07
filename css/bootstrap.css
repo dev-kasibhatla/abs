@@ -113,9 +113,9 @@ input,
 optgroup,
 select,
 textarea {
-  margin: 0;
-  font: inherit;
-  color: inherit;
+	margin: 0;
+	font: inherit;
+	color: #007CFF;
 }
 button {
   overflow: visible;
@@ -3114,20 +3114,20 @@ fieldset[disabled] .btn-default.focus {
   background-color: #333;
 }
 .btn-primary {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+	color: #fff;
+	background-color: #007CFF;
+	border-color: #007CFF;
 }
 .btn-primary:focus,
 .btn-primary.focus {
-  color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
+	color: #fff;
+	background-color: #286090;
+	border-color: #0069D8;
 }
 .btn-primary:hover {
-  color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+	color: #fff;
+	background-color: #0071E8;
+	border-color: #0071E8;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3896,15 +3896,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   vertical-align: middle;
 }
 .input-group-addon {
-  padding: 6px 12px;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1;
-  color: #555;
-  text-align: center;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1;
+	color: #FFFFFF;
+	text-align: center;
+	background-color: #007CFF;
+	border: 1px solid #007CFF;
+	border-radius: 4px;
 }
 .input-group-addon.input-sm {
   padding: 5px 10px;
