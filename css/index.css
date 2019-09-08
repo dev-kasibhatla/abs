@@ -57,7 +57,7 @@
 /* Float the link section to the right */
 .header-right {
 	float: right;
-	width = "40%";
+	width : "40%";
 	margin-right: 3%;
 }
 .calendar_header {
@@ -103,7 +103,7 @@ a {
 
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
   .header a {
     float: none;
     display: block;
@@ -129,6 +129,5 @@ a {
 	left: 1%;
 	position: static;
 	}
-	
 	
 }
