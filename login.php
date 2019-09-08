@@ -115,12 +115,9 @@
 
 	          
 			<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon">Password</span>
-		  <input type="password" class="form-control" placeholder="Set a password" aria-describedby="addon1" name="signup_group_password" required onKeyUp="passwordKeyUp()"
+		  <input type="password" class="form-control" placeholder="Atleast 8 characters" aria-describedby="addon1" name="signup_group_password" required onKeyUp="passwordKeyUp()"
 			  onFocus="passwordOnFocus()"> 
 				  </div>
-			  <p class="col-md-10 col-md-offset-1" id="signup_password_error">
-			  	Password must contain atleast 8 characters
-			  </p>
 			  
 			  
 			  
