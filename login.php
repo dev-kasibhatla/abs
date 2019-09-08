@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
+<html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login</title>
+<title>Auditorium: Login</title>
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
@@ -17,7 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload = "initialize()">
 
 <div class="header">
  
@@ -60,12 +61,12 @@
  	</div>
  	<div class="row" style="margin-top: 2%">
  		<div class="col-md-offset-2 col-md-10">
-			<button type="button" class="btn btn-primary btn-block">Submit</button> 
+			<button type="button" class="btn btn-primary btn-block" id = "login_submit">Submit</button> 
 		</div>	
  	</div>
  	<div class="row" style="margin-top: 2%">
  		<div class="col-md-offset-2 col-md-10">
-			<button type="button" class="btn btn-default btn-block">Forgot Password</button>	
+			<button type="button" class="btn btn-default btn-block" name="login_forgot_password">Forgot Password</button>	
 		</div>	
  	</div>
  	<div class="row" style="margin-top: 2%">
@@ -88,8 +89,10 @@
  	</div>
 
 
+
+<form action="scripts/validate.php" method="post">
 	<div class="btn-group col-md-offset-0 col-md-11"  style="margin-bottom:4%">
-	             <button type="button" class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select school  <span class="caret"></span></button>
+	             <button type="button" class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="signup_school_name">Select school  <span class="caret"></span></button>
 			 <ul class="dropdown-menu">
 	               <li role="presentation" class="dropdown-header">Select School</li>
 	               <li role="presentation"><a href="#">School 1</a></li>
@@ -103,42 +106,53 @@
  		<div class="col-md-offset-0 col-md-11">
 		  <div>
 				<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon">Name</span>
-				  <input type="text" class="form-control" placeholder="Group Name" aria-describedby="addon1">
+				  <input type="text" class="form-control" placeholder="Group Name" aria-describedby="addon1" name="signup_group_name" required>
 				</div>
 
 		    <div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon">Email</span>
-				  <input type="email" class="form-control" placeholder="Group email" aria-describedby="addon1" id = "sign_password">				  
+				  <input type="email" class="form-control" placeholder="Group email" aria-describedby="addon1" name = "signup_group_email" required>				  
 			  </div>
 
 	          
 			<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon">Password</span>
-		  <input type="password" class="form-control" placeholder="Set a password" aria-describedby="addon1" >
-			  </div>
-      	
+		  <input type="password" class="form-control" placeholder="Set a password" aria-describedby="addon1" name="signup_group_password" required onKeyUp="passwordKeyUp()"
+			  onFocus="passwordOnFocus()"> 
+				  </div>
+			  <p class="col-md-10 col-md-offset-1" id="signup_password_error">
+			  	Password must contain atleast 8 characters
+			  </p>
+			  
+			  
+			  
+			  
+			  
+			  
+				  
 			<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  					class="input-group-addon">Mentor Name</span>
-				  	<input type="text" class="form-control" placeholder="Type Mentor Name" aria-describedby="addon1" >
+				  	<input type="text" class="form-control" placeholder="Type Mentor Name" aria-describedby="addon1" name="signup_mentor_name" required>
 			  </div>
       		
+      		
+      		
       		<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  					class="input-group-addon">Mentor Email</span>
-				  	<input type="email" class="form-control" placeholder="Type Mentor Email" aria-describedby="addon1" >
+				  	<input type="email" class="form-control" placeholder="Type Mentor Email" aria-describedby="addon1" name="signup_mentor_email" required>
 			  </div>
       	
       		
       		<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  					class="input-group-addon">Mentor Dept.</span>
-				  	<input type="text" class="form-control" placeholder="Mentor's department" aria-describedby="addon1" >
+				  	<input type="text" class="form-control" placeholder="Mentor's department" aria-describedby="addon1" name="signup_mentor_dept" required>
 			  </div>
       	  </div>
 		</div>	
  	</div>
  	<div class="row" style="margin-top: 2%">
  		<div class="col-md-11 col-md-offset-0" >
-			<button type="button" class="btn btn-primary btn-block">Submit</button>			
+			<button type="submit" class="btn btn-primary btn-block" id="signup_submit" >Submit</button>	
 		</div>	
 		<br><br><br><br><br><br>
  	</div>
+ 	</form>
  </div>
-
-<br><br><br>
 <p>
 	 
 </p>
@@ -147,5 +161,11 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
+<script src="js/login.js"></script>
+<?php require 'scripts/login.php'	?>
+
 </body>
+</html>
+
+
 </html>
