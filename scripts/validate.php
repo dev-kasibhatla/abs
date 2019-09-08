@@ -1,5 +1,5 @@
 <?php
-echo "Form was submitted<br>";
+//echo "Form was submitted<br>";
 
 getData();
 function klog($message){
@@ -15,25 +15,35 @@ function getData(){
         $mentor_name = cleanData($_POST["signup_mentor_name"]);
         $mentor_email = cleanData($_POST["signup_mentor_email"]);
         $mentor_dept = cleanData($_POST["signup_mentor_dept"]);
-        echo "<br>Data seems fine<br>";
+        //echo "<br>Data seems fine<br>";
     }     
 
+    $signup_message = "";
+
     if(strlen($group_password)>7){
-        echo "Password is okay";
-    }else{
-        echo "Password must be atleast 8 characters long";
+        echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your data has been sent to the Administrator for reviewal.<br>Mentor will be sent an e-mail regarding the same.<br>
+        Please check your e-mail for activation information.</h1>";
+        echo "
+        <br><a href=\"../index.html\" font-face=\"verdana\" style=\"margin-left:20%\">Click here</a> to continue to homepage";
         
+    }
+    else {
+        echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Please enter a password that is atleast 8 characters long<br></h1>";
+        echo "
+            <a href=\"javascript:history.go(-1)\" font-face=\"verdana\" style=\"margin-left:20%\">Click to try again</a>
+        ";
     }
 
 
     
-
+    /*
     echo "<br>Group Name: ".$group_name;
     echo "<br>Group Email: ". $group_email;
     echo "<br>Group Password: ".$group_password;
     echo "<br>Mentor Name: ".$mentor_name;
     echo "<br>Mentor Email: ".$mentor_email;
     echo "<br>Mentor Department: ".$mentor_dept;
+    */
 }
 
 function cleanData($data){
