@@ -1,5 +1,4 @@
 <!doctype html>
-<html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -89,9 +88,12 @@
  	</div>
 
 
-
 <form action="scripts/validate.php" method="post">
-	<div class="btn-group col-md-offset-0 col-md-11"  style="margin-bottom:4%">
+	
+             
+             <div class="btn-group col-md-offset-0 col-md-11"  style="margin-bottom:4%">
+             
+             <!-- Looks cool but doesn't work
 	             <button type="button" class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="signup_school_name">Select school  <span class="caret"></span></button>
 			 <ul class="dropdown-menu">
 	               <li role="presentation" class="dropdown-header">Select School</li>
@@ -100,6 +102,29 @@
 	               <li role="presentation"><a href="#">School 3</a></li>
 	               <li role="presentation"><a href="#">School 4</a></li>
               </ul>
+              
+              -->
+		  	<select class="md-form col-md-offset-0 col-md-12" name="signup_school_name" required>
+			  <option value="" disabled selected>Select your school</option>
+			  <option value="1">School 1</option>
+			  <option value="2">School 2</option>
+			  <option value="3">School 3</option>
+			  <option value="4">School 4</option>
+			  <option value="5">School 5</option>
+			  <option value="6">School 6</option>
+			  <option value="7">School 7</option>
+			  <option value="8">School 8</option>
+			  <option value="9">School 9</option>
+			  <option value="10">School 10</option>
+			  <option value="11">School 11</option>
+			  <option value="12">School 12</option>
+			  <option value="13">School 13</option>
+			  <option value="14">School 14</option>
+			  <option value="15">School 15</option>
+			  <option value="16">School 16</option>
+			  <option value="17">School 17</option>		  
+			</select>
+
 	</div>
 
  	<div class="row" style="margin-top: 4%">
@@ -161,8 +186,9 @@
 <script src="js/login.js"></script>
 <?php require 'scripts/login.php'	?>
 
+<!-- It's like a triple staged darkness --> 
+
 </body>
 </html>
 
 
-</html>
