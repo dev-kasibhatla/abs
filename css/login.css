@@ -94,10 +94,23 @@ h1{
 	
 }
 
+select{
+	height: 40px;
+	line-height: 40px;
+	font:bold;
+	color:#ffffff;
+	background-color:#007CFF
+}
+
+
+
 
 @media screen and (max-width:1000px){
 	.vl{
 		height: 0px;
 		border-left: 10px solid #434343;
 	}	
+	select{
+		width: 200%;
+	}
 }
