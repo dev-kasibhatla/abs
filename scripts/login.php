@@ -1,5 +1,5 @@
 <?php
-klog("It's like a triple staged darkness");
+//klog("It's like a triple staged darkness");
 
 
 

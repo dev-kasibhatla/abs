@@ -32,7 +32,6 @@ $("#login_form").submit(function(event){
     var serializedData = $form.serialize();
 
     // Let's disable the inputs for the duration of the Ajax request.
-    // Note: we disable elements AFTER the form data has been serialized.
     // Disabled form elements will not be serialized.
     $inputs.prop("disabled", true);
 
