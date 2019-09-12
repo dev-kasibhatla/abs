@@ -33,25 +33,16 @@ function getData(){
     $signup_message = "";
 
     if(strlen($group_password)>7){
-        echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your data has been sent to the Administrator for reviewal.<br>Mentor will be sent an e-mail regarding the same.<br>
-        Please check your e-mail for activation information.</h1>";
-        echo "
-        <br><a href=\"../index.html\" font-face=\"verdana\" style=\"margin-left:20%\">Click here</a> to continue to homepage";
-        
+               
 
         //addToTables();
-        echo "<br>Group Name: ".$group_name;
+        /*echo "<br>Group Name: ".$group_name;
         echo "<br>Group Email: ". $group_email;
         echo "<br>Group Password: ".$group_password;
         echo "<br>Mentor Name: ".$mentor_name;
         echo "<br>Mentor Email: ".$mentor_email;
         echo "<br>Mentor Department: ".$mentor_dept;
-        echo "<br>School Name: ".$school_name;
-
-
-
-
-
+        echo "<br>School Name: ".$school_name;*/
 
           //create new connection
             $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
@@ -65,16 +56,24 @@ function getData(){
 
             //FUCK
 
-            $sql = "insert into ".$account_table." (School Name,Group Name,Group Email,Group Password,Mentor Name,Mentor Email,Mentor Department,Activated)
-            values (".'$school_name'.",".'$group_name'.",".'$group_email'.",".'$group_password'.",".'$mentor_name'.",".'$mentor_email'.",".'$mentor_dept'.
-            ")";
+            
+            $sql ="insert into $account_table (`School Name`,`Group Name`,`Group Email`,`Group Password`,`Mentor Name`,`Mentor Email`,`Mentor Department`,`Activated`)".
+            " values ('$school_name','$group_name','$group_email','$group_password','$mentor_name','$mentor_email','$mentor_dept','0')";
 
             //FUCK
 
             if ($i->query($sql) === TRUE) {
+                echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your data has been sent to the Administrator for reviewal.<br>Mentor will be sent an e-mail regarding the same.<br>
+                Please check your e-mail for activation information.</h1>";
+                echo "
+                <br><a href=\"../index.html\" font-face=\"verdana\" style=\"margin-left:20%\">Click here</a> to continue to homepage";
                 echo "New record created successfully";
             } else {
-                echo "Error: " . $sql . "<br>" . $i->error;
+               // echo "Error: " . $sql . "<br>" . $i->error;
+               echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">There was a problem connecting to our servers.
+                Please try again shortly.<br></h1>";
+                echo "<a href=\"javascript:history.go(-1)\" font-face=\"verdana\" style=\"margin-left:20%\">Click to try again</a>
+                ";
             }
             
             $i->close();
