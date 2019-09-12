@@ -113,9 +113,9 @@ input,
 optgroup,
 select,
 textarea {
-	margin: 0;
-	font: inherit;
-	color: #007CFF;
+  margin: 0;
+  font: inherit;
+  color: inherit;
 }
 button {
   overflow: visible;
@@ -3120,14 +3120,14 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary:focus,
 .btn-primary.focus {
-	color: #fff;
-	background-color: #286090;
-	border-color: #0069D8;
+  color: #fff;
+  background-color: #286090;
+  border-color: #122b40;
 }
 .btn-primary:hover {
-	color: #fff;
-	background-color: #0071E8;
-	border-color: #0071E8;
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3898,18 +3898,19 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .input-group-addon {
 	padding: 6px 12px;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: normal;
 	line-height: 1;
-	color: #FFFFFF;
+	color: #E4F9FF;
 	text-align: center;
 	background-color: #007CFF;
-	border: 1px solid #007CFF;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 }
 .input-group-addon.input-sm {
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 3px;
+	padding: 5px 10px;
+	font-size: 12px;
+	border-radius: 3px;
+	color: #E4F9FF;
 }
 .input-group-addon.input-lg {
   padding: 10px 16px;
