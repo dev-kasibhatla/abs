@@ -79,6 +79,6 @@ function hideStuff(h){
 		$("onload_message_para").show();
 	}else{
 		$("*").show();
-		$("onload_message_para").hide();
+		$("#onload_message_para").hide();
 	}
 }
