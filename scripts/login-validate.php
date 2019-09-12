@@ -34,13 +34,19 @@ function login($i, $l_uname, $l_password){
         $p = $row["Group Password"];
         $u = $row["Group Email"];
         //$mess = "Server data: Uname: $u, Password: $p";
-        $mess = "Login successful: $u\nStarting a session";
-        klog($mess);
-        //start session and set variables
-        session_start();
-        $_SESSION["username"] = $u;
-        //send a response
-        echo "1";
+        if($p == $l_password){
+            $mess = "Login successful: $u\nStarting a session";
+            klog($mess);
+            //start session and set variables
+            session_start();
+            $_SESSION["username"] = $u;
+            //send a response
+            echo "1";
+        }else{
+            echo "0";
+        }
+        
+        
         
     }else{
         klog("This account doesn't exist");
