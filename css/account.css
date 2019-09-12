@@ -93,6 +93,10 @@ h1{
 	width: 20%;
 }
 
+.change-pass-old-colour{
+	background-color:#004D9E
+}
+
 @media screen and (max-width: 1000px){
 	.vl{
 		height: 0px;
