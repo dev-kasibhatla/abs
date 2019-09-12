@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,22 +18,24 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-
+<body onLoad="initialize()">
+<p id = "onload_message_para">
+	<h1>Please wait</h1>
+</p>
 <div class="header">
  
   <a href="#default" class="logo" id="header_logo">Account</a>
   <div class="header-right">
     <a href="index.html" style="font-weight: bold">Home</a>
-	<a href="login.php" style="font-weight: bold">Login</a>
+	<a href= "index.html" onclick="logout()" style="font-weight: bold" id="top_login_link">Logout</a>
   </div>
 </div>
 <hr color="#007CFF" width="95%">
 
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 col-md-offset-3">
+<div class="container-fluid" name = "title_block">
+  <div class="row" name = "title_block">
+    <div class="col-md-3 col-md-offset-3" name = "title_block">
       <h1 class="text-capitalize" id = "account_name_label">Account Name</h1>
     </div>
     <div class="col-md-offset-0 col-md-3">
@@ -118,5 +121,6 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
+<script src="js/account.js"></script>
 </body>
 </html>
