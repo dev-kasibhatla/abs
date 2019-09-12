@@ -39,6 +39,10 @@
 <div class="vl"></div>
 
 <div class="container-fluid col-md-offset-2 col-md-4" >
+	<form id = "login_form" method="post">
+	<!-- ?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?
+	<form action = "<>" method="post">
+	-->
  	<div class="row">
  		<div class="col-md-offset-3 col-md-9"  style="margin-bottom:4%">
 			<h2>Login</h2>
@@ -48,11 +52,11 @@
  		<div class="col-md-offset-2 col-md-10" >
  		  <div>
  		    <div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon">Username</span>
- 		      <input type="email" class="form-control" placeholder="Type your email" aria-describedby="addon1" id="login_email">
+ 		      <input type="email" class="form-control" placeholder="Type your email" aria-describedby="addon1" id="login_email" name="login_email">
 	        </div>
  		      
  		   <div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:2%"><span  class="input-group-addon">Password</span>
- 		      <input type="password" class="form-control" placeholder="Type your Password" aria-describedby="addon1" id = "login_password">
+ 		      <input type="password" class="form-control" placeholder="Type your Password" aria-describedby="addon1" id = "login_password" name="login_password">
 	        </div>
 	      </div>
 			
@@ -60,7 +64,9 @@
  	</div>
  	<div class="row" style="margin-top: 2%">
  		<div class="col-md-offset-2 col-md-10">
-			<button type="button" class="btn btn-primary btn-block" id = "login_submit">Submit</button> 
+			<button type="submit" class="btn btn-primary btn-block" id = "login_submit" >Submit</button> 
+			
+			<!-- onclick = "submitLoginData()"  -->
 		</div>	
  	</div>
  	<div class="row" style="margin-top: 2%">
@@ -77,6 +83,7 @@
 			</p>
 		</div>	
  	</div> 	
+ 	</form>
  </div>	
  
  
@@ -187,6 +194,28 @@
 <?php require 'scripts/login.php'	?>
 
 <!-- It's like a triple staged darkness --> 
+
+
+<?php
+//validate login
+$l_uname = $l_password = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$l_uname = test_input($_POST["login_email"]);
+	$l_password = test_input($_POST["login_password"]);  
+	
+	//check if these match
+	
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
 
 </body>
 </html>
