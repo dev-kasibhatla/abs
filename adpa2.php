@@ -55,7 +55,7 @@
 
  	<div class="row" style="margin-top: 4%">
  		<div class="col-md-9 col-md-offset-0">
-			<a href="#">Generate slots in DB</a>
+			<a href="#" onclick="generateSlots()">Generate slots in DB</a>
 		</div>	
  	</div>
  
@@ -66,6 +66,32 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
 <script src="js/account.js"></script>
-
+<script>
+	var request;
+function generateSlots(){
+	console.log("Generating dates");
+	//send request
+	if(request){
+		request.abort();
+	}
+	var genDates = "gendates";
+	request = $.ajax({
+        url: "scripts/adminactions.php",
+        type: "post",
+        data: {'action': genDates}
+	});
+	
+	request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("response: "+response);
+        if(response == 1){
+			
+        }else{
+			
+        }
+    });
+}
+	
+</script>
 </body>
 </html>
