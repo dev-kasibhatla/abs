@@ -61,7 +61,7 @@
  	</div>
  	<div class="row" style="margin-top: 2%">
  		<div class="col-md-offset-3 col-md-9">
-			<a href="#">View Account Details</a>
+			<a href="account_details.php">View Account Details</a>
 		</div>	
  	</div>
  	<div class="row" style="margin-top: 2%">
