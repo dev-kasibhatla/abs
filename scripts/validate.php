@@ -65,6 +65,8 @@ function getData(){
             if ($i->query($sql) === TRUE) {
                 echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your data has been sent to the Administrator for reviewal.<br>Mentor will be sent an e-mail regarding the same.<br>
                 Please check your e-mail for activation information.</h1>";
+                //Call here i guess?
+                //sendemail();
                 echo "
                 <br><a href=\"../index.html\" font-face=\"verdana\" style=\"margin-left:20%\">Click here</a> to continue to homepage";
                 echo "New record created successfully";
@@ -102,7 +104,20 @@ function addToTables(){
 function tp(){
     
 }
-
+/*
+function sendemail(){
+$otp=rand(1000,9999);
+$subject = 'Account Activation';
+$message = 'The otp for account activation of your student group is:$otp'; 
+$from = 'Auditorium.Manager';
+ // Sending email
+if(mail($mentor_email, $subject, $message)){
+    echo 'Your mail has been sent successfully.';
+} else{
+    echo 'Unable to send email. Please try again.';
+}
+}
+*/
 
 /*
 <?php
