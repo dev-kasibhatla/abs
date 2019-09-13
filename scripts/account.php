@@ -57,6 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_destroy();
             klog("$u was logged out");
             echo "1";
+        }elseif (isset($_SESSION["adminID"])){
+            $u = $_SESSION["amdinID"];
+            session_destroy();
+            klog("Admin: $u was logged out");
+            echo "1";
         }
     }
 }
