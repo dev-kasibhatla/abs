@@ -59,7 +59,7 @@ function getData(){
             
             $sql ="insert into $account_table (`School Name`,`Group Name`,`Group Email`,`Group Password`,`Mentor Name`,`Mentor Email`,`Mentor Department`,`Activated`)".
             " values ('$school_name','$group_name','$group_email','$group_password','$mentor_name','$mentor_email','$mentor_dept','0')";
-
+            $sql1="insert into $account_table (`OTP`)"." values ($otp)";
             //FUCK
 
             if ($i->query($sql) === TRUE) {
@@ -110,8 +110,19 @@ $otp=rand(1000,9999);
 $subject = 'Account Activation';
 $message = 'The otp for account activation of your student group is:$otp'; 
 $from = 'Auditorium.Manager';
- // Sending email
-if(mail($mentor_email, $subject, $message)){
+ //storing otp in grps table
+  $sql1="insert into $account_table (`OTP`)"." values ($otp)" where `Group Email`=$group_email and `Mentor Email`=$mentor_email;
+ 
+ if ($i->query($sql) === TRUE) {
+                echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your Mentor has been sent an OTP for account confirmation</h1>";
+            } else {
+               // echo "Error: " . $sql . "<br>" . $i->error;
+               echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">There was a problem connecting to our servers.
+                Please try again shortly.<br></h1>";
+                echo "<a href=\"javascript:history.go(-1)\" font-face=\"verdana\" style=\"margin-left:20%\">Click to try again</a>
+                ";
+            }// Sending email
+if(mail($mentor_email, $subject, $message, $from)){
     echo 'Your mail has been sent successfully.';
 } else{
     echo 'Unable to send email. Please try again.';
