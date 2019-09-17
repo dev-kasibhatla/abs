@@ -41,9 +41,12 @@
 
 				$sql = "update $table_name set `OTP` = '0' where `Mentor Email` = '$mEmail' ";
 				$result = mysqli_query($i,$sql);
-
+				//start a mentor session and make them set password	
+				sessiion_start();
+				$_SESSION["username"] = $mEmail;
+            	$_SESSION["level"] = 1;
 				echo '<script type="text/JavaScript">  
-				 window.location.replace("index.html");
+				 window.location.replace("change_password.php");
 				 </script>' 
 				;
 				die();
@@ -114,6 +117,9 @@ function klog($message){
 		</div>
  		<div class="col-md-offset-5 col-md-4">
 				<button type="submit" class="btn btn-primary btn-block" id ="admin_submit">Submit</button>
+	        </div>
+			<div class="col-md-offset-5 col-md-4">
+				<p>Upon entering the correct OTP, you'll be asked to set a new password.<br>Leave old password blank</p>
 	        </div>
 					
 		</form>
