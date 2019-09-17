@@ -15,11 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             //get all data from database
             $user = $_SESSION["username"];
-            $sql = "select * from grps where `Group Email` = '$user' ";
+            if($_SESSION["level"] == 0){
+                $sql = "select * from grps where `Group Email` = '$user' ";
+            }elseif($_SESSION["level"] == 1){
+                $sql = "select * from grps where `Mentor Email` = '$user' ";
+            }
 
             $result = mysqli_query($i,$sql);
             if(mysqli_num_rows($result) == 1){
                 $row = mysqli_fetch_assoc($result);
+                $groupEmail = $row["Group Email"];
                 $groupName = $row["Group Name"];
                 $mentorName = $row["Mentor Name"];
                 $mentorEmail = $row["Mentor Email"];
@@ -30,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 //create a json object to respond     
                 $jobj = new \stdClass(); 
-                $jobj ->username = $user;
+                $jobj ->username = $groupEmail;
                 $jobj ->groupname = $groupName;
                 $jobj ->mentorname = $mentorName;
                 $jobj ->mentoremail = $mentorEmail;
-                $jobj ->level = $level;
+                $jobj ->level = $_SESSION["level"];
                 $jobj ->schoolname = $schoolName;
                 
                 $jres = json_encode($jobj);
