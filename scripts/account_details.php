@@ -4,7 +4,11 @@ if(isset($_SESSION["username"])){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $_SESSION["username"];
         $table_name = "grps";
-        $sql = "select `*` from $table_name where `Group Email` = '$user' ";
+        if($_SESSION["level"] == 0){
+            $sql = "select * from grps where `Group Email` = '$user' ";
+        }elseif($_SESSION["level"] == 1){
+            $sql = "select * from grps where `Mentor Email` = '$user' ";
+        }
         klog("$user is requesting account info");
         $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
         if($i -> connect_error){
@@ -17,6 +21,7 @@ if(isset($_SESSION["username"])){
 
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_assoc($result);
+            $groupEmail =$row["Group Email"]; 
             $groupName = $row["Group Name"];
             $mentorName = $row["Mentor Name"];
             $mentorEmail = $row["Mentor Email"];
