@@ -10,7 +10,11 @@ if(isset($_SESSION["username"])){
 
         $user = $_SESSION["username"];
         $table_name = "grps";
-        $sql = "select `Group Password` from $table_name where `Group Email` = '$user' ";
+        if($_SESSION["level"] == 0){
+            $sql = "select `Group Password` from $table_name where `Group Email` = '$user' ";
+        }elseif($_SESSION["level"] == 1){
+            $sql = "select `Group Password` from $table_name where `Mentor Email` = '$user' ";
+        }
 
         $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
         if($i -> connect_error){
