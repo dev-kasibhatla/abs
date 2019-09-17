@@ -18,7 +18,7 @@ function initialize(){
         if(response == 0){
 			//user not logged in. Redirect to login			
 			console.log("redirecting to login");
-		//	window.location.replace("login.php");
+			window.location.replace("login.php");
         }else{
 			//user is logged in
 			var res = JSON.parse(response);
@@ -28,12 +28,20 @@ function initialize(){
             });
         }
     });
+    if($("#date_input").val() == ""){
+        var now = new Date();
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+        $("#date_input").val(today);
+    }
 }
 
 function loadButtons(){
 
 }
-
 
 function clearSlots(){
 
@@ -45,42 +53,40 @@ function clearSlots(){
 }
 
 function loadData(){
-    //set datepicker
-    var $j = jQuery.noConflict();
-    $j('#datePicker').datepicker({
-            format: 'mm/dd/yyyy'
-        })
-        .on('changeDate', function(e) {
-            // Revalidate the date field
-            $('#eventForm').formValidation('revalidateField', 'date');
-        });
+    //get date from datepicker
+    if($("#date_input").val() == ""){
+        var now = new Date();
 
-    $('#eventForm').formValidation({
-        framework: 'bootstrap',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The name is required'
-                    }
-                }
-            },
-            date: {
-                validators: {
-                    notEmpty: {
-                        message: 'The date is required'
-                    },
-                    date: {
-                        format: 'MM/DD/YYYY',
-                        message: 'The date is not a valid'
-                    }
-                }
-            }
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+        $("#date_input").val(today);
+    }
+    var date = $("#date_input").val();
+    console.log("Date is: "+date);
+    
+    //request data to server:
+    if(request){
+		request.abort();
+	}
+    var askForInfo = "get_book";
+	
+	request = $.ajax({
+        url: "../scripts/account.php",
+        type: "post",
+        data: {'action': askForInfo, 'date':date}
+    });
+    
+
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log(response);
+        if(response == 0){
+			console.log("Error occured");
+        }else{
+            //got data from server
+            //now load it into buttons
         }
     });
 
@@ -124,4 +130,12 @@ function loadData(){
 
     }
 
+}
+
+function submitSlotData(){
+    console.log("Selected slots: ");
+    $.each($("input[name='slot_input']:checked"), function(){            
+        console.log($(this).val());
+        $(this).prop('checked',false);
+    });
 }
