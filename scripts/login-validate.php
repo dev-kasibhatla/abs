@@ -24,12 +24,12 @@ function login($i, $l_uname, $l_password){
     }
 
     //query:
-    $mess = "USer typed: Uname: $l_uname, Password: $l_password";
+    $mess = "User typed: Uname: $l_uname, Password: $l_password";
     klog($mess);
     $sql = "select `Group Password`, `Group Email` from $account_table where `Group Email` = '$l_uname' ";
 
     $result = mysqli_query($i,$sql);
-    if(mysqli_num_rows($result) > 0){
+    if(mysqli_num_rows($result) == 1){
         $row = mysqli_fetch_assoc($result);
         $p = $row["Group Password"];
         $u = $row["Group Email"];
@@ -40,18 +40,47 @@ function login($i, $l_uname, $l_password){
             //start session and set variables
             session_start();
             $_SESSION["username"] = $u;
+            $_SESSION["level"] = 0;
             //send a response
             echo "1";
-        }else{
+        }else{      
+
             echo "0";
         }
         
         
         
     }else{
-        klog("This account doesn't exist");
-        echo "0";
+        //Check if it's a mentor account
+        klog("Checking to see if $l_uname is a mentor account");
+        $sql = "select `Mentor Password`, `Mentor Email` from $account_table where `Mentor Email` = '$l_uname' ";
+        $result = mysqli_query($i,$sql);
+        if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_assoc($result);
+            $p = $row["Mentor Password"];
+            $u = $row["Mentor Email"];
+            $mess = "Server data for mentor check: Uname: $u, Password: $p";        
+            if($p == $l_password){
+                $mess = "Login successful: $u\nStarting a session";
+                klog($mess);
+                //start session and set variables
+                session_start();
+                $_SESSION["username"] = $u;
+                $_SESSION["level"] = 1; 
+                //send a response
+                echo "1";
+            }else{
+                klog("This account doesn't exist");
+      
+                echo "0";
+            }
+            
+            
+            
+        }
+
     }
+    
 }
 
 function connectDB(){
