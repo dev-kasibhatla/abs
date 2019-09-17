@@ -38,22 +38,14 @@
     <div class="col-md-offset-1 col-md-4">
 		<h3>Select all slots that apply</h3>   		
     </div>    
-    <div class="col-md-offset-1 col-md-4">
-    
-		<div class='input-group date' id='datepicker'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                
-        	
+    <div class="col-md-3 col-md-offset-3">   
+		<br>Date: <input type="date" id="date_input">        	
     </div>   
   </div>
   <div class="row">
     <div class="col-md-10 col-md-offset-1 selection-background" id="button_view">
     
-    
+    <h4 class="text-center">Date</h4>
     <!--Buttons show up here -->
     
     <div class="form-group">
