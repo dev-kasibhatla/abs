@@ -55,7 +55,7 @@ function logout(){
 	}
 	
 	var askLogout = "logout";
-	
+	console.log("Trying to logout");
 	request = $.ajax({
         url: "../scripts/account.php",
         type: "post",
