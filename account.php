@@ -13,7 +13,7 @@
 
 </head>
 <body onLoad="initialize()">
-<p >
+<p>
 	<h1 id = "onload_message_para">Please wait</h1>
 </p>
 <div class="header">
