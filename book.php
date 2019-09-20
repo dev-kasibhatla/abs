@@ -39,46 +39,17 @@
 		<h3>Select all slots that apply</h3>   		
     </div>    
     <div class="col-md-3 col-md-offset-3">   
-		<br>Date: <input type="date" id="date_input">        	
+		<br>Date: <input type="date" id="date_input" onkeyup="onDateChanged()">        	
     </div>   
   </div>
   <div class="row">
     <div class="col-md-10 col-md-offset-1 selection-background" id="button_view">
     
-    <h4 class="text-center">Date</h4>
+    <h4 class="text-center" id="date_confirm">Loading</h4>
     <!--Buttons show up here -->
     
     <div class="form-group">
-        <div class="items-collection" id="button_container">
-
-                <div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                    <div class="info-block block-info clearfix">
-                        <div data-toggle="buttons" class="btn-group bizmoduleselect">
-                            <label class="btn btn-default" name="slot_button">
-                                <div class="itemcontent">
-                                    <input type="checkbox" autocomplete="off" value="s1" name="slot_input">
-                                    <h5>car</h5>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                    <div class="info-block block-info clearfix">
-                        <div data-toggle="buttons" class="btn-group itemcontent">
-                            <label class="btn btn-default" name="slot_button">
-                                <div class="itemcontent">
-                                    <input type="checkbox"  autocomplete="off" value="s2" name="slot_input">
-                                    <h5>keyboard</h5>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>     
-                
-                
-                
-          		
+        <div class="items-collection" id="button_container" style="padding-bottom:2%">
           </div>
         </div>  
     
