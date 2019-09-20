@@ -8,6 +8,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(isset($_SESSION["username"]) || isset($_SESSION["adminID"])){
             //get data from server
             $date = ($_POST["date"]);
+            klog("Date is $date");
+            $date=str_replace("-","",$date);
+            klog("New date is $date");
+             $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+            if($i -> connect_error){
+            klog("Error connecting to database");
+             echo "0";
+            die("Connection failed: " . $i->connect_error);
+             }
+            klog("Connected to DB");
+            $table_name = "schedule";
+            $sql = "select `SlotID` from $table_name where `Date`=$date and `Booked`=0 ";
+            $result = mysqli_query($i,$sql);
+             /*if(mysqli_num_rows($result) == 0){
+                 klog("Got 0 rows");
+             }else{
+                 klog("Got a finite non-zero number of rows!");
+             }*/
+            //klog("result: $result");
+            $index = 0;
+            $jobj = new \stdClass(); 
+            //$jobj -> "size" = (string)mysqli_num_rows($result);
+            while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
+                
+                $sid = $row["SlotID"];
+                $jobj -> $index = $sid;
+                //klog("Found slot id: ".$row["SlotID"]);
+                $index++;
+            }
+            $jobj -> size = $index;
+            $jres = json_encode($jobj);
+            echo "$jres";
+            mysqli_close($i);
         }else{
             //user not logged in
             klog("User wasn't logged in. Trying to book slots");
