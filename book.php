@@ -39,7 +39,7 @@
 		<h3>Select all slots that apply</h3>   		
     </div>    
     <div class="col-md-3 col-md-offset-3">   
-		<br>Date: <input type="date" id="date_input" onkeyup="onDateChanged()">        	
+		<br>Date: <input type="date" id="date_input" onchange="onDateChanged()">        	
     </div>   
   </div>
   <div class="row">
@@ -62,7 +62,7 @@
 			<button type="clear_slots" class="btn btn-default btn-block" onclick="clearSlots()">Clear</button>	
 		</div>	
 		<div class="col-md-2 col-md-offset-0" >
-			<button type="submit_slots" class="btn btn-primary btn-block" onclick="loadData()">Submit</button>	
+			<button type="submit_slots" class="btn btn-primary btn-block" onclick="submitSlotData()">Submit</button>	
 		</div>	
 		
 		<br><br><br><br><br><br>
