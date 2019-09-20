@@ -13,7 +13,7 @@
 
 </head>
 <body onLoad="initialize()">
-<p>
+<p >
 	<h1 id = "onload_message_para">Please wait</h1>
 </p>
 <div class="header">
@@ -51,7 +51,7 @@
 
  	<div class="row" style="margin-top: 4%">
  		<div class="col-md-offset-3 col-md-9">
-			<a href="#">Book Slot(s)</a>
+			<a href="book.php">Book Slot(s)</a>
 		</div>	
  	</div>
  	<div class="row" style="margin-top: 2%">
