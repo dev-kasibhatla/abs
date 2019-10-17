@@ -75,7 +75,10 @@ function submitSlotData(){
     $data = ($_POST["data"]);
     //echo $data;
     $slots = explode(" ",$data);
-    
+    unset($slots[$slots.count()-1]);
+    foreach ($slots as $slot) {
+        klog("Booking for $slot");
+    }
     //connect 
     $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
     if($i -> connect_error){
@@ -88,6 +91,7 @@ function submitSlotData(){
     
     //update $table_name set `Group Password`='$new_pass_1' where `Group Email` = '$user' ";
     $gname = "";
+    //get group name to put into the slot table
     foreach($slots as $slot){
         if(isset($_SESSION["username"])){
             $gname = $_SESSION["username"];
@@ -97,8 +101,35 @@ function submitSlotData(){
             echo "0";
             die();
         }
-        $sql = "update $table_name set `Group Name`='$gname' where `SlotID` = '$slot' ";
+        //get group name and q group name
+        $sql = "select `Group Name`, `Q Group Name` from $table_name where `SlotID`= $slot" ;
         $result = mysqli_query($i,$sql);
+        if(mysqli_num_rows($result) == 0){
+            klog("Got 0 rows. It means this slot is not available anymore");
+            echo "Unable to book slot $slot";
+            die();
+        }else{
+            //check where to put the name
+            $row = mysqli_fetch_assoc($result);
+            $res_gname = $row["Group Name"];
+            $res_q_gname = $row["Q Group Name"];
+            if($res_gname == null && $res_q_gname == null){
+                //means booking goes into group name
+                $sql = "update $table_name set `Group Name`='$gname' where `SlotID` = '$slot'";
+                $result = mysqli_query($i,$sql);
+                klog("slot $slot is being booked as main slot");
+                echo "$slot booked as main";
+            }elseif($res_gname != null && $res_q_gname == null){
+                $sql = "update $table_name set `Q Group Name`='$gname' where `SlotID` = '$slot'";
+                $result = mysqli_query($i,$sql);
+                klog("slot $slot is being booked as queue slot");
+                echo "$slot booked as queue";
+            }
+            klog("slot $slot is being booked");
+        }
+
+        //c
+        //$result = mysqli_query($i,$sql);
     }
 }
 
