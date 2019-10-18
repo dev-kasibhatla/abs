@@ -226,5 +226,23 @@ function submitSlotData(){
 
     request.done(function (response, textStatus, jqXHR){
         console.log("Response after sending data to server: "+response);
+        //slotconfirmation page shows result of slot booking
+        if(response == "0" || response == "1"){
+            //show error
+            console.log("Error occured");
+        }else{
+            //explode
+            console.log("List of slots booked:\n");
+            var bookedSlots = response.split("\n");
+            var dates=[];
+            for (var i=1; i<bookedSlots.length;i++){
+                console.log(bookedSlots[i].substring(0,bookedSlots[i].length-2) + " was booked as "+bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length));
+                dates[i-1] = bookedSlots[i].substring(0,bookedSlots[i].length-2);
+                //convert to words
+                var d = new Date(bookedSlots[i].substring(0,4),bookedSlots[i].substring(4,6),bookedSlots[i].substring(6,8),bookedSlots[i].substring(8,10));
+                var temp = d.getHours()+1;
+                console.log(d.toDateString() + " from " + d.getHours() + " hours to " + temp + "hours");
+            }
+        }
     });
 }
