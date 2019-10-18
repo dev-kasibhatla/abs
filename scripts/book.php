@@ -75,7 +75,7 @@ function submitSlotData(){
     $data = ($_POST["data"]);
     //echo $data;
     $slots = explode(" ",$data);
-    unset($slots[$slots.count()-1]);
+    unset($slots[count($slots)-1]);
     foreach ($slots as $slot) {
         klog("Booking for $slot");
     }
@@ -98,15 +98,21 @@ function submitSlotData(){
         }elseif(isset($_SESSION["adminID"])){
             $gname = $_SESSION["adminID"];
         }else{
+            //user not logged in
             echo "0";
+            //send user to login screen
+            echo '<script type="text/JavaScript">  
+				 window.location.replace("login.php");
+				 </script>' ;
             die();
         }
         //get group name and q group name
         $sql = "select `Group Name`, `Q Group Name` from $table_name where `SlotID`= $slot" ;
         $result = mysqli_query($i,$sql);
         if(mysqli_num_rows($result) == 0){
+            //means one of the slots selected is unavailable for booking
             klog("Got 0 rows. It means this slot is not available anymore");
-            echo "Unable to book slot $slot";
+            echo "1";
             die();
         }else{
             //check where to put the name
@@ -118,12 +124,12 @@ function submitSlotData(){
                 $sql = "update $table_name set `Group Name`='$gname' where `SlotID` = '$slot'";
                 $result = mysqli_query($i,$sql);
                 klog("slot $slot is being booked as main slot");
-                echo "$slot booked as main";
+                echo "\n$slot:m";
             }elseif($res_gname != null && $res_q_gname == null){
                 $sql = "update $table_name set `Q Group Name`='$gname' where `SlotID` = '$slot'";
                 $result = mysqli_query($i,$sql);
                 klog("slot $slot is being booked as queue slot");
-                echo "$slot booked as queue";
+                echo "\n$slot:q";
             }
             klog("slot $slot is being booked");
         }
