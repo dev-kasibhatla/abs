@@ -127,7 +127,7 @@ function loadData(){
 
 function setSlotsOnScreen(){
 
-
+    //sample html code
     //load into div id = "button_container"
     /*
     button code:
@@ -232,17 +232,41 @@ function submitSlotData(){
             console.log("Error occured");
         }else{
             //explode
-            console.log("List of slots booked:\n");
             var bookedSlots = response.split("\n");
-            var dates=[];
+            //final result holds html document that shows the result
+            var final_result = "<style>	.light-background {	background-color: #E0E0E0;	margin-top: 5px;	margin-bottom: 5px;	padding-top:1px;	padding-bottom: 7px;}</style>"
+            final_result += "<div class=\"col-md-7 col-md-offset-2\"><h1 align=\"left\"> Your slots were booked</h1><h3  align=\"left\">Group name: </h3><h3  align=\"left\">Mentor name: </h3></div>";
+
+            //collect all booked slots into the document
             for (var i=1; i<bookedSlots.length;i++){
-                console.log(bookedSlots[i].substring(0,bookedSlots[i].length-2) + " was booked as "+bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length));
-                dates[i-1] = bookedSlots[i].substring(0,bookedSlots[i].length-2);
-                //convert to words
+                //show all slots on screen
+                //id is result_division
+                var slotID = bookedSlots[i].substring(0,bookedSlots[i].length-2);
+                var status = "error";
+                if(bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length) == "m"){
+                    status = "Booked";
+                }else if(bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length) == "q"){
+                    status = "Queued";
+                }
                 var d = new Date(bookedSlots[i].substring(0,4),bookedSlots[i].substring(4,6),bookedSlots[i].substring(6,8),bookedSlots[i].substring(8,10));
                 var temp = d.getHours()+1;
-                console.log(d.toDateString() + " from " + d.getHours() + " hours to " + temp + "hours");
+                var slotTime = d.toDateString() + " from " + d.getHours() + ":00 to " + temp + ":00";
+
+                final_result +="<div class=\"col-md-7 col-md-offset-2 light-background\"><h3 align=\"left\">Slot Time: ";                    
+                final_result += slotTime;
+
+                final_result += "</h3><h3 align=\"left\" >Slot ID: ";
+                final_result += slotID;
+
+                final_result += "</h3><h3 align=\"left\">Status: ";
+                final_result += status;
+                final_result += " </h3></div> ";                
             }
+            //hide the rest: name = "main_page"
+            $("[name='main_page']").hide();
+            //show result
+            $("#result_division").html(final_result);
+
         }
     });
 }
