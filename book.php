@@ -17,38 +17,38 @@
   <a href="#default" class="logo" id="header_logo">Book</a>
   <div class="header-right">
     <a href="index.html" style="font-weight: bold">Home</a>
-	<a href="account.php" style="font-weight: bold">Account</a>
+    <a href="account.php" style="font-weight: bold">Account</a>
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" name = "main_page">
   <div class="row">
     <div class="col-md-offset-0 col-md-4">
       <h1 class="text-center">Book Slots</h1>
     </div>
     <div class="col-md-4 col-md-offset-3">
-		<h3 class="text-center" id="account_name_label">Account Name</h3>
+		  <h3 class="text-center" id="account_name_label">Account Name</h3>
     </div>
   </div>
   <hr>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" name = "main_page">
   <div class="row">
     <div class="col-md-offset-1 col-md-4">
-		<h3>Select all slots that apply</h3>   		
+		  <h3>Select all slots that apply</h3>   		
     </div>    
     <div class="col-md-3 col-md-offset-3">   
-		<br>Date: <input type="date" id="date_input" onchange="onDateChanged()">        	
+		  <br>Date: <input type="date" id="date_input" onchange="onDateChanged()">        	
     </div>   
   </div>
-  <div class="row">
+  <div class="row" name = "main_page">
     <div class="col-md-10 col-md-offset-1 selection-background" id="button_view">
     
-    <h4 class="text-center" id="date_confirm">Loading</h4>
-    <!--Buttons show up here -->
+      <h4 class="text-center" id="date_confirm">Loading</h4>
+      <!--Buttons show up here -->
     
-    <div class="form-group">
+    <div class="form-group" name = "main_page">
         <div class="items-collection" id="button_container" style="padding-bottom:2%">
           </div>
         </div>  
@@ -57,16 +57,21 @@
 		
     </div>    
   </div>
-   <div class="row" style="margin-top: 2%">   		
-   		 <div class="col-md-1 col-md-offset-8" >
-			<button type="clear_slots" class="btn btn-default btn-block" onclick="clearSlots()">Clear</button>	
+   <div class="row" style="margin-top: 2%" name = "main_page">   		
+      <div class="col-md-1 col-md-offset-8" >
+      <button type="clear_slots" class="btn btn-default btn-block" onclick="clearSlots()">Clear</button>	
 		</div>	
-		<div class="col-md-2 col-md-offset-0" >
+		<div class="col-md-2 col-md-offset-0" name = "main_page">
 			<button type="submit_slots" class="btn btn-primary btn-block" onclick="submitSlotData()">Submit</button>	
 		</div>	
 		
 		<br><br><br><br><br><br>
  	</div>
+   </div>
+
+   <div id="result_division">
+      
+   </div>
 <style>
 
 
