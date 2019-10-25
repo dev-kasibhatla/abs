@@ -28,7 +28,7 @@
 		<div class="row" style="margin-top: 5%">
 			<div class = "col-md-4 col-md-offset-4">
 				<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon change-pass-old-colour">Old Password</span>
-				  <input type="password" class="form-control" placeholder="Old Password" aria-describedby="addon1" name = "change_old_password" required>				  
+				  <input type="password" class="form-control" placeholder="Old Password" aria-describedby="addon1" name = "change_old_password">				  
 			  	</div>
 			  	
 			  	<div class="input-group col-md-10 col-md-offset-1" style="margin-bottom:4%"><span  class="input-group-addon">New Password</span>
