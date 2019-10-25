@@ -53,25 +53,21 @@ function getData(){
 
             //declare names
             $account_table = "grps";
-
-            //FUCK
-
-            
-            $sql ="insert into $account_table (`School Name`,`Group Name`,`Group Email`,`Group Password`,`Mentor Name`,`Mentor Email`,`Mentor Department`,`Activated`)".
-            " values ('$school_name','$group_name','$group_email','$group_password','$mentor_name','$mentor_email','$mentor_dept','0')";
-            $sql1="insert into $account_table (`OTP`)"." values ($otp)";
-            //FUCK
+            $otp=rand(1000,9999);
+            $sql ="insert into $account_table (`School Name`,`Group Name`,`Group Email`,`Group Password`,`Mentor Name`,`Mentor Email`,`Mentor Department`,`Activated`, `OTP`)".
+            " values ('$school_name','$group_name','$group_email','$group_password','$mentor_name','$mentor_email','$mentor_dept','0', '$otp')";
+           
 
             if ($i->query($sql) === TRUE) {
                 echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your data has been sent to the Administrator for reviewal.<br>Mentor will be sent an e-mail regarding the same.<br>
                 Please check your e-mail for activation information.</h1>";
                 //Call here i guess?
-                //sendemail();
+                sendemail($otp,$mentor_email);
                 echo "
                 <br><a href=\"../index.html\" font-face=\"verdana\" style=\"margin-left:20%\">Click here</a> to continue to homepage";
                 echo "New record created successfully";
             } else {
-               // echo "Error: " . $sql . "<br>" . $i->error;
+                echo "Error: " . $sql . "<br>" . $i->error;
                echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">There was a problem connecting to our servers.
                 Please try again shortly.<br></h1>";
                 echo "<a href=\"javascript:history.go(-1)\" font-face=\"verdana\" style=\"margin-left:20%\">Click to try again</a>
@@ -104,31 +100,26 @@ function addToTables(){
 function tp(){
     
 }
-/*
-function sendemail(){
-$otp=rand(1000,9999);
+
+function sendemail($otp, $mentor_email){
+//$otp=rand(1000,9999);
 $subject = 'Account Activation';
-$message = 'The otp for account activation of your student group is:$otp'; 
+$message = 'The otp for account activation of your student group is:'.$otp.'
+Follow this link to activate: https://absabs2.000webhostapp.com/account_otp.php'; 
 $from = 'Auditorium.Manager';
  //storing otp in grps table
-  $sql1="insert into $account_table (`OTP`)"." values ($otp)" where `Group Email`=$group_email and `Mentor Email`=$mentor_email;
- 
- if ($i->query($sql) === TRUE) {
-                echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your Mentor has been sent an OTP for account confirmation</h1>";
-            } else {
-               // echo "Error: " . $sql . "<br>" . $i->error;
-               echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">There was a problem connecting to our servers.
-                Please try again shortly.<br></h1>";
-                echo "<a href=\"javascript:history.go(-1)\" font-face=\"verdana\" style=\"margin-left:20%\">Click to try again</a>
-                ";
-            }// Sending email
+  //$sql1="insert into $account_table (`OTP`) values ($otp) where `Group Email`=$group_email and `Mentor Email`=$mentor_email ";
+
+echo "<h1 class=\"text-center\" font-face=\"verdana\" style=\"margin-left:20%\">Your Mentor has been sent an OTP for account confirmation</h1>";
+            
+              
 if(mail($mentor_email, $subject, $message, $from)){
     echo 'Your mail has been sent successfully.';
 } else{
     echo 'Unable to send email. Please try again.';
 }
 }
-*/
+
 
 /*
 <?php
