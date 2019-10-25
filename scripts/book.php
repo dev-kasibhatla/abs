@@ -22,10 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             klog("New date is $date");
             $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
             if($i -> connect_error){
-            klog("Error connecting to database");
-             echo "0";
-            die("Connection failed: " . $i->connect_error);
-             }
+                klog("Error connecting to database");
+                echo "0";
+                die("Connection failed: " . $i->connect_error);
+            }
             klog("Connected to DB");
             $table_name = "schedule";
             $sql = "select `SlotID`, `Group Name`, `Q Group Name` from $table_name where `Date`=$date and `Booked`=0 ";
@@ -95,6 +95,21 @@ function submitSlotData(){
     foreach($slots as $slot){
         if(isset($_SESSION["username"])){
             $gname = $_SESSION["username"];
+
+            echo $_SESSION["level"];
+            if($_SESSION["level"] == 1){
+                //get group email 
+                $sql = "select `Group Email` from grps where `Mentor Email`= '$gname' " ;
+                $result = mysqli_query($i,$sql);
+                $row = mysqli_fetch_assoc($result);
+                if(mysqli_num_rows($result) == 1){
+                    $gname = $row["Group Email"];
+                }else{
+                    klog("Error fetching group username");
+                    echo "0";
+                    die();
+                }
+            }
         }elseif(isset($_SESSION["adminID"])){
             $gname = $_SESSION["adminID"];
         }else{
