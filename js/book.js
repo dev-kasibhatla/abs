@@ -248,7 +248,8 @@ function submitSlotData(){
                 }else if(bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length) == "q"){
                     status = "Queued";
                 }
-                var d = new Date(bookedSlots[i].substring(0,4),bookedSlots[i].substring(4,6),bookedSlots[i].substring(6,8),bookedSlots[i].substring(8,10));
+                var mo = parseInt(bookedSlots[i].substring(4,6)) - 1;
+                var d = new Date(bookedSlots[i].substring(0,4),mo.toString(),bookedSlots[i].substring(6,8),bookedSlots[i].substring(8,10));
                 var temp = d.getHours()+1;
                 var slotTime = d.toDateString() + " from " + d.getHours() + ":00 to " + temp + ":00";
 
