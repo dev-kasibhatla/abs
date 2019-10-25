@@ -42,7 +42,7 @@
 				$sql = "update $table_name set `OTP` = '0' where `Mentor Email` = '$mEmail' ";
 				$result = mysqli_query($i,$sql);
 				//start a mentor session and make them set password	
-				sessiion_start();
+				session_start();
 				$_SESSION["username"] = $mEmail;
             	$_SESSION["level"] = 1;
 				echo '<script type="text/JavaScript">  
