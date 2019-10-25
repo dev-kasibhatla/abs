@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 //send a response
                 echo "$jres";
-        
+                
             }
 
         }else{
@@ -69,6 +69,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "1";
         }
     }
+
+    if($req == "future_schedule" || $req == "past_schedule"){
+        $group = ($_POST["group"]);  
+        getSchedule($req,$group);
+    }
+}
+
+function getSchedule($req,$group){
+    $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+    if($i -> connect_error){
+        die("Connection failed: " . $i->connect_error);
+        klog("Error connecting to database");
+        echo "0";
+    }
+    
+    $sql = "select * from schedule where `Group Name` = '$group' ";
+    $result = mysqli_query($i,$sql);
+
+    $index=-1;
+    $jobj = new \stdClass(); 
+    $jobj -> totalBooked = mysqli_num_rows($result);
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            $index++;
+            $jobj -> $index = $row["SlotID"];   
+            
+        }              
+    }
+    //get data for queued bookings
+    $sql = "select * from schedule where `Q Group Name` = '$group' ";
+    $result = mysqli_query($i,$sql);
+    $jobj -> totalQueued = mysqli_num_rows($result);
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            $index++;
+            $jobj -> $index = $row["SlotID"];               
+        }              
+    }
+    
+    $jres = json_encode($jobj);
+    //send a response
+    echo "$jres";
 }
 
 function klog($message){
@@ -76,5 +118,6 @@ function klog($message){
     //todo: create a new file for each date
     $message = "Account.php:  ".$message;
     file_put_contents('../logs/log.txt', $message.PHP_EOL , FILE_APPEND);
+    
 }
 ?>
