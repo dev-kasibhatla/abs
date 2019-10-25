@@ -46,7 +46,7 @@ $("#change_password_form").submit(function(event){
         // Log a message to the console
         console.log(response);
         switch (response){
-            case 1:
+            case "1":
                 //successful
                 console.log("Password changed");
                 $("#login_message").text("Password changed. Please login again");
