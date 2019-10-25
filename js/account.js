@@ -58,7 +58,7 @@ function fetchSchedule(){
 	}
 	
 	var askForSchedule = "future_schedule";
-	
+	$("#future-booking-preview").html("<div class=\"row\" >	<div class=\"col-md-offset-3 col-md-9\" align=\"center\">		<h4 align=\"left\"><br>Please Wait. Fetching your schedule</h4></div></div>");
 	request = $.ajax({
         url: "../scripts/account.php",
         type: "post",
@@ -68,8 +68,7 @@ function fetchSchedule(){
 	var bookedSlots = [];
 	var queuedSlots = [];
 	request.done(function (response, textStatus, jqXHR){
-		$("#future-booking-preview").html("<div class=\"row\" >	<div class=\"col-md-offset-3 col-md-9\" align=\"center\">		<h4 align=\"left\">Please Wait. Fetching your schedule</h4></div></div>");
-
+		
 		// Log a message to the console
 		console.log("response for slot request:");
         console.log(response);
@@ -94,7 +93,7 @@ function fetchSchedule(){
 			}
 			if(res.totalQueued > 0){
 				console.log("Total queues slot: " + res.totalQueued);
-				for(var i=res.totalBooked; i < res.totalQueued + totalBooked; i++){
+				for(var i=res.totalBooked; i < res.totalQueued + res.totalBooked; i++){
 					var temp = i.toString();
 					var t2 = parseInt(res[temp]);
 					if(t2 > currSlot){
@@ -106,27 +105,38 @@ function fetchSchedule(){
 			//collect 5 earliest slots
 			
 			var allSlots = [];
-			allSlots.push(...bookedSlots);
-			allSlots.push(...queuedSlots);
+			for (var b=0;b<bookedSlots.length;b++){
+				allSlots.push(bookedSlots[b]);
+			}
+			for(q=0;q<queuedSlots.length;q++){
+				allSlots.push(queuedSlots[q]);
+			}
 			allSlots.sort();
+			//var htmlCode = "<style> .grey-background {	background-color: #E0E0E0;	margin-top: 3px;	margin-bottom:3px;	padding-top:2px;	padding-bottom: 2px;}	.green-background {	background-color: #7BFF82;	margin-top: 3px;	margin-bottom:3px;	padding-top:2px;	padding-bottom: 2px;}	</style> ";
 			var htmlCode = "";
 			var bCol = "";
 			var sTime = "";
 			var i=0;
-			for(s in allSlots){
+			for(var c=0; c < allSlots.length; c++){
+				s=allSlots[c].toString();
 				if(i>5){
 					break;
 				}
 				//background color
-				if(bookedSlots.indexOf(s) !== -1){
+				if(bookedSlots.indexOf(allSlots[c]) !== -1){
 					//s is a booked slot
+					console.log("s is a booked slot");
 					bCol = "green-background ";	
-				}else if(queuedSlots.indexOf(s) !== -1){
+				}else if(queuedSlots.indexOf(allSlots[c]) !== -1){
+					console.log("s is a queued slot");
 					bCol = "grey-background ";
+				}else{
+					console.log("Can't find in booked and queued");
 				}
 				//slot time
-				var d = new Date(s.substring(0,4),s.substring(4,6),s.substring(6,8),s.substring(8,10));
-                var temp = d.getHours()+1;
+				month = parseInt(s.substring(4,6)) - 1;
+				var d = new Date(s.substring(0,4),month.toString(),s.substring(6,8),s.substring(8,10));
+				var temp = d.getHours()+1;
 				sTime = d.toDateString() + " from " + d.getHours() + ":00 to " + temp + ":00";
 				
 				//html code
@@ -141,8 +151,9 @@ function fetchSchedule(){
 			}
 			$("#future-booking-preview").html(htmlCode);
 			if(allSlots.length == 0){
-				$("#future-booking-preview").html("<div class=\"row\" >	<div class=\"col-md-offset-3 col-md-9\" align=\"center\">		<h4 align=\"left\">You have no upcoming bookings</h4></div></div>");
+				$("#future-booking-preview").html("<br><div class=\"row\" >	<div class=\"col-md-offset-3 col-md-9\" align=\"center\">		<h4 align=\"left\">You have no upcoming bookings</h4></div></div>");
 			}
+			//console.log(htmlCode);
 			console.log("Sizes: " + allSlots.length + "  " + bookedSlots.length + "  "+ queuedSlots.length);
 
         }
