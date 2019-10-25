@@ -78,36 +78,24 @@
  
  <div class="container-fluid col-md-offset-0 col-md-4">
  	<div class="row">
- 		<div class="col-md-offset-3 col-md-9 " style="margin-bottom: 4%">
-			<h2>Your Schedule</h2>
-		</div>		
+ 		<div class="col-md-offset-3  col-md-9" >
+			<h2>Your Schedule</h2>			
+		</div>
+		<div class="col-md-4 col-md-offset-3">
+			<font color="#green"> <strong> ■ </strong> </font>			
+			<strong> Booked </strong>		
+		</div>
+		<div class="col-md-4 col-md-offset-1">
+			<font color="grey"> <strong> ■ </strong> </font>			
+			<strong> Queued</strong>		
+		</div>	
  	</div>
+ 	
+	<div id="future-booking-preview">
+		
+	</div>
 
- 	<div class="row" style="margin-top: 4%">
- 		<div class="col-md-offset-3 col-md-9">
-			<a href="#"></a>
-		</div>	
- 	</div>
- 	<div class="row" style="margin-top: 2%">
- 		<div class="col-md-offset-3 col-md-9" >
-			<a href="#"></a>
-		</div>	
- 	</div>
- 	<div class="row" style="margin-top: 2%">
- 		<div class="col-md-offset-3 col-md-9">
-			<a href="#"></a>
-		</div>	
- 	</div>
- 	<div class="row" style="margin-top: 2%">
- 		<div class="col-md-offset-3 col-md-9">
-			<a href="#"></a>
-		</div>	
- 	</div>
- 	<div class="row" style="margin-top: 2%">
- 		<div class="col-md-offset-3 col-md-9">
-			<a href="#"></a>
-		</div>	
- 	</div>
+ 	
  </div>
   
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
