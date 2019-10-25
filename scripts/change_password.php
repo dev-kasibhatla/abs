@@ -7,13 +7,16 @@ if(isset($_SESSION["username"])){
         $new_pass_1 = ($_POST["change_new_password1"]); 
         $new_pass_2 = ($_POST["change_new_password2"]); 
 
+        if($old_pass == ""){
+            $old_pass = null;
+        }
 
         $user = $_SESSION["username"];
         $table_name = "grps";
         if($_SESSION["level"] == 0){
             $sql = "select `Group Password` from $table_name where `Group Email` = '$user' ";
         }elseif($_SESSION["level"] == 1){
-            $sql = "select `Group Password` from $table_name where `Mentor Email` = '$user' ";
+            $sql = "select `Mentor Password` from $table_name where `Mentor Email` = '$user' ";
         }
 
         $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
@@ -26,10 +29,16 @@ if(isset($_SESSION["username"])){
 
         $result = mysqli_query($i,$sql);
         $row = mysqli_fetch_assoc($result);
-        $p = $row["Group Password"]; 
+        if($_SESSION["level"] == 0){
+            $p = $row["Group Password"]; 
+        }elseif($_SESSION["level"] == 1){
+            $p = $row["Mentor Password"]; 
+        }        
 
         if($p != $old_pass){
             echo -4;
+            echo $old_pass;
+            echo $p;
             die();
         }
 
@@ -46,9 +55,11 @@ if(isset($_SESSION["username"])){
 
         if($new_pass_1 == $new_pass_2){
            
-            //get username
-            
-            $sql = "update $table_name set `Group Password`='$new_pass_1' where `Group Email` = '$user' ";
+            if($_SESSION["level"] == 0){
+                $sql = "update $table_name set `Group Password`='$new_pass_1' where `Group Email` = '$user' "; 
+            }elseif($_SESSION["level"] == 1){
+                $sql = "update $table_name set `Mentor Password`='$new_pass_1' where `Mentor Email` = '$user' "; 
+            }             
             $result = mysqli_query($i,$sql);
             echo "1";
             klog("Password was changed for $user");
