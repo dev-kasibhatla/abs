@@ -16,7 +16,7 @@ function generateDates(){
     date_default_timezone_set('Asia/Kolkata');
     $date = date('YmdH', time());
     klog("Current time: $date");
-    $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
     if($i -> connect_error){
         klog("Error connecting to database");
         echo "0";
@@ -47,7 +47,7 @@ function addSlots($startSid){
     //calculate end date
     date_default_timezone_set('Asia/Kolkata');
     $date = new DateTime('now');
-    $date->modify('+2 month');
+    $date->modify('+1 day');
     $endSid = $date->format('YmdH');
     klog("End Slot ID: $endSid");
     //maintain date, slot id, time separately
@@ -68,10 +68,10 @@ function addSlots($startSid){
     $dateArray = array();
     while($currDate < $endDate){
         array_push($dateArray,date('y-m-d',$currDate));
-        $currDate = strtotime('+1 day',$currDate);
+        $currDate = strtotime('+1 month',$currDate);
     }
     $table_name="schedule";
-    $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
     if($i -> connect_error){
         klog("Error connecting to database");
         echo "0";
@@ -88,7 +88,7 @@ function addSlots($startSid){
             $slid = "20".str_replace("-", "", $slid);
             $sql="insert into $table_name (`Date`,`Slot Timing`,`SlotID`) values ('$slid','$st','$slid$st')";
             $result = mysqli_query($i,$sql);
-
+            klog($i->error);
             //$result = mysqli_query($i,$sql);
             klog($sql);
             

@@ -15,7 +15,7 @@
 	  	
 		$table_name = "admin";
         $sql = "select `password` from $table_name where `username` = '$user' ";
-		$i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+		$i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
 		if($i -> connect_error){
 			echo "Error connecting to mysql server";
 			die();

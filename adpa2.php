@@ -58,7 +58,11 @@
 			<a href="#" onclick="generateSlots()">Generate slots in DB</a>
 		</div>	
  	</div>
- 
+ <div class="row" style="margin-top: 4%">
+ 		<div class="col-md-9 col-md-offset-0">
+			<a href="https://absabs2.000webhostapp.com/adpa3.php">Create a Mentor</a>
+		</div>	
+ 	</div>
  
  </div>	
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
@@ -85,9 +89,10 @@ function generateSlots(){
         // Log a message to the console
         console.log("response: "+response);
         if(response == 1){
+			alert("New Slots were created successfully");
 			
         }else{
-			
+			alert("There was a error generating new slots");
         }
     });
 }

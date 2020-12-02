@@ -45,7 +45,7 @@ function getData(){
         echo "<br>School Name: ".$school_name;*/
 
           //create new connection
-            $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+            $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
             if($i -> connect_error){
                 die("Connection failed: " . $i->connect_error);
                 echo "Error connecting to database";
@@ -123,7 +123,7 @@ if(mail($mentor_email, $subject, $message, $from)){
 
 /*
 <?php
-$i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+$i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
 $d=$i->query('show tables;');
 $d=$d->fetch_all();
 echo print_r($d);
