@@ -1,0 +1,116 @@
+@charset "utf-8";
+/* CSS Document */
+* {box-sizing: border-box;}
+.header {
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding: 20px 5px;
+	margin-right: 2.5%;
+	margin-left: 2.5%;
+}
+
+/* Style the header links */
+.header a {
+	float: left;
+	color: black;
+	text-align: center;
+	padding-top: 1px;
+	padding-right: 4px;
+	padding-left: 4px;
+	padding-bottom: 1px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 20px;
+	margin-right: 5px;
+	margin-left: 5px;
+	border-radius: 4px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 0px;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+	background-color: #FFFFFF;
+	color: #007AFF;
+}
+
+#header_logo:hover{	
+	background-color: #FFFFFF;
+	color:black;
+
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+	float: right;
+	width : "40%";
+	margin-right: 3%;
+}
+
+.vl {
+	border-left: 1px solid #717171;
+	height: 60%;
+	position: absolute;
+	left: 50%;
+	margin-left: -3px;
+	top: 0;
+	margin-top: 17%;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-top-color: #434343;
+	border-bottom-color: #434343;
+	border-right-color: #434343;
+}
+
+a{
+	font-size: large;
+	color: #007CFF
+}
+
+h1{
+	padding-left: 0px;
+}
+
+.float-left{
+	float: left;
+	width: 20%;
+
+}
+.float-right{
+	float: right;
+	width: 20%;
+	
+}
+
+select{
+	height: 40px;
+	line-height: 40px;
+	font:bold;
+	color:#ffffff;
+	background-color:#007CFF
+}
+
+
+
+
+@media screen and (max-width:1000px){
+	.vl{
+		height: 0px;
+		border-left: 10px solid #434343;
+	}	
+	select{
+		width: 200%;
+	}
+}
