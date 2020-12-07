@@ -1,12 +1,74 @@
 @charset "utf-8";
 /* CSS Document */
 * {box-sizing: border-box;}
+body {
+	background: rgb(216, 211, 233);
+}
 .header {
 	overflow: hidden;
 	background-color: #FFFFFF;
 	padding: 20px 5px;
 	margin-right: 2.5%;
 	margin-left: 2.5%;
+}
+
+.bg-dark2{
+	background-color: #1000a0;
+}
+
+.div-20 {
+	height: 20px;
+}
+
+.div-10 {
+	height: 10px;
+}
+
+.elevate {
+	z-index: 10px;
+}
+
+.login-div {
+	width: 100%;
+	/* width: 30rem;
+  height: 20rem; */
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .15);
+  padding: 25px;
+  backdrop-filter: blur(5px);
+}
+
+.btn-purple {
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	background-color: #1000a0d3;
+	color: white;
+}
+
+.btn-purple:hover {
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	background-color: #0d036d;
+	color: white;
+}
+
+.btn-purple-sec {
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	background-color: #5900ffd5;
+	color: white;
+}
+
+.btn-purple-sec:hover {
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	background-color: #5900ff;
+	color: white;
 }
 
 /* Style the header links */
@@ -102,8 +164,32 @@ select{
 	background-color:#007CFF
 }
 
+.reg-body {
+	padding: 50px;
+	width: 100%;
+}
 
+.flat-glass {
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, .15);
+	padding: 25px;
+	backdrop-filter: blur(5px);
+}
 
+.reg-div {
+	width: 100%;
+	/* height: 100%; */
+	margin-bottom: 5px;
+}
+
+.submit-div {
+	height: 100%;
+	width: 100%;
+}
+
+.red {
+	background-color: red;
+}
 
 @media screen and (max-width:1000px){
 	.vl{
@@ -112,5 +198,13 @@ select{
 	}	
 	select{
 		width: 200%;
+	}
+}
+
+
+@media screen and (max-width:767px){
+	.login-div {
+		margin-left: 10%;
+		margin-right: 10%;
 	}
 }
