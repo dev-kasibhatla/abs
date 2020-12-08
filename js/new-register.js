@@ -51,7 +51,7 @@ function getSchools(){
 
 
 $("#btnSubmit").click(function(){
-
+    var abort=0
     // $("#login_message").hide();
     $("#emailHelp").html("");
     $("#errorMentor").html("");
@@ -89,6 +89,7 @@ $("#btnSubmit").click(function(){
                         {
                             $("#emailHelp").html("<strong class=\"text-danger\">Email should have more characters </strong>");
                             $($inputs[i]).css('border',"2px solid red");
+                            abort = 1;
                         }
                     }
                     else
@@ -97,6 +98,7 @@ $("#btnSubmit").click(function(){
                         {
                             $("#errorMentor").html("<strong class=\"text-danger\">Email should have more characters </strong>");
                             $($inputs[i]).css('border',"2px solid red");
+                            abort = 1;
                         }
                     }
                         
@@ -107,12 +109,14 @@ $("#btnSubmit").click(function(){
                     if(!repass.test($inputs[i].value))
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\">Please enter a valid password with the appropriate characters</strong>");
-                        $($inputs[i]).css('border',"2px solid red");  
+                        $($inputs[i]).css('border',"2px solid red");
+                        abort = 1;  
                     }
                     else if(($inputs[i].value.length < 8))
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\"> Password has to have more than eight characters </strong>");
                         $($inputs[i]).css('border',"2px solid red");
+                        abort = 1;
                     }
                     break;     
                 }        
@@ -125,12 +129,14 @@ $("#btnSubmit").click(function(){
                         {
                             $("#errorGroupDetails").html("<strong class=\"text-danger\">Please enter valid group details</strong>")  ;
                             $($inputs[i]).css('border',"2px solid red");
+                             abort = 1;
                         }
                         else if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorGroupDetails").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
                             $($inputs[i]).css('border',"2px solid red");
+                            abort = 1;
                         }
                     }
                     else
@@ -139,12 +145,14 @@ $("#btnSubmit").click(function(){
                         {
                             $("#errorMentor").html("<strong class=\"text-danger\">Please enter valid mentor details</strong>")  ;
                             $($inputs[i]).css('border',"2px solid red");
+                            abort = 1;
                         }
                         else if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorMentor").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
                             $($inputs[i]).css('border',"2px solid red");
+                            abort = 1;
                         }    
                     }        
                     break;
@@ -155,6 +163,7 @@ $("#btnSubmit").click(function(){
                     {
                         $("#phoneHelp").html("<strong class=\"text-danger\">Please enter a valid 10 digit phone number</strong>");
                         $($inputs[i]).css('border',"2px solid red");
+                        abort = 1;
                     }
                     break;
                 }
