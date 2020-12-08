@@ -1,11 +1,13 @@
 var scale = 'scale(0.90)';
 var globalAccountData;
+var deleteTime;
 //start
 function initialize(){
 	hideStuff(true);
+	$('.modal').hide();
 	$(document).ready(function(){
 		//hide everything
-		
+
 		console.log("Checking account status");
 		checkAccountStatus();
     });
@@ -36,20 +38,57 @@ function checkAccountStatus(){
         // Log a message to the console
         console.log(response);
         if(response == 0){
-			//user not logged in. Redirect to login			
+			//user not logged in. Redirect to login
+			alert("Please register a group to use the auditorium booking system");
 			console.log("redirecting to login");
 			window.location.replace("login.php");
         }else{
 			//user is logged in
-			var res = JSON.parse(response);
+			var res = JSON.parse(response);	
+
 			$("#account_name_label").text(res.groupname);
 			$("#mentor_name_label").text(res.mentorname);
 			hideStuff(false);
+			if(res.activated==0)
+			{
+			    $("#activation").show();
+			}
+			else{
+			   $("#activation").hide();
+			}
 			globalAccountData = res;
 			//now fetch user's schedule
 			fetchSchedule();
         }
     });
+}
+function activateAccount()
+{
+   if(request){
+		request.abort();
+	}
+	
+	var action = "activate";
+	$("#activation").html("<h4>Please Wait. Activating your account</h4>");
+	request = $.ajax({
+        url: "../scripts/account.php",
+        type: "post",
+        data: {'action': action, 'group': globalAccountData.mentorname, 'groupid': globalAccountData.groupid}
+	}); 
+	request.done(function (response, textStatus, jqXHR){
+	   var res = JSON.parse(response);
+	   if(res.activation==1)
+	   {
+	       alert("account activated successfully");
+	        $("#activation").hide();
+	   }
+	   else{
+	       alert("account activation failed");
+	        $("#activation").html("<a href=\"#\" onclick=\"activateAccount()\">Your account isn't activated, click here to activate</a>");
+	      
+	   }
+	    
+	});
 }
 
 function fetchSchedule(){
@@ -140,9 +179,13 @@ function fetchSchedule(){
 				sTime = d.toDateString() + " from " + d.getHours() + ":00 to " + temp + ":00";
 				
 				//html code
+
 				htmlCode += "<div class=\"row\"> <div class=\" ";
+				
 				htmlCode += bCol;
-				htmlCode += " col-md-offset-3 col-md-9\" align=\"center\"> <h4 align=\"left\">Slot Time:  ";
+
+				htmlCode += "col-md-offset-3 col-md-9\" align=\"center\"> <h4 align=\"left\">" + "<button type=\"button\" id=\""+s+"\" class=\"btn  modalVala \"><i class=\"far fa-times-circle fa-2x danger\"></i></button><br><br>"+" Slot Time:  ";
+				
 				htmlCode += sTime;
 				htmlCode += " </h4> <h4 align=\"left\" >Slot ID:  ";
 				htmlCode += s;
@@ -159,6 +202,17 @@ function fetchSchedule(){
         }
     });
 }
+
+
+   $("#future-booking-preview").on('click',".modalVala",function(){
+
+         // show Modal
+         console.log(this.getAttribute('id'));
+         deleteTime = parseInt(this.getAttribute('id'));
+         $('#myModal').modal('show');
+    });
+
+
 
 function fetchPastSchedule(username){
 	if(request){
@@ -211,12 +265,47 @@ function logout(){
 	
 }
 
+function cancelSlot()
+{
+
+	if(request){
+		request.abort();
+	}
+	console.log("Cancelling slot "+ deleteTime);
+	request = $.ajax({
+        url: "../scripts/account.php",
+        type: "post",
+        data: {'action': 'cancelslot','time':deleteTime}
+	});
+	
+	request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        var res = JSON.parse(response);
+		if(res['response'] == 1){
+			console.log("Slot was deleted");
+	    }
+	    $('#myModal').modal('toggle');
+	    fetchSchedule();
+	    
+		   
+    });
+
+}
+
+
+
 function hideStuff(h){
 	if(h){
+
 		$("div").hide();
 		$("onload_message_para").show();
 	}else{
 		$("*").show();
+		$('.modal').hide();
 		$("#onload_message_para").hide();
 	}
 }
+
+
+
+

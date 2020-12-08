@@ -53,7 +53,7 @@ function login($i, $l_uname, $l_password){
     }else{
         //Check if it's a mentor account
         klog("Checking to see if $l_uname is a mentor account");
-        $sql = "select `Mentor Password`, `Mentor Email` from $account_table where `Mentor Email` = '$l_uname' ";
+        $sql = "select `Mentor Password`, `Mentor Email` from Mentor where `Mentor Email` = '$l_uname' ";
         $result = mysqli_query($i,$sql);
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_assoc($result);
@@ -85,7 +85,7 @@ function login($i, $l_uname, $l_password){
 
 function connectDB(){
     //connect to sql
-    $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
     if($i -> connect_error){
         die("Connection failed: " . $i->connect_error);
         klog("Error connecting to database");

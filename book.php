@@ -1,5 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +13,7 @@
 <link rel="stylesheet" href="css/account.css">
 
 </head>
-<body onload = "initialize()">
+<body id="body">
 <div class="header">
  
   <a href="#default" class="logo" id="header_logo">Book</a>
@@ -62,7 +64,7 @@
       <button type="clear_slots" class="btn btn-default btn-block" onclick="clearSlots()">Clear</button>	
 		</div>	
 		<div class="col-md-2 col-md-offset-0" name = "main_page">
-			<button type="submit_slots" class="btn btn-primary btn-block" onclick="submitSlotData()">Submit</button>	
+			<button id = "book-button" type="submit_slots" class="btn btn-primary btn-block" onclick="submitSlotData()">Submit</button>	
 		</div>	
 		
 		<br><br><br><br><br><br>

@@ -7,7 +7,7 @@
 		//retrieve data from server
 		$table_name = "grps";
         $sql = "select `OTP`,`Activated` from $table_name where `Mentor Email` = '$mEmail' ";
-		$i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+		$i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
 		if($i -> connect_error){
 			klog("Unable to connect to DB");
 			echo "Error connecting to mysql server";
@@ -31,13 +31,13 @@
 			//verify
 			if($otp == $mOtp){
 				//set account as activated
-				$i=mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+				$i=mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
 
 				klog("Otp matches server data. Activating this account");
 				$sql = "update $table_name set `Activated` = '1' where `Mentor Email` = '$mEmail' ";
 				$result = mysqli_query($i,$sql);
 				
-				$i=mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+				$i=mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
 
 				$sql = "update $table_name set `OTP` = '0' where `Mentor Email` = '$mEmail' ";
 				$result = mysqli_query($i,$sql);

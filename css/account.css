@@ -9,6 +9,8 @@
 	margin-left: 2.5%;
 }
 
+
+
 /* Style the header links */
 .header a {
 	float: left;
@@ -95,6 +97,13 @@ h1{
 
 .change-pass-old-colour{
 	background-color:#004D9E
+}
+
+.modalVala{
+	background:none;
+	border:0px;
+	padding:0;
+	color:red;
 }
 
 @media screen and (max-width: 1000px){

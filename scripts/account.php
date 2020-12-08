@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //check if a user is logged in
         if(isset($_SESSION["username"])){
             //connect to server
-            $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+            $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
             if($i -> connect_error){
                 die("Connection failed: " . $i->connect_error);
                 klog("Error connecting to database");
@@ -30,18 +30,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mentorEmail = $row["Mentor Email"];
                 $level = $row["Level"];
                 $schoolName = $row["School Name"];
+                $activated = $row["Activated"];
+                $id = $row["id"];
                 $mess = "$user is already logged in";
                 klog($mess);
+                
+                
 
                 //create a json object to respond     
-                $jobj = new \stdClass(); 
+                $jobj = new \stdClass();
+                $jobj ->groupid = $id; 
                 $jobj ->username = $groupEmail;
                 $jobj ->groupname = $groupName;
                 $jobj ->mentorname = $mentorName;
                 $jobj ->mentoremail = $mentorEmail;
                 $jobj ->level = $_SESSION["level"];
                 $jobj ->schoolname = $schoolName;
-                
+                $jobj ->activated = $activated;
                 $jres = json_encode($jobj);
 
                 klog("Got all user data from db");
@@ -52,7 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
         }else{
-            echo "0";
+            klog("Mentor with no grp tried to login");
+            echo 0;
+            die();
         }
     }
 
@@ -74,10 +81,87 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $group = ($_POST["group"]);  
         getSchedule($req,$group);
     }
+    
+    if($req == "cancelslot")
+    {
+        cancelSlot();
+        
+    }
+    if($req == "activate")
+    {
+        activateAccount();
+    }
+    
 }
 
+
+
+
+function activateAccount()
+{
+    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $mname=$_POST['group'];
+    $sql = "update grps set `Activated` = '1' where `Mentor Name`='$mname'";
+    $result=mysqli_query($i,$sql);
+    if($result==TRUE)
+    {
+        $id=$_POST["groupid"];
+        $sql = "update Mentor set `Group ID` = '$id' where `Mentor Name`='$mname'";
+        $result=mysqli_query($i,$sql);
+        if($result==TRUE)
+        {
+            $jobj=new \stdClass();
+            $jobj->activation=1;
+            echo json_encode($jobj);
+            die(); 
+        }
+     }
+     else
+     {
+        print_r(__line__.$i->error);
+        echo 0;
+        die();
+     }
+     
+    
+}
+function cancelSlot()
+{
+    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $slotid=intval($_POST['time']);
+    $sql = "update schedule set `Group Name` = NULL,`Booked`='0'  where `SlotID` = $slotid ";
+    $result=mysqli_query($i,$sql);
+    if($result==TRUE)
+    {
+        $sql="UPDATE schedule set `Group Name` = `Q Group Name`, `Q Group Name` = NULL where `SlotID` = $slotid ";
+        $sql2="UPDATE schedule set  `Booked`=0 where `SlotID` = $slotid AND `Group Name`=NULL";
+         $result=mysqli_query($i,$sql);
+         $result=mysqli_query($i,$sql2);
+         if($result==TRUE)
+         {
+             $jobj=new \stdClass();
+             $jobj->response=1;
+             echo json_encode($jobj);
+             die();
+         }
+         else
+         {
+            print_r(__line__.$i->error);
+            echo 0;
+            die();
+         }
+    }
+    else
+    {
+        print_r(__line__.$i->error);
+            echo 0;
+            die();
+    }
+}
+
+
 function getSchedule($req,$group){
-    $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
     if($i -> connect_error){
         die("Connection failed: " . $i->connect_error);
         klog("Error connecting to database");

@@ -1,4 +1,7 @@
 var request;
+var grpemail;
+$("document").ready(initialize);
+
 function initialize(){
     //check if the user is logged in
     if(request){
@@ -22,6 +25,15 @@ function initialize(){
         }else{
 			//user is logged in
 			var res = JSON.parse(response);
+			console.log("Level is "+ res.level);
+			if(res.level==0)
+			{
+	
+	            var a =  "<a href=\"https://absabs2.000webhostapp.com/account.php\">Return to Account Page</a>";
+			    $("html").html("Student Groups cannot make bookings<br>" + a);
+			    
+			}
+			grpemail = res['username']
 			$("#account_name_label").text(res.groupname);
             //$(document).ready(function(){});
             //console.log("User is :"+res.groupname);
@@ -91,7 +103,7 @@ function loadData(){
 	request = $.ajax({
         url: "../scripts/book.php",
         type: "post",
-        data: {'action': askForInfo, 'date':date}
+        data: {'action': askForInfo, 'date':date, 'grpname':grpemail}
     });
     
     request.done(function (response, textStatus, jqXHR){
@@ -106,19 +118,25 @@ function loadData(){
             console.log("Got "+parseInt(res.size)+" slots from server");
             //put all those slot ids in an array
             var i = 0;
+            var rightNow = new Date();
+			var r = rightNow.toISOString().slice(0,10).replace(/-/g,"");
+			currSlot = parseInt(r+rightNow.getHours());                
+            console.log("currSlot: "+currSlot);
             for(i =0;i<parseInt(res.size);i++ ){
                 var temp = i.toString();
                 var data = parseInt(res[temp]);
-                //console.log("data: "+data);
-                slots.push(data);
-
-                var a = i.toString() + "a";
-                var b = i.toString() + "b";
-                slota.push(res[a]);
-                slotb.push(res[b]);
+                console.log("data: "+data);
+                if(data>currSlot){
+                    
+                    slots.push(data);
+                    var a = i.toString() + "a";
+                    var b = i.toString() + "b";
+                    slota.push(res[a]);
+                    slotb.push(res[b]);
+                }
             }
-           // console.log("Here is the collected slot data:");
-            //console.log(slots);
+            console.log("Here is the collected slot data:");
+            console.log(slots);
             setSlotsOnScreen();
         }
     });
@@ -221,7 +239,11 @@ function submitSlotData(){
 	request = $.ajax({
         url: "../scripts/book.php",
         type: "post",
-        data: {'action': sendInfo, 'data': data}
+        data: {'action': sendInfo, 'data': data},
+        beforeSend:function(){
+            // alert("No Masti allowed");
+            $("#book-button").prop('disabled',true);
+        }
     });
 
     request.done(function (response, textStatus, jqXHR){
@@ -231,25 +253,32 @@ function submitSlotData(){
             //show error
             console.log("Error occured");
         }else{
+            var res = JSON.parse(response);
             //explode
-            var bookedSlots = response.split("\n");
+            // var bookedSlots = res["slot"].split("\n");
+            console.log(res);
             //final result holds html document that shows the result
             var final_result = "<style>	.light-background {	background-color: #E0E0E0;	margin-top: 5px;	margin-bottom: 5px;	padding-top:1px;	padding-bottom: 7px;}</style>"
-            final_result += "<div class=\"col-md-7 col-md-offset-2\"><h1 align=\"left\"> Your slots were booked</h1><h3  align=\"left\">Group name: </h3><h3  align=\"left\">Mentor name: </h3></div>";
+            final_result += "<div class=\"col-md-7 col-md-offset-2\"><h1 align=\"left\"> Your slots were booked</h1><h3  align=\"left\">Group Email: "+res["gname"] +"</h3><h3  align=\"left\">Mentor name: "+res["mname"] +"</h3></div>";
 
             //collect all booked slots into the document
-            for (var i=1; i<bookedSlots.length;i++){
+            for (var i=1; i<=res['size'];i++){
+                
                 //show all slots on screen
                 //id is result_division
-                var slotID = bookedSlots[i].substring(0,bookedSlots[i].length-2);
+                var bookedSlots = JSON.parse(res[i]);
+              
+                console.log(bookedSlots["slot"]);
+
+                var slotID = bookedSlots["slot"].substring(0,(bookedSlots["slot"].length)-2);
                 var status = "error";
-                if(bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length) == "m"){
+                if(bookedSlots["slot"].substring(bookedSlots["slot"].length-1,bookedSlots["slot"].length) == "m"){
                     status = "Booked";
-                }else if(bookedSlots[i].substring(bookedSlots[i].length-1,bookedSlots[i].length) == "q"){
+                }else if(bookedSlots["slot"].substring(bookedSlots["slot"].length-1,bookedSlots["slot"].length) == "q"){
                     status = "Queued";
                 }
-                var mo = parseInt(bookedSlots[i].substring(4,6)) - 1;
-                var d = new Date(bookedSlots[i].substring(0,4),mo.toString(),bookedSlots[i].substring(6,8),bookedSlots[i].substring(8,10));
+                var mo = parseInt(bookedSlots["slot"].substring(4,6)) - 1;
+                var d = new Date(bookedSlots["slot"].substring(0,4),mo.toString(),bookedSlots["slot"].substring(6,8),bookedSlots["slot"].substring(8,10));
                 var temp = d.getHours()+1;
                 var slotTime = d.toDateString() + " from " + d.getHours() + ":00 to " + temp + ":00";
 
@@ -262,8 +291,10 @@ function submitSlotData(){
                 final_result += "</h3><h3 align=\"left\">Status: ";
                 final_result += status;
                 final_result += " </h3></div> ";                
+                
             }
             //hide the rest: name = "main_page"
+            $("#book-button").prop('disabled',true);
             $("[name='main_page']").hide();
             //show result
             $("#result_division").html(final_result);

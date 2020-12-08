@@ -18,8 +18,8 @@ if(isset($_SESSION["username"])){
         }elseif($_SESSION["level"] == 1){
             $sql = "select `Mentor Password` from $table_name where `Mentor Email` = '$user' ";
         }
-
-        $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+   
+        $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
         if($i -> connect_error){
             die("Connection failed: " . $i->connect_error);
             klog("Error connecting to database");
@@ -30,16 +30,16 @@ if(isset($_SESSION["username"])){
         $result = mysqli_query($i,$sql);
         $row = mysqli_fetch_assoc($result);
         if($_SESSION["level"] == 0){
-            $p = $row["Group Password"]; 
+            $p = $row["Group Password"];
+                    
         }elseif($_SESSION["level"] == 1){
-            $p = $row["Mentor Password"]; 
+            $p = $row["Mentor Password"];
+                    
         }        
 
         if($p != $old_pass){
             echo -4;
-            echo $old_pass;
-            echo $p;
-            die();
+            
         }
 
         if(strlen($new_pass_1) < 8){

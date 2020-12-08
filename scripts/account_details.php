@@ -10,7 +10,7 @@ if(isset($_SESSION["username"])){
             $sql = "select * from grps where `Mentor Email` = '$user' ";
         }
         klog("$user is requesting account info");
-        $i = mysqli_connect('remotemysql.com','IsgZ9IuKUH','Xx4FYXPuoq','IsgZ9IuKUH','3306');
+        $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
         if($i -> connect_error){
             die("Connection failed: " . $i->connect_error);
             klog("Error connecting to database");
