@@ -37,5 +37,13 @@ jobs:
         echo '"'									>>/dev/shm/somecommand
         chmod 0500 /dev/shm/somecommand
 
-    - name: Run the command from the file
-      run: sh /dev/shm/somecommand
+    - name: Fetch the last commit from repository
+      uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          clean: false
+
+    - name: Change to repo directory and run command from the file
+      run: |
+        cd "$GITHUB_WORKSPACE"
+        sh /dev/shm/somecommand
