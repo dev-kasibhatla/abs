@@ -1,0 +1,20 @@
+name: deploy-master
+
+on:
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+env:
+  SECRET1: ${{ secrets.fh }}
+  SECRET2: ${{ secrets.fu }}
+  SECRET3: ${{ secrets.fp }}
+  DDOMAIN: absonline.educationhost.cloud
+
+jobs:
+  deploy-master-job:	
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to server
+      run: lftp "$SECRET1" -e "set ftp:ssl-force true; set ssl:verify-certificate true; set ftp:list-options -a; set ftp:anon-user $SECRET2 ; set ftp:anon-pass $SECRET3 ; mirror -cesRLv -x^\.git/$ -x^\.github/$ -X **/*.{MD,mD,Md,md} . domains/$DDOMAIN/public_html ; quit"
