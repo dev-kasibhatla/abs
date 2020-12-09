@@ -19,9 +19,9 @@ a {
 }
 
 .cal-div{
-	height: fit-content;
+	height: 150px;
 	width: 100%;
-	background: none;
+	background-color: blue;
 }
 
 .flat-glass:hover{
@@ -44,4 +44,3 @@ a {
 @media screen and (max-height: 500px){
 
 }
-
