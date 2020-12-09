@@ -13,11 +13,29 @@ env:
   DDOMAIN: absonline.educationhost.cloud
 
 jobs:
-  deploy-master-job:	
+  deploy-master-job:
     runs-on: ubuntu-latest
     steps:
     - name: Install lftp
       run: sudo apt install -y --no-install-recommends lftp >/dev/null
 
-    - name: Run the FTP reverse mirror
-      run: lftp "$SECRET1" -e "set ftp:ssl-force true; set ssl:verify-certificate true; set ftp:list-options -a; set ftp:anon-user $SECRET2 ; set ftp:anon-pass $SECRET3 ; mirror -cesRLv -x^\.git/$ -x^\.github/$ -X **/*.{MD,mD,Md,md} . domains/$DDOMAIN/public_html ; quit"
+    - name: Write the FTP reverse mirror command to a file
+      run: |
+        rm -rfv /dev/shm/somecommand
+        echo '#!/bin/bash'							 >/dev/shm/somecommand
+        echo "lftp $SECRET1 -e \""					>>/dev/shm/somecommand
+        echo ' set ftp:ssl-force true'				>>/dev/shm/somecommand
+        echo ' set ssl:verify-certificate true'		>>/dev/shm/somecommand
+        echo ' set ftp:list-options -a'				>>/dev/shm/somecommand
+        echo " set ftp:anon-user $SECRET2"			>>/dev/shm/somecommand
+        echo " set ftp:anon-pass $SECRET3"			>>/dev/shm/somecommand
+        echo ' mirror -cesRLv \'					>>/dev/shm/somecommand
+        echo '   -x^\.git/$ -x^\.github/$ \'		>>/dev/shm/somecommand
+        echo '   -X **/*.{MD,mD,Md,md} \'			>>/dev/shm/somecommand
+        echo "   . domains/$DDOMAIN/public_html"	>>/dev/shm/somecommand
+        echo ' quit'								>>/dev/shm/somecommand
+        echo '"'									>>/dev/shm/somecommand
+        chmod 0500 /dev/shm/somecommand
+
+    - name: Run the command from the file
+      run: sh /dev/shm/somecommand
