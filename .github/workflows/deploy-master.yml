@@ -16,5 +16,8 @@ jobs:
   deploy-master-job:	
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy to server
+    - name: Install lftp
+      run: sudo apt install -y --no-install-recommends lftp >/dev/null
+
+    - name: Run the FTP reverse mirror
       run: lftp "$SECRET1" -e "set ftp:ssl-force true; set ssl:verify-certificate true; set ftp:list-options -a; set ftp:anon-user $SECRET2 ; set ftp:anon-pass $SECRET3 ; mirror -cesRLv -x^\.git/$ -x^\.github/$ -X **/*.{MD,mD,Md,md} . domains/$DDOMAIN/public_html ; quit"
