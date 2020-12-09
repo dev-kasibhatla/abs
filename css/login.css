@@ -16,6 +16,13 @@ body {
 	background-color: #1000a0;
 }
 
+.nav {
+	top: 0px;
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+
 .div-20 {
 	height: 20px;
 }
@@ -191,6 +198,13 @@ select{
 	background-color: red;
 }
 
+.hidden-login {
+	display:none;
+	width: 100%;
+	text-align: center;
+}
+
+
 @media screen and (max-width:1000px){
 	.vl{
 		height: 0px;
@@ -206,5 +220,39 @@ select{
 	.login-div {
 		margin-left: 10%;
 		margin-right: 10%;
+	}
+
+	.extra-space{
+		margin-top: 50px;
+	}
+
+	.reg-tweak1{
+		margin-left: 0px;
+		margin-right: 0px;
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.reg-body {
+		padding: 50px;
+		width: 100%;
+	}
+}
+
+
+@media screen and (max-width:512px){
+
+
+	.reg-body {
+		padding: 25px;
+	}
+
+}
+
+@media screen and (max-width:1000px){
+
+	.hidden-login {
+		display: inline;
 	}
 }

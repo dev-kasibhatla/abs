@@ -21,9 +21,9 @@
 </head>
 <!-- <body onload = "initialize()"> -->
 
-<body>
+<body onload="initialize()">
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark2 shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark2 shadow-sm nav">
     <a class="navbar-brand" href="#">Auditorium Booking System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,9 +63,9 @@
           </form> -->
     </div>
   </nav>
-
+  <div style="height: 50px;" class=""></div>
   <section class="reg-body">
-    <div class="container-fluid">
+    <div class="container-fluid reg-tweak1">
       <div class="row flat-glass shadow rounded">
         <div class="">
           <div>
@@ -79,7 +79,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="reg-div flat-glass">
               <h4 style="width: 100%; text-align: center;">Contact details</h4>
-              <form id="form1">
+              <form id="form1"  class="registerForms">
                 <div class="form-group">
                   <label for="inputEmail">Email address</label>
                   <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
@@ -106,8 +106,8 @@
           <div class="col-lg-4 col-md-6">
             <div class="reg-div flat-glass">
               <h4 style="width: 100%; text-align: center;">Group details</h4>
-              <form id="form2">
-                <small id="groupError" class="form-text text-danger">Errors from this section can appear here</small>
+              <form id="form2" class="registerForms">
+                <small id="errorGroupDetails" class="form-text text-danger">Errors from this section can appear here</small>
                 <div class="form-group">
                   <label for="inputGroupName">Group name</label>
                   <input type="text" class="form-control" id="inputGroupName" placeholder="Enter name">
@@ -150,7 +150,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="reg-div flat-glass">
               <h4 style="width: 100%; text-align: center;">Security</h4>
-              <form id="form3">
+              <form id="form3"  class="registerForms">
                 <small id="passwordInfo" class="form-text-muted">Password must contain:<br>
                   <ul>
                     <li>8 or more characters</li>
@@ -179,7 +179,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="reg-div flat-glass">
               <h4 style="width: 100%; text-align: center;">Mentor details</h4>
-              <form id="form4">
+              <form id="form4" class="registerForms">
                 <small id="errorMentor" class="text-danger">Errors from this section can appear here</small>
                 <div class="form-group">
                   <label for="inputMentorName">Mentor name</label>
@@ -193,7 +193,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputMentorDept">Mentor Department</label>
-                  <input type="email" class="form-control" id="inputMentorDept" placeholder="Enter department">
+                  <input type="text" class="form-control" id="inputMentorDept" placeholder="Enter department">
                   <small id="mentorHelp2" class="text-muted">Department your mentor works in</small>
                 </div>
                 <!-- <div class="form-group form-check">
@@ -225,16 +225,20 @@
         </div>
         <!-- <div class="col-lg-4 col-sm-6"></div> -->
         <div class="col-lg-4 col-sm-6">
-          <button class="btn btn-block btn-purple">Submit</button>
+          <button id="btnSubmit" class="btn btn-block btn-purple">Submit</button>
         </div>
       </div>
     </div>
   </section>
   <div class="div-20"></div>
+  <div class="hidden-login">
+    <a href="login.html" class="active nav-link">Already have an account? Go to login</a>
+  </div>
+  <div class="div-20"></div>
   <div class="div-10"></div>
   <div class="div-10"></div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" 
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -243,6 +247,7 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+  <script src="js/new-register.js"></script>
   <script>
     console.log('yo');
     $('.reg-div').matchHeight();
