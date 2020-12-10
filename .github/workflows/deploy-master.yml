@@ -39,6 +39,7 @@ jobs:
             fi
           done
         done
+        cat /dev/shm/gitignores
 
     - name: Install lftp
       run: sudo apt install -y --no-install-recommends lftp >/dev/null
