@@ -1,0 +1,4 @@
+# Deny direct access to includes
+RewriteEngine on
+RewriteOptions InheritBefore
+RewriteRule ^ /invalidpath
