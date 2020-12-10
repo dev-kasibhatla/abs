@@ -16,6 +16,30 @@ jobs:
   deploy-master-job:
     runs-on: ubuntu-latest
     steps:
+
+    - name: Fetch the last commit from repository
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        clean: false
+
+    - name: Prevent gitignored files from getting deleted
+      run: |
+        cd "$GITHUB_WORKSPACE"
+        rm -rfv /dev/shm/gitignores ; touch /dev/shm/gitignores
+        find . -iname .gitignore | cut -c3- |
+        while read f; do
+          for i in "$( sed '/^\s*$/d' "$f" )"; do
+            d="$( dirname "$f" )"
+            [ -z "$d" ] && continue
+            if [ "$d" = "." ]; then
+                echo "$i" >>/dev/shm/gitignores
+            else
+                echo "$d/$i" >>/dev/shm/gitignores
+            fi
+          done
+        done
+
     - name: Install lftp
       run: sudo apt install -y --no-install-recommends lftp >/dev/null
 
@@ -31,15 +55,12 @@ jobs:
         echo ' mirror -cesRLv --ignore-time \'		>>/dev/shm/somecommand
         echo '   -x^\.git/$ -x^\.github/$ \'		>>/dev/shm/somecommand
         echo '   -X **/*.{MD,mD,Md,md} \'			>>/dev/shm/somecommand
+        while IFS= read -r exc; do
+          echo "   -X $exc \\"						>>/dev/shm/somecommand
+        done < /dev/shm/gitignores
         echo "   . domains/$DDOMAIN/public_html"	>>/dev/shm/somecommand
         echo ' quit'								>>/dev/shm/somecommand
         echo '"'									>>/dev/shm/somecommand
-
-    - name: Fetch the last commit from repository
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-        clean: false
 
     - name: Change to repo directory and run command from the file
       run: |
