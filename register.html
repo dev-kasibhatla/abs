@@ -82,13 +82,13 @@
               <form id="form1"  class="registerForms">
                 <div class="form-group">
                   <label for="inputEmail">Email address</label>
-                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                  <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"
                     placeholder="Enter email">
                   <small id="emailHelp" class="form-text text-muted">Your group's email address</small>
                 </div>
                 <div class="form-group">
                   <label for="inputPhone">Phone number</label>
-                  <input type="tel" class="form-control" id="inputPhone" placeholder="Enter Phone" length="10"
+                  <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="Enter Phone" length="10"
                     pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
                   <small id="phoneHelp" class="form-text text-muted">10 digit phone number to contact group's
                     administration</small>
@@ -110,15 +110,15 @@
                 <small id="errorGroupDetails" class="form-text text-danger">Errors from this section can appear here</small>
                 <div class="form-group">
                   <label for="inputGroupName">Group name</label>
-                  <input type="text" class="form-control" id="inputGroupName" placeholder="Enter name">
+                  <input type="text" class="form-control" id="inputGroupName" name="inputGroupName" placeholder="Enter name">
                   <!-- <small id="errorPassword" class="text-danger">Error can appear here</small> -->
                 </div>
                 <div class="form-group">
                   <label for="inputRepName">Representative name</label>
-                  <input type="text" class="form-control" id="inputRepName" placeholder="Enter name">
+                  <input type="text" class="form-control" id="inputRepName" name="inputRepName" placeholder="Enter name">
                   <small id="nameHelp" class="text-muted">Full name of your group representative</small>
                 </div>
-                <select class="form-control" id="inputSchool">
+                <select class="form-control" id="inputSchool" name="inputSchool">
                   <option value="" disabled selected>Select your school</option>
                   <option value="1">School 1</option>
                   <option value="2">School 2</option>
@@ -159,12 +159,12 @@
                 </small>
                 <div class="form-group">
                   <label for="inputPassword">Password</label>
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                  <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
                   <small id="errorPassword" class="text-danger">Error can appear here</small>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword2">Confirm password</label>
-                  <input type="password" class="form-control" id="inputPassword2" placeholder="Re-type Password">
+                  <input type="password" class="form-control" id="inputPassword2" name="inputPassword2" placeholder="Re-type Password">
                 </div>
                 <!-- <div class="form-group form-check">
                                   <input type="checkbox" class="form-check-input" id="inputRemember">
@@ -183,17 +183,17 @@
                 <small id="errorMentor" class="text-danger">Errors from this section can appear here</small>
                 <div class="form-group">
                   <label for="inputMentorName">Mentor name</label>
-                  <input type="text" class="form-control" id="inputMentorName" placeholder="Enter name">
+                  <input type="text" class="form-control" id="inputMentorName" name="inputMentorName" placeholder="Enter name">
                   <small id="mentorHelp" class="text-muted">Name of group Mentor</small>
                 </div>
                 <div class="form-group">
                   <label for="inputMentorEmail">Mentor email</label>
-                  <input type="email" class="form-control" id="inputMentorEmail" placeholder="Enter email">
+                  <input type="email" class="form-control" id="inputMentorEmail" name="inputMentorEmail" placeholder="Enter email">
                   <small id="mentorHelp2" class="text-muted">Mentor's college email address</small>
                 </div>
                 <div class="form-group">
                   <label for="inputMentorDept">Mentor Department</label>
-                  <input type="text" class="form-control" id="inputMentorDept" placeholder="Enter department">
+                  <input type="text" class="form-control" id="inputMentorDept" name="inputMentorDept" placeholder="Enter department">
                   <small id="mentorHelp2" class="text-muted">Department your mentor works in</small>
                 </div>
                 <!-- <div class="form-group form-check">
@@ -219,9 +219,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-8 col-sm-12">
+        <div class="col-lg-8 col-sm-6 text-justify">
           Upon clicking submit, an e-mail will be sent to the mentor's address with an account
           activation link. The link expires in 2 days.
+          <div class="div-10"></div>
         </div>
         <!-- <div class="col-lg-4 col-sm-6"></div> -->
         <div class="col-lg-4 col-sm-6">
@@ -249,7 +250,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
   <script src="js/new-register.js"></script>
   <script>
-    console.log('yo');
     $('.reg-div').matchHeight();
   </script>
 
