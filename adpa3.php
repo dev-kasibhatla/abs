@@ -4,48 +4,48 @@
 		//echo "User ID: ".$_SESSION["adminID"];
 	}else{
 		//not logged in!
-		echo '<script type="text/JavaScript">  
+		echo '<script type="text/JavaScript">
 		 window.location.replace("adpa.php");
-		 </script>' 
+		 </script>'
 		;
 		die();
 	}
-	
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		session_abort();
 		$user = ($_POST["mentor_username"]);
 		$pass = ($_POST["mentor_password"]);
 		$email= ($_POST["mentor_email"]);
 		$department= ($_POST["mentor_department"]);
-	  	
+
 		$table_name = "Mentor";
         $sql = "INSERT INTO $table_name (`Mentor Name`,`Mentor Email`,`Mentor Department`,`Mentor Password`)".
                 " VALUES ('$user','$email','$department','$pass')";
-		$i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+		$i = my_sqli_connect();
 		$result = mysqli_query($i,$sql);
     	if($result==TRUE){
-			
-				echo '<script src="js/jquery-1.11.3.min.js"></script> 
+
+				echo '<script src="js/jquery-1.11.3.min.js"></script>
                 <script src="js/bootstrap.js"></script>
-                <script type="text/JavaScript">  
+                <script type="text/JavaScript">
 				alert("Mentor was created successfully");
 				window.location.replace("adpa2.php");
-				 </script>' 
+				 </script>'
 				;
 				die();
-			
+
 		}
 		else{
 		    print_r($i->error);
 			echo "Error connecting to mysql server";
-			echo '<script type="text/JavaScript">  
+			echo '<script type="text/JavaScript">
 				alert("Mentor was not created");
 				 window.location.replace("adpa2.php");
-				 </script>' 
+				 </script>'
 				;
 				die();
 		}
-		
+
 	}
 ?>
 
@@ -62,12 +62,12 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/account.css">
-<script src="js/jquery-1.11.3.min.js"></script> 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/jquery-1.11.3.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 </head>
 <body id='body'>
-<div class="header"> 
+<div class="header">
   <a href="#default" class="logo" id="header_logo">Account</a>
   <div class="header-right">
     <a href="index.html" style="font-weight: bold">Home</a>
@@ -79,7 +79,7 @@
 		<div class="col-md-offset-5 col-md-2">
 			<h1 class="text-capitalize">Add a Mentor</h1>
 		</div>
-		
+
 		<form method="post" id="admin_login" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
  		<div class="col-md-offset-5 col-md-4" >
  		  <div>
@@ -95,14 +95,14 @@
 	        <div class="input-group col-md-11 col-md-offset-0" style="margin-bottom:2%"><span  class="input-group-addon">Mentor Dept.</span>
  		      <input type="text" class="form-control" aria-describedby="addon1" name="mentor_department" required>
 	        </div>
-	        
+
 	      </div>
-	      
+
 		</div>
  		<div class="col-md-offset-5 col-md-4">
 				<button type="submit" class="btn btn-primary btn-block" id ="admin_submit">Submit</button>
 	        </div>
-					
+
 		</form>
  	</div>
 

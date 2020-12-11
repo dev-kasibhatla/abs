@@ -1,21 +1,21 @@
 <?php
 	session_start();
 	if(isset($_SESSION["adminID"])){
-		echo '<script type="text/JavaScript">  
+		echo '<script type="text/JavaScript">
 				 window.location.replace("adpa2.php");
-				 </script>' 
+				 </script>'
 				;
 		die();
 	}
-	
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		session_abort();
 		$user = ($_POST["admin_username"]);
 		$pass = ($_POST["admin_password"]);
-	  	
+
 		$table_name = "admin";
         $sql = "select `password` from $table_name where `username` = '$user' ";
-		$i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+		$i = my_sqli_connect();
 		if($i -> connect_error){
 			echo "Error connecting to mysql server";
 			die();
@@ -29,28 +29,28 @@
 				session_start();
 				//login successful
 				$_SESSION["adminID"] = "$user";
-				echo '<script type="text/JavaScript">  
+				echo '<script type="text/JavaScript">
 				 window.location.replace("adpa2.php");
-				 </script>' 
+				 </script>'
 				;
 				die();
 			}else{
 				echo "Invalid login";
-				echo '<script type="text/JavaScript">  
+				echo '<script type="text/JavaScript">
 				 window.location.replace("adpa.php");
-				 </script>' 
+				 </script>'
 				;
 				die();
 			}
 		}else{
 			echo "Invalid login";
-			echo '<script type="text/JavaScript">  
+			echo '<script type="text/JavaScript">
 				 window.location.replace("adpa.php");
-				 </script>' 
+				 </script>'
 				;
 			die();
 		}
-		
+
 	}
 ?>
 
@@ -70,7 +70,7 @@
 
 </head>
 <body>
-<div class="header"> 
+<div class="header">
   <a href="#default" class="logo" id="header_logo">Account</a>
   <div class="header-right">
     <a href="index.html" style="font-weight: bold">Home</a>
@@ -82,29 +82,29 @@
 		<div class="col-md-offset-5 col-md-2">
 			<h1 class="text-capitalize">Login</h1>
 		</div>
-		
+
 		<form method="post" id="admin_login" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
  		<div class="col-md-offset-5 col-md-4" >
  		  <div>
  		    <div class="input-group col-md-11 col-md-offset-0" style="margin-bottom:4%"><span  class="input-group-addon">Username</span>
  		      <input type="text" class="form-control" aria-describedby="addon1" name="admin_username" required>
 	        </div>
- 		      
+
  		   <div class="input-group col-md-11 col-md-offset-0" style="margin-bottom:2%"><span  class="input-group-addon">Password</span>
  		      <input type="password" class="form-control" aria-describedby="addon1" name="admin_password" required>
 	        </div>
-	        
+
 	      </div>
-	      
+
 		</div>
  		<div class="col-md-offset-5 col-md-4">
 				<button type="submit" class="btn btn-primary btn-block" id ="admin_submit">Submit</button>
 	        </div>
-					
+
 		</form>
  	</div>
-<script src="js/jquery-1.11.3.min.js"></script> 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/jquery-1.11.3.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 
 

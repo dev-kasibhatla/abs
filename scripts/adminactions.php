@@ -16,7 +16,7 @@ function generateDates(){
     date_default_timezone_set('Asia/Kolkata');
     $date = date('YmdH', time());
     klog("Current time: $date");
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $i = my_sqli_connect();
     if($i -> connect_error){
         klog("Error connecting to database");
         echo "0";
@@ -71,7 +71,7 @@ function addSlots($startSid){
         $currDate = strtotime('+1 month',$currDate);
     }
     $table_name="schedule";
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $i = my_sqli_connect();
     if($i -> connect_error){
         klog("Error connecting to database");
         echo "0";
@@ -91,9 +91,9 @@ function addSlots($startSid){
             klog($i->error);
             //$result = mysqli_query($i,$sql);
             klog($sql);
-            
+
         }
-        
+
     }
 
 }

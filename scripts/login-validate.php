@@ -5,8 +5,8 @@
 //get data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $l_uname = ($_POST["login_email"]);
-    $l_password = ($_POST["login_password"]); 
-    
+    $l_password = ($_POST["login_password"]);
+
     $i=connectDB();
     login($i, $l_uname, $l_password);
 }
@@ -43,13 +43,13 @@ function login($i, $l_uname, $l_password){
             $_SESSION["level"] = 0;
             //send a response
             echo "1";
-        }else{      
+        }else{
 
             echo "0";
         }
-        
-        
-        
+
+
+
     }else{
         //Check if it's a mentor account
         klog("Checking to see if $l_uname is a mentor account");
@@ -59,33 +59,33 @@ function login($i, $l_uname, $l_password){
             $row = mysqli_fetch_assoc($result);
             $p = $row["Mentor Password"];
             $u = $row["Mentor Email"];
-            $mess = "Server data for mentor check: Uname: $u, Password: $p";        
+            $mess = "Server data for mentor check: Uname: $u, Password: $p";
             if($p == $l_password){
                 $mess = "Login successful: $u\nStarting a session";
                 klog($mess);
                 //start session and set variables
                 session_start();
                 $_SESSION["username"] = $u;
-                $_SESSION["level"] = 1; 
+                $_SESSION["level"] = 1;
                 //send a response
                 echo "1";
             }else{
                 klog("This account doesn't exist");
-      
+
                 echo "0";
             }
-            
-            
-            
+
+
+
         }
 
     }
-    
+
 }
 
 function connectDB(){
     //connect to sql
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $i = my_sqli_connect();
     if($i -> connect_error){
         die("Connection failed: " . $i->connect_error);
         klog("Error connecting to database");
