@@ -37,6 +37,85 @@ a {
 	height: auto;
 }
 
+.main-margin {
+	margin: 20px;
+}
+
+.main-padding{
+	padding: 50px;
+}
+
+.text-description {
+	font-size: large;
+	color: #444;
+}
+
+.text-i {
+	font-size: small;
+	color: #666;
+}
+
+.flat-glass-no-hover {
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, .15);
+	padding: 25px;
+	backdrop-filter: blur(5px);
+	/* margin: 5px; */
+}
+
+.margin-internal{
+	margin-top: 10px;
+	margin-right: 5px;
+}
+.margin-internal-r{
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.padding-0{
+	padding: 0px;
+}
+
+.red-ball{
+	color: red;
+	border-color: red;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.green-ball{
+	color: green;
+	border-color: green;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.grey-ball{
+	border-color: grey;
+	color: grey;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.slot-div {
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, .15);
+	padding: 15px;
+	backdrop-filter: blur(5px);
+	margin: 5px;
+	text-align: center;
+	/* margin-right: 5px; */
+	/* margin-left: 5px; */
+}
+.slot-div:hover {
+	box-shadow:  .125rem .25rem rgba(0,0,0,.075)!important;
+	cursor: pointer;
+}
+
+.slot-div-selected {
+	background-color:  #1000a0;
+	color: white;
+}
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
 @media screen and (max-width: 1000px) {
   
