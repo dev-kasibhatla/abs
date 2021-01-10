@@ -1,0 +1,36 @@
+# Timezone
+SetEnv TZ 'Asia/Kolkata'
+php_value date.timezone 'Asia/Kolkata'
+
+# Simple HTTP Error messages
+ErrorDocument 400 "Bad Request"
+ErrorDocument 401 "Unauthorized"
+ErrorDocument 402 "Payment Required"
+ErrorDocument 403 "Forbidden"
+ErrorDocument 404 "Not Found"
+ErrorDocument 405 "Method Not Allowed"
+ErrorDocument 406 "Not Acceptable"
+ErrorDocument 407 "Proxy Authentication Required"
+ErrorDocument 408 "Request Timeout"
+ErrorDocument 409 "Conflict"
+ErrorDocument 410 "Gone"
+ErrorDocument 411 "Length Required"
+ErrorDocument 412 "Precondition Failed"
+ErrorDocument 413 "Request Entity Too Large"
+ErrorDocument 414 "Request-URI Too Long"
+ErrorDocument 415 "Unsupported Media Type"
+ErrorDocument 416 "Requested Range Not Satisfiable"
+ErrorDocument 417 "Expectation Failed"
+ErrorDocument 500 "Internal Server Error"
+ErrorDocument 501 "Not Implemented"
+ErrorDocument 502 "Bad Gateway"
+ErrorDocument 503 "Service Unavailable"
+ErrorDocument 504 "Gateway Timeout"
+ErrorDocument 505 "HTTP Version Not Supported"
+
+# PHP: General options
+php_flag html_errors off
+
+# PHP: Include the includes
+php_value auto_prepend_file "includes.php"
+# Note: include_path was manually updated from the configuration panel with the absolute path of the "includes" folder

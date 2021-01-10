@@ -10,18 +10,18 @@ if(isset($_SESSION["username"])){
             $sql = "select * from grps where `Mentor Email` = '$user' ";
         }
         klog("$user is requesting account info");
-        $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+        $i = my_sqli_connect();
         if($i -> connect_error){
             die("Connection failed: " . $i->connect_error);
             klog("Error connecting to database");
             echo "-2";
             die();
         }
-        $result = mysqli_query($i,$sql);; 
+        $result = mysqli_query($i,$sql);;
 
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_assoc($result);
-            $groupEmail =$row["Group Email"]; 
+            $groupEmail =$row["Group Email"];
             $groupName = $row["Group Name"];
             $mentorName = $row["Mentor Name"];
             $mentorEmail = $row["Mentor Email"];
@@ -30,18 +30,18 @@ if(isset($_SESSION["username"])){
             $mess = "$user: retrieved all account information";
             klog($mess);
 
-            $jobj = new \stdClass(); 
+            $jobj = new \stdClass();
             $jobj ->username = $user;
             $jobj ->groupname = $groupName;
             $jobj ->mentorname = $mentorName;
             $jobj ->mentoremail = $mentorEmail;
             $jobj ->level = $level;
-            $jobj ->schoolname = $schoolName; 
-            
+            $jobj ->schoolname = $schoolName;
+
             $jres = json_encode($jobj);
             echo "$jres";
         }
-        
+
     }
 }else{
     //redirect to login page

@@ -2,16 +2,16 @@
 session_start();
 if(!(isset($_SESSION["username"]) || isset($_SESSION["adminID"]))){
     klog("User wasn't logged in. Trying to book slots");
-        echo '<script type="text/JavaScript">  
+        echo '<script type="text/JavaScript">
              window.location.replace("login.php");
-             </script>' 
+             </script>'
             ;
 }
 //check request type
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $req = ($_POST["action"]);  
-    
-    
+    $req = ($_POST["action"]);
+
+
     if($req == "get_book"){
         //check if a user is logged in
         if(isset($_SESSION["username"]) || isset($_SESSION["adminID"])){
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             klog("Date is $date");
             $date=str_replace("-","",$date);
             klog("New date is $date");
-            $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+            $i = my_sqli_connect();
             if($i -> connect_error){
                 klog("Error connecting to database");
                 echo "0";
@@ -37,17 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  klog("Got a finite non-zero number of rows!");
              }
             // print_r($result);
-            
+
             $index = 0;
             $jobj = new \stdClass();
             // print_r($_POST);
             //$jobj -> "size" = (string)mysqli_num_rows($result);
             while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
-                
+
                 if($row["Group Name"]!=$_POST['grpname'])
                 {
                     // print_r($row["Group Name"]." is not ".$_POST['grpname']."\n");
-                    
+
                     $sid = $row["SlotID"];
                     $gn = $row["Group Name"];
                     $qgn = $row["Q Group Name"];
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $jobj -> $t1 = $qgn;
                     //klog("Found slot id: ".$row["SlotID"]);
                     $index++;
-                    
+
                 }
             }
             $jobj -> size = $index;
@@ -68,9 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
             //user not logged in
             klog("User wasn't logged in. Trying to book slots");
-            echo '<script type="text/JavaScript">  
+            echo '<script type="text/JavaScript">
 				 window.location.replace("login.php");
-				 </script>' 
+				 </script>'
 				;
         }
     }
@@ -88,12 +88,12 @@ function submitSlotData(){
     $finalres = new\stdClass();
     $finalres->error=0;
     $finalres->size=0;
-    
+
     foreach ($slots as $slot) {
         klog("Booking for $slot");
     }
-    //connect 
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    //connect
+    $i = my_sqli_connect();
     if($i -> connect_error){
         klog("Error connecting to database");
         echo "0";
@@ -101,7 +101,7 @@ function submitSlotData(){
     }
     klog("Connected to DB");
     $table_name = "schedule";
-    
+
     //update $table_name set `Group Password`='$new_pass_1' where `Group Email` = '$user' ";
     $gname = "";
     $mname = "";
@@ -120,7 +120,7 @@ function submitSlotData(){
             $jobj->lvl =  $_SESSION["level"];
             if($_SESSION["level"] == 1)
             {
-                //get group email 
+                //get group email
                 $sql = "select * from grps where `Mentor Email`= '$gname' " ;
                 $result = mysqli_query($i,$sql);
                 $row = mysqli_fetch_assoc($result);
@@ -145,7 +145,7 @@ function submitSlotData(){
             //user not logged in
             echo "0";
             //send user to login screen
-            echo '<script type="text/JavaScript">  
+            echo '<script type="text/JavaScript">
 				 window.location.replace("login.php");
 				 </script>' ;
             die();
@@ -157,7 +157,7 @@ function submitSlotData(){
             //means one of the slots selected is unavailable for booking
             klog("Got 0 rows. It means this slot is not available anymore");
             $finalres->$temp = 0;
-            
+
         }else{
             //check where to put the name
             $row = mysqli_fetch_assoc($result);
@@ -170,11 +170,11 @@ function submitSlotData(){
                 $result = mysqli_query($i,$sql);
                 klog("slot $slot is being booked as main slot");
                 $jobj->slot = "$slot:m";
-                
-                
+
+
                 $finalres->$temp = json_encode($jobj);
-                
-                
+
+
             }elseif($res_gname != null && $res_q_gname == null){
                 $sql = "update $table_name set `Q Group Name`='$gname' where `SlotID` = '$slot'";
                 $result = mysqli_query($i,$sql);
@@ -182,11 +182,11 @@ function submitSlotData(){
                 $jobj->slot = "$slot:q";
 
                 $finalres->$temp = json_encode($jobj);
-                
+
             }
             klog("slot $slot is being booked");
 
-            
+
         }
 
 

@@ -4,8 +4,8 @@ klog("User trying to change password");
 if(isset($_SESSION["username"])){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $old_pass = ($_POST["change_old_password"]);
-        $new_pass_1 = ($_POST["change_new_password1"]); 
-        $new_pass_2 = ($_POST["change_new_password2"]); 
+        $new_pass_1 = ($_POST["change_new_password1"]);
+        $new_pass_2 = ($_POST["change_new_password2"]);
 
         if($old_pass == ""){
             $old_pass = null;
@@ -18,8 +18,8 @@ if(isset($_SESSION["username"])){
         }elseif($_SESSION["level"] == 1){
             $sql = "select `Mentor Password` from $table_name where `Mentor Email` = '$user' ";
         }
-   
-        $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+
+        $i = my_sqli_connect();
         if($i -> connect_error){
             die("Connection failed: " . $i->connect_error);
             klog("Error connecting to database");
@@ -31,15 +31,15 @@ if(isset($_SESSION["username"])){
         $row = mysqli_fetch_assoc($result);
         if($_SESSION["level"] == 0){
             $p = $row["Group Password"];
-                    
+
         }elseif($_SESSION["level"] == 1){
             $p = $row["Mentor Password"];
-                    
-        }        
+
+        }
 
         if($p != $old_pass){
             echo -4;
-            
+
         }
 
         if(strlen($new_pass_1) < 8){
@@ -54,12 +54,12 @@ if(isset($_SESSION["username"])){
         }
 
         if($new_pass_1 == $new_pass_2){
-           
+
             if($_SESSION["level"] == 0){
-                $sql = "update $table_name set `Group Password`='$new_pass_1' where `Group Email` = '$user' "; 
+                $sql = "update $table_name set `Group Password`='$new_pass_1' where `Group Email` = '$user' ";
             }elseif($_SESSION["level"] == 1){
-                $sql = "update $table_name set `Mentor Password`='$new_pass_1' where `Mentor Email` = '$user' "; 
-            }             
+                $sql = "update $table_name set `Mentor Password`='$new_pass_1' where `Mentor Email` = '$user' ";
+            }
             $result = mysqli_query($i,$sql);
             echo "1";
             klog("Password was changed for $user");
@@ -68,7 +68,7 @@ if(isset($_SESSION["username"])){
             echo "0";
             die();
         }
-        
+
     }
 }else{
     //redirect to login page

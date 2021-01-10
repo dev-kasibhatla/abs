@@ -16,26 +16,6 @@ jobs:
   deploy-master-job:
     runs-on: ubuntu-latest
     steps:
-    - name: Install lftp
-      run: sudo apt install -y --no-install-recommends lftp >/dev/null
-
-    - name: Write the FTP reverse mirror command to a file
-      run: |
-        rm -rfv /dev/shm/somecommand
-        echo '#!/bin/bash'							 >/dev/shm/somecommand
-        echo "lftp $SECRET1 -e \""					>>/dev/shm/somecommand
-        echo ' set ftp:ssl-force true'				>>/dev/shm/somecommand
-        echo ' set ssl:verify-certificate true'		>>/dev/shm/somecommand
-        echo ' set ftp:list-options -a'				>>/dev/shm/somecommand
-        echo " set ftp:anon-user $SECRET2"			>>/dev/shm/somecommand
-        echo " set ftp:anon-pass $SECRET3"			>>/dev/shm/somecommand
-        echo ' mirror -cesRLv \'					>>/dev/shm/somecommand
-        echo '   -x^\.git/$ -x^\.github/$ \'		>>/dev/shm/somecommand
-        echo '   -X **/*.{MD,mD,Md,md} \'			>>/dev/shm/somecommand
-        echo "   . domains/$DDOMAIN/public_html"	>>/dev/shm/somecommand
-        echo ' quit'								>>/dev/shm/somecommand
-        echo '"'									>>/dev/shm/somecommand
-        chmod 0500 /dev/shm/somecommand
 
     - name: Fetch the last commit from repository
       uses: actions/checkout@v2
@@ -43,7 +23,47 @@ jobs:
         persist-credentials: false
         clean: false
 
+    - name: Prevent gitignored files from getting deleted
+      run: |
+        cd "$GITHUB_WORKSPACE"
+        rm -rfv /dev/shm/gitignores ; touch /dev/shm/gitignores
+        find . -iname .gitignore | cut -c3- |
+        while read f; do
+          for i in "$( sed '/^\s*$/d' "$f" )"; do
+            d="$( dirname "$f" )"
+            [ -z "$d" ] && continue
+            if [ "$d" = "." ]; then
+                echo "$i" >>/dev/shm/gitignores
+            else
+                echo "$d/$i" >>/dev/shm/gitignores
+            fi
+          done
+        done
+        cat /dev/shm/gitignores
+
+    - name: Install lftp
+      run: sudo apt install -y --no-install-recommends lftp >/dev/null
+
+    - name: Write the FTP reverse mirror command to a file
+      run: |
+        rm -rfv /dev/shm/somecommand
+        echo "lftp $SECRET1 -e \""					>>/dev/shm/somecommand
+        echo ' set ftp:ssl-force true'				>>/dev/shm/somecommand
+        echo ' set ssl:verify-certificate true'		>>/dev/shm/somecommand
+        echo ' set ftp:list-options -a'				>>/dev/shm/somecommand
+        echo " set ftp:anon-user $SECRET2"			>>/dev/shm/somecommand
+        echo " set ftp:anon-pass $SECRET3"			>>/dev/shm/somecommand
+        echo ' mirror -cesRLv --ignore-time \'		>>/dev/shm/somecommand
+        echo '   -x^\.git/$ -x^\.github/$ \'		>>/dev/shm/somecommand
+        echo '   -X **/*.{MD,mD,Md,md} \'			>>/dev/shm/somecommand
+        while IFS= read -r exc; do
+          echo "   -X $exc \\"						>>/dev/shm/somecommand
+        done < /dev/shm/gitignores
+        echo "   . domains/$DDOMAIN/public_html"	>>/dev/shm/somecommand
+        echo ' quit'								>>/dev/shm/somecommand
+        echo '"'									>>/dev/shm/somecommand
+
     - name: Change to repo directory and run command from the file
       run: |
         cd "$GITHUB_WORKSPACE"
-        sh /dev/shm/somecommand
+        . /dev/shm/somecommand

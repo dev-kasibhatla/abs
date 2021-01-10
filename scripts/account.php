@@ -2,12 +2,12 @@
 session_start();
 //check request type
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $req = ($_POST["action"]);  
+    $req = ($_POST["action"]);
     if($req == "login_info"){
         //check if a user is logged in
         if(isset($_SESSION["username"])){
             //connect to server
-            $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+            $i = my_sqli_connect();
             if($i -> connect_error){
                 die("Connection failed: " . $i->connect_error);
                 klog("Error connecting to database");
@@ -34,12 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $id = $row["id"];
                 $mess = "$user is already logged in";
                 klog($mess);
-                
-                
 
-                //create a json object to respond     
+
+
+                //create a json object to respond
                 $jobj = new \stdClass();
-                $jobj ->groupid = $id; 
+                $jobj ->groupid = $id;
                 $jobj ->username = $groupEmail;
                 $jobj ->groupname = $groupName;
                 $jobj ->mentorname = $mentorName;
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 //send a response
                 echo "$jres";
-                
+
             }
 
         }else{
@@ -78,20 +78,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if($req == "future_schedule" || $req == "past_schedule"){
-        $group = ($_POST["group"]);  
+        $group = ($_POST["group"]);
         getSchedule($req,$group);
     }
-    
+
     if($req == "cancelslot")
     {
         cancelSlot();
-        
+
     }
     if($req == "activate")
     {
         activateAccount();
     }
-    
+
 }
 
 
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function activateAccount()
 {
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $i = my_sqli_connect();
     $mname=$_POST['group'];
     $sql = "update grps set `Activated` = '1' where `Mentor Name`='$mname'";
     $result=mysqli_query($i,$sql);
@@ -113,7 +113,7 @@ function activateAccount()
             $jobj=new \stdClass();
             $jobj->activation=1;
             echo json_encode($jobj);
-            die(); 
+            die();
         }
      }
      else
@@ -122,12 +122,12 @@ function activateAccount()
         echo 0;
         die();
      }
-     
-    
+
+
 }
 function cancelSlot()
 {
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $i = my_sqli_connect();
     $slotid=intval($_POST['time']);
     $sql = "update schedule set `Group Name` = NULL,`Booked`='0'  where `SlotID` = $slotid ";
     $result=mysqli_query($i,$sql);
@@ -161,25 +161,25 @@ function cancelSlot()
 
 
 function getSchedule($req,$group){
-    $i = mysqli_connect('localhost','id10814660_root','dFX0#HxYkm(Y*g&I','id10814660_abs','3306');
+    $i = my_sqli_connect();
     if($i -> connect_error){
         die("Connection failed: " . $i->connect_error);
         klog("Error connecting to database");
         echo "0";
     }
-    
+
     $sql = "select * from schedule where `Group Name` = '$group' ";
     $result = mysqli_query($i,$sql);
 
     $index=-1;
-    $jobj = new \stdClass(); 
+    $jobj = new \stdClass();
     $jobj -> totalBooked = mysqli_num_rows($result);
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_assoc($result)){
             $index++;
-            $jobj -> $index = $row["SlotID"];   
-            
-        }              
+            $jobj -> $index = $row["SlotID"];
+
+        }
     }
     //get data for queued bookings
     $sql = "select * from schedule where `Q Group Name` = '$group' ";
@@ -188,10 +188,10 @@ function getSchedule($req,$group){
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_assoc($result)){
             $index++;
-            $jobj -> $index = $row["SlotID"];               
-        }              
+            $jobj -> $index = $row["SlotID"];
+        }
     }
-    
+
     $jres = json_encode($jobj);
     //send a response
     echo "$jres";
@@ -202,6 +202,6 @@ function klog($message){
     //todo: create a new file for each date
     $message = "Account.php:  ".$message;
     file_put_contents('../logs/log.txt', $message.PHP_EOL , FILE_APPEND);
-    
+
 }
 ?>
