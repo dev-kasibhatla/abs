@@ -79,7 +79,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 							</h4>
 							<form id="eventDetails"  name= "eventDetails" class="registerForms">
 								<div class="form-group">
-								  <label for="inputName">Email address</label>
+								  <label for="inputName">Event Name</label>
 								  <input type="text" class="form-control" id="inputName" name="inputName" aria-describedby="nameHelp"
 									placeholder="Event name">
 								  <small id="nameHelp" class="form-text text-muted">Pick a name for your event</small>
@@ -126,7 +126,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 											</div>
 											<!-- todo: the day should appear here -->
 											<div class="col-md-6">
-												<input type="text" disabled class="form-control" id="outputDay" name="outputDay" aria-describedby="dateHelp"
+												<input type="text" class="form-control" id="outputDay" name="outputDay" aria-describedby="dateHelp"
 												placeholder="Day">
 											</div>
 										</div>
@@ -152,25 +152,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 								<div class="div-10"></div>
 								<div class="container-fluid">
 									<div class="row" id="slotContainer">
-										<!-- todo: slot template. Store it as a constant and 
-										replace text and render when required -->
-										<div class="col-md-6 padding-0">
-											<div class="slot-div %availability">
-												%start to %end
-											</div>
-										</div>
-										<!-- todo: this is just an example and should be removed -->
-										<div class="col-md-6 padding-0">
-											<div class="slot-div grey-ball">
-											5pm to 6pm
-											</div>
-										</div>
-										<!-- todo: add slot-div-selected when a slot is selected -->
-										<div class="col-md-6 padding-0">
-											<div class="slot-div slot-div-selected">
-												5pm to 6pm
-											</div>
-										</div>
+
 									</div>
 								</div>
 						</div>
@@ -207,12 +189,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
 	<!-- <script src="js/require.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-	<script>
-		$('.dummy').matchHeight();
-		// todo: You can put this line in the init section of your js if you want to make 
-		// further changes to editor / get its value using built in methods
-		console.log("Loading simplemde");
-		var simplemde = new SimpleMDE();
-	</script>
+	<script src="js/book-new.js"></script>script>
+
 </body>
 </html>
