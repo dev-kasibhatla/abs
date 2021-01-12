@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 var req;
 var event;
 var simplemde;
@@ -20,6 +27,35 @@ function initialize(){
 
 
 }
+//---------------------------------------------Aesthetics----------------------------------------//
+$("#inputLink").focusin(function(){
+    $("#linkHelp").addClass('text-muted');
+    $("#inputLink").css('border','none');
+    $("#linkHelp").html("Pick a name for your event");
+    console.log('Focused1');
+});
+
+$("#inputName").focusin(function(){
+    $("#nameHelp").addClass('text-muted');
+    $("#inputName").css('border','none');
+    $("#nameHelp").html("Pick a name for your event");
+    console.log('Focused2');
+});
+
+$("#inputDate").focusin(function(){
+    $("#dateHelp").addClass('text-muted');
+    $("#inputDate").css('border','none');
+    $("#dateHelp").html("Pick a name for your event");
+    $("#slotContainer").css('border','none');
+    console.log('Focused3');
+});
+$("#eventDetails").on('focus','.CodeMirror',function () {
+    console.log('focus mirror');
+    $("#descriptionHelp").addClass('text-muted');
+    $(".CodeMirror").css('border','none');
+    $("#descriptionHelp").html("Pick a name for your event");
+});
+
 
 //-------------------------------------------SLOT FUNCTIONS---------------------------------------------------//
 var date;
@@ -177,6 +213,7 @@ $("#inputDate").change(()=>{
 
     let currDate = $("#inputDate").val();
     currDate = new Date(currDate);
+    $("#slotContainer").css("border",'none');
     $("#slotContainer").html("");
     displaySlots(currDate);
     getDate();
@@ -184,13 +221,18 @@ $("#inputDate").change(()=>{
 
 });
 
-//-------------------------------------------COLLECTING AND SENDING DATA FUNCTIONS---------------------------------------------------//
+//-------------------------------------------COLLECTING AND SENDING DATA --> FUNCTIONS---------------------------------------------------//
 
 
 var selectedSlots
 $('#slotContainer').on('click','.green-ball, .grey-ball', function(){
+    $("#slotContainer").css('border','none');
     console.log($(this));
     $(this).toggleClass('slot-div-selected');
+    $("#dateHelp").addClass('text-muted');
+    $("#inputDate").css('border','none');
+    $("#dateHelp").html("Pick a name for your event");
+    
 });
 
 function validURL(str) {
@@ -207,7 +249,10 @@ function validate(){
     console.log('validating data');
     let url = $("#inputLink").val();
     if((!validURL(url)) && url.length!=0) {
-        $("#linkHelp").text(' Please enter a valid event link ');
+        $("#linkHelp").removeClass('text-muted');
+        $("#linkHelp").html('<strong>Please enter a valid event link</strong>');
+        $("#linkHelp").css('color',"red");
+        $("#inputLink").css('border','solid red 2px');
         return 0;
     }
 
@@ -216,12 +261,18 @@ function validate(){
     eventName = eventName.trim();
     if(eventName.length < 5)
     {
-        $("#nameHelp").text('Please give an event name greater than 5 characters');
+        $("#nameHelp").removeClass('text-muted');
+        $("#nameHelp").html('<strong>Please give an event name greater than 5 characters</strong>');
+        $("#nameHelp").css('color',"red");
+        $("#inputName").css('border','solid red 2px');
         return 0;
     }
     if(eventName.length > 50)
     {
-        $("#nameHelp").text('Please give an event name less than 50 characters');
+        $("#nameHelp").removeClass('text-muted');
+        $("#nameHelp").html('<strong>Please give an event name less than 50 characters</strong>');
+        $("#nameHelp").css('color',"red");
+        $("#inputName").css('border','solid red 2px');
         return 0;
     }
 
@@ -230,26 +281,49 @@ function validate(){
     eventDescription.trim();
     if(eventDescription.length<10)
     {
-        $("#descriptionHelp").text('Please write atleast 10 characs in your description');
+        $("#descriptionHelp").removeClass('text-muted');
+        $("#descriptionHelp").html('<strong>Please write atleast 10 characs in your description</strong>');
+        $("#descriptionHelp").css('color',"red");
+        $(".CodeMirror").css('border','solid red 2px');
         return 0;
     }
     else if(eventDescription.length>200)
     {
-        $("#descriptionHelp").text('Atmost 200 characters are allowed for description');
+        ("#descriptionHelp").removeClass('text-muted');
+        $("#descriptionHelp").html('<strong>Atmost 200 characters are allowed for description</strong>');
+        $("#descriptionHelp").css('color',"red");
+        $(".CodeMirror").css('border','solid red 2px');
         return 0;
     }
 
     //validate slots
+    if($(".slot-div-selected").length<=0)
+    {
+        let text = "Atleast one slot must be selected";
+        $("#dateHelp").removeClass('text-muted');
+        $("#dateHelp").html('<strong>'+text+'</strong>');
+        $("#dateHelp").css('color',"red");
+        $("#inputDate").css('border','red solid 2px');
+        $("#slotContainer").css('border','red solid 2px');
+        return 0;
+    }
     $(".slot-div-selected").each(function(){
         if($(this).attr('id') < (new Date()).getTime())
         {
             let text = "Cannot select the slot " + (new Date($(this).attr('id'))).getHours() + " to " + ((new Date($(this).attr('id'))).getHours()+1);
-            $("#dateHelp").text(text);
+            $("#dateHelp").removeClass('text-muted');
+            $("#dateHelp").html('<strong>'+text+'</strong>');
+            $("#dateHelp").css('color',"red");
+            $("#inputDate").css('border','red solid 2px');
             return 0;
         }
         if(!($(this).hasClass('green-ball') || $(this).hasClass('grey-ball')))
         {
-            $("#dateHelp").text("Inavalid slot selected please refresh the page and try again");
+            // noinspection JSJQueryEfficiency
+            $("#dateHelp").removeClass('text-muted');
+            $("#dateHelp").html("<strong>Inavalid slot selected please refresh the page and try again</strong>");
+            $("#dateHelp").css('color',"red");
+            $("#inputDate").css('border','red solid 2px');
             return 0;
         }
     });
