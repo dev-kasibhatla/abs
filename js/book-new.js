@@ -232,7 +232,7 @@ $('#slotContainer').on('click','.green-ball, .grey-ball', function(){
     $("#dateHelp").addClass('text-muted');
     $("#inputDate").css('border','none');
     $("#dateHelp").html("Pick a name for your event");
-    
+
 });
 
 function validURL(str) {
