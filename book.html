@@ -74,7 +74,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 						<div class=" margin-internal flat-glass-no-hover">
 							<h2>Event details</h2><hr>
 							<!-- todo: replace this and all occurences of club name in a loop-->
-							<h4 name="clubName">
+							<h4 name="clubName" class="color-purple">
 								Club Name
 							</h4>
 							<form id="eventDetails"  name= "eventDetails" class="registerForms">
@@ -188,6 +188,12 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 	<!-- <script src="js/require.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 	<script src="js/book-new.js"></script>
+	<script>
+		//$('.dummy').matchHeight();
+		// todo: You can put this line in the init section of your js if you want to make 
+		// further changes to editor / get its value using built in methods
+		var simplemde = new SimpleMDE();
+	</script>
 
 </body>
 </html>
