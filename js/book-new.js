@@ -15,7 +15,7 @@ function initialize(){
 
     // further changes to editor / get its value using built in methods
     console.log("Loading simplemde");
-    simplemde = new SimpleMDE();
+    simplemde = new SimpleMDE({ element: $("#simplemde")});
     let now = new Date();
     let day = ("0" + now.getDate()).slice(-2);
     let month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -114,7 +114,7 @@ function getSlots (){
 }
 function displaySlots(currDate) {
     let a = {
-        "12/01/2021":
+        "17/01/2021":
             [
                 {"st":5,"et":6,"av":1},
                 {"st":6,"et":7,"av":0},
@@ -131,7 +131,7 @@ function displaySlots(currDate) {
                 {"st":19,"et":20,"av":1},
                 {"st":20,"et":21,"av":-1}
             ],
-        "13/01/2021":
+        "18/01/2021":
             [
                 {"st":5,"et":6,"av":1},
                 {"st":6,"et":7,"av":0},
@@ -148,7 +148,7 @@ function displaySlots(currDate) {
                 {"st":19,"et":20,"av":1},
                 {"st":20,"et":21,"av":-1}
             ],
-        "14/01/2021":
+        "19/01/2021":
             [
                 {"st":5,"et":6,"av":1},
                 {"st":6,"et":7,"av":0},
@@ -179,6 +179,7 @@ function displaySlots(currDate) {
         let rn = (new Date).getTime();
         today.setHours(e['st'],0,0,0);
         let slotid = today.getTime();
+
         console.log(slotid,(new Date).getTime());
         if(slotid > (new Date).getTime()) {
             console.log("in");
@@ -205,6 +206,11 @@ function displaySlots(currDate) {
                 }
 
             }
+            if(tempSelect.includes(slotid))
+            {
+                console.log('Heloo');
+                $(`#${slotid}`).addClass('slot-div-selected');
+            }
         }
     });
 
@@ -224,14 +230,27 @@ $("#inputDate").change(()=>{
 //-------------------------------------------COLLECTING AND SENDING DATA --> FUNCTIONS---------------------------------------------------//
 
 
-var selectedSlots
+var selectedSlots;
+var tempSelect = [];
 $('#slotContainer').on('click','.green-ball, .grey-ball', function(){
     $("#slotContainer").css('border','none');
     console.log($(this));
     $(this).toggleClass('slot-div-selected');
+    if($(this).hasClass('slot-div-selected'))
+    {
+        console.log('has selected class');
+        tempSelect.push($(this).attr('id'));
+    }
+    else
+    {
+        console.log('no selected class');
+        tempSelect.filter(item => item !== ($(this).attr('id')));
+    }
+
     $("#dateHelp").addClass('text-muted');
     $("#inputDate").css('border','none');
     $("#dateHelp").html("Pick a name for your event");
+
 
 });
 
