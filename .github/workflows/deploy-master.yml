@@ -2,7 +2,7 @@ name: deploy-master
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ null ]
 
   workflow_dispatch:
 
