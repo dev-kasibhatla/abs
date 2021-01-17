@@ -134,6 +134,83 @@ a {
 	background-color:  #1000a0;
 	color: white;
 }
+
+.edit-icon {
+	background-image: url("../images/edit.png");
+	background-size: contain;
+	object-fit: contain;
+	height: 30px;
+	width: 30px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	/* vertical-align: 20%; */
+	margin-top:-2px;
+	align-self: start;
+	background-size:30px;
+	background-position-y: center;
+}
+
+.edit-icon:hover {
+	background-image: url("../images/edit-f.png");
+}
+
+.dummy{
+
+}
+
+.dummy-2{
+
+}
+
+.inline {
+	display: inline;
+}
+
+.dp-parent{
+	text-align: center;
+	width: 100%;	
+	display: inline-block;
+}
+
+.dp{
+	height: 150px;
+	width: 150px;
+	border-radius: 75px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #1000a0;
+	background-color: #999;
+}
+
+.dp:hover{
+	height: 160px;
+	width: 160px;
+	border-radius: 80px;
+	border-width: 4px;
+	border-style: dashed;
+	border-color: #333;
+	cursor: pointer;
+}
+
+.margin-top-20{
+	margin-top: 20px;
+}
+
+.dp-text {
+	width: 98%;
+	font-size: large;
+	font-weight: normal;
+	color: black;
+	text-align: center;
+	color: #1000a0;
+}
+
+.dp-text:hover {
+	font-weight: bold;
+	color: red;
+	cursor: pointer;
+}
+
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
 @media screen and (max-width: 1000px) {
   
@@ -141,3 +218,19 @@ a {
 @media screen and (max-height: 500px){
 
 }
+@media screen and (max-width: 768px) {
+  .dp-text{
+	  width: 100%;
+  }
+  .dp-parent{
+	text-align: center;
+	width: 100%;	
+	display: inline-block;
+  }
+}
+/* 
+@media screen and (max-width: 800px) {
+	.edit-icon {
+		background-size: 55%;
+	}
+} */
