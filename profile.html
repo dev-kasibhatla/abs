@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditorium - home</title>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link href="css/login.css" rel="stylesheet" type="text/css">
+<link href="css/index.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark2 shadow-sm nav">
+		<a class="navbar-brand" href="#">Auditorium Booking System</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+	
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  <ul class="navbar-nav mr-auto"></ul>
+		  <ul class="navbar-nav my-2 my-lg-0">
+			<!-- <li class="nav-item">
+			  <a href="login.html" class="active nav-link">Already have an account? Go to login</a>
+			</li> -->
+	
+			<li class="nav-item active">
+			  <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+			</li>
+	
+			<li class="nav-item dropdown">
+			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false" name="clubName">
+				Account
+			  </a>
+			  <div class="dropdown-menu dropdown-menu-right" style="right:0" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item " href="account.html">Account settings</a>
+				<a class="dropdown-item" href="events.html">My events</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Logout</a>
+			  </div>
+			</li>
+			<!-- <li class="nav-item">
+				  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+				</li> -->
+		  </ul>
+		</div>
+	  </nav>
+	  <div style="height: 75px;"></div>
+	  <section>
+		  <div class="main-margin">
+			<form id="form">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 flat-glass-no-hover margin-5">
+							<h1>Profile</h1><hr>
+							<div class="text-description">
+								Edit your club's profile. This is what other people see.
+							</div>
+							<div class="div-10"></div>
+							<!-- todo: replace this and all occurences of club name in a loop-->
+							<h4 name="clubName" class="color-purple">Club Name</h4>
+						</div>
+					</div>
+					<div class="div-20"></div>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="margin-5">
+								<div class="-2 dp-parent">
+									<!-- todo: set src -->
+									<img width="150" height="150" class="dp">
+								</div>
+								<div class="div-20"></div>
+								<div class="dp-text">
+									Remove
+								</div>						
+							</div>
+						</div>
+						<div class="col-md-7">
+							<div class="form-group margin-top-20">
+								<!-- todo: Set default value to Club's name -->
+								<h4>Club name</h4><hr>
+								<div class="row">
+									<div class="col-11">
+										<input type="text" class="form-control " id="inputClubName" name="inputClubName" aria-describedby="linkHelp"
+								  placeholder="Club Name" disabled>
+								  
+									</div>
+									<div class="col-1  edit-icon" id="btnEditClubName"></div>
+								</div>
+								<small id="clubNameHelp" class="form-text text-danger">Changing the club's name requires admin's approval</small>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 ">
+							<div class="container-fluid  flat-glass-no-hover">
+								<div class="row">
+									<div class="col-lg-6 padding-0">
+										<div class="form-group flat-glass-no-hover margin-5 dummy">
+											<!-- todo: Set default value to Club's link -->
+											<div class="row">
+												<div style="width: 20px;"></div>
+												<h4 style="width: 85%;">Link</h4>
+												<div class="col-1  edit-icon" id="btnEditInfo"></div>
+											</div>
+											<hr>
+											<!-- <label for="inputLink">Registration Link</label> -->
+											<div class="row">
+												<div class="col-11">
+													<input type="url" class="form-control " id="inputLink" name="inputLink" aria-describedby="linkHelp"
+											  placeholder="Link to club's website" disabled>
+												</div>
+											</div>
+	
+											<div class="div-20"></div>
+											<div class="div-20"></div>
+	
+											<h4>Tag line</h4>										
+											<hr>
+											<!-- <label for="inputLink">Registration Link</label> -->
+											<div class="row">
+												<div class="col-11">
+													<input type="text" class="form-control " id="inputTag" name="inputTag" aria-describedby="linkHelp"
+											  placeholder="Club's tag line" disabled>
+												</div>
+											</div>
+	
+											<div class="div-20"></div>
+											<div class="div-20"></div>
+	
+											<h4>Student representative</h4>
+											<hr>
+											<div class="row">
+												<div class="col-11">
+													<input type="text" class="form-control " id="inputRepName" name="inputRepName" aria-describedby="linkHelp"
+											  placeholder="Representative's name" disabled>
+												</div>
+											</div>
+											<div class="div-10"></div>
+											<div class="row">
+												<div class="col-11">
+													<input type="email" class="form-control " id="inputRepEmail" name="inputRepEmail" aria-describedby="linkHelp"
+											  placeholder="Representative's e-mail" disabled>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 padding-0">
+										<div class="form-group flat-glass-no-hover margin-5 dummy">
+											<!-- todo: Set default value to Club's link -->
+											<div class="row">
+												<div style="width: 20px;"></div>
+												<h4 style="width: 85%;">Description</h4>
+												<div class="col-1  edit-icon" id="btnEditDescription"></div>
+											</div>
+											<hr>
+											<!-- <label for="inputLink">Registration Link</label> -->
+											<div class="row">
+												<div class="col-11">
+													<textarea class="form-control" 
+											  placeholder="Enter club description" disabled rows="10" id="inputDescription" name="inputDescription" maxlength="5000"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+					<div class="div-20"></div>
+					<div class="row">
+						<div class="col-md-9"></div>
+						<div class="col-md-3">
+							<button class="btn btn-purple" type = "submit" id="btnSubmit">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="div-20"></div>
+
+		  </div>
+		<div class="div-20"></div>
+		<div class="div-20"></div>
+		<div class="div-20"></div>
+
+	  </section>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<script>
+		// note: using this class as a reference can be dangerous in the future
+		$('.flat-glass').matchHeight();
+		$('.dummy').matchHeight();
+		// todo: You can put this line in the init section of your js if you want to make 
+		// further changes to editor / get its value using built in methods
+		var simplemde = new SimpleMDE(document.getElementById('inputDescription'));
+		//todo: to enable edit, make this false
+		simplemde.codemirror.options.readOnly = true;
+	</script>
+</body>
+</html>
