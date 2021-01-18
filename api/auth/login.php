@@ -1,6 +1,5 @@
 <?php
 require_once 'auth.php';
-
 denyauth();
 
 $email=$_POST['email']??NULL;
