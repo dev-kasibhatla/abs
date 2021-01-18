@@ -9,6 +9,7 @@
 var req;
 var event;
 var simplemde;
+var converter;
 $("document").ready(initialize);
 function initialize(){
     $('.dummy').matchHeight();
@@ -25,8 +26,16 @@ function initialize(){
 
     // further changes to editor / get its value using built in methods
     console.log("Loading simplemde");
-    simplemde = new SimpleMDE({ element: $("#simplemde")});
+    try{
+        simplemde = new SimpleMDE({ element: $("#simplemde")});
+        throw e;
+    }
+    catch (e) {
+        console.error(e);
+    }
+    console.log("yo");
 
+    converter = new showdown.Converter();
 
 
 }
@@ -373,7 +382,7 @@ function submitData(){
         //start the submit
         let finalData = new Object();
         finalData.eventName =  $('#inputName').val();
-        finalData.eventDescription =  simplemde.value();
+        finalData.eventDescription =  converter.makeHtml(simplemde.value());
         finalData.selectedSlots = new Object();
         tempSelect.forEach(function(e){
             if(e < (new Date()).getTime())
