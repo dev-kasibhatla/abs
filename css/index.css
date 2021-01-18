@@ -223,6 +223,95 @@ a {
 	margin-left: 10px;
 }
 
+.chat-box{
+	margin-left: 19%;
+	margin-right: 19%;
+	height: 400px;
+	width: 60%;
+	overflow: auto;
+}
+
+.chat-left {
+	margin-left: 0px;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 70%;
+	background-color: rgba(245, 245, 245, 0.500);
+	color: black;
+	border-radius: 10px;
+}
+
+.chat-left-title{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: normal;
+	font-weight: bold;
+	color: #1000a0;
+}
+
+.chat-right-title{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: normal;
+	font-weight: bold;
+	color: white;
+}
+
+.chat-right {
+	margin-bottom: 10px;
+	margin-left: 29%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 70%;
+	color: white;
+	background-color: #1000a0;
+	border-radius: 10px;
+}
+
+.chat-input {
+	background-color: #eee;
+	height: auto;
+	border-radius: 5px;
+	border-color: #aaa;
+	margin-top: 20px;
+	resize: none;
+}
+
+.chat-label {
+	margin-left: 19%;
+	margin-right: 19%;
+	margin-top: -5px;
+}
+
+.chat-btn{
+	width: 20%;
+	margin-left: 59%;
+}
+
+.chat-btn:hover{
+	width: 20%;
+	margin-left: 59%;
+}
+
+.chat-date-left{
+	margin-top: 5px;
+	font-size: small;
+	font-weight: lighter;
+	color: #777;
+}
+
+.chat-date-right{
+	margin-top: 5px;
+	font-size: small;
+	font-weight: lighter;
+	color: #bbb;
+}
+
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
 @media screen and (max-width: 1000px) {
   
@@ -235,10 +324,41 @@ a {
 	  width: 100%;
   }
   .dp-parent{
-	text-align: center;
-	width: 100%;	
-	display: inline-block;
-  }
+		text-align: center;
+		width: 100%;	
+		display: inline-block;
+	}
+  .chat-btn{
+		width: 96%;
+		margin-left: 2%;
+	}
+  .chat-box{
+		margin-left: 2%;
+		margin-right: 2%;
+		height: 400px;
+		width: 96%;
+		overflow: auto;
+	}
+
+	.chat-right {
+		margin-left: 9%;
+		width: 90%;
+	}
+
+	.chat-left{
+		width: 90%;
+	}
+
+	.chat-label {
+		margin-left: 2%;
+		margin-right: 2%;
+		margin-top: -3px;
+		margin-bottom: 10px;
+	}
+
+	.chat-input {
+		height: auto;	
+	}
 }
 /* 
 @media screen and (max-width: 800px) {
