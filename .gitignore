@@ -1,8 +1,5 @@
-
 _notes/
-
+start-server.sh
 start-server.cmd
-
 logs/log.txt
-
 artboards/*
