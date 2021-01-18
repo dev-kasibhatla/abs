@@ -1,12 +1,8 @@
 name: deploy-master
 
-# on:
-#   pull_request:
-#     branches: [ master ]
 on:
-  push:
-    branches:
-    - master
+  pull_request:
+    branches: [ master ]
 
   workflow_dispatch:
 
@@ -22,7 +18,7 @@ jobs:
     steps:
 
     - name: Fetch the last commit from repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.2
       with:
         persist-credentials: false
         clean: false
