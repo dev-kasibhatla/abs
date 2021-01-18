@@ -100,7 +100,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 							<div class="container-fluid  flat-glass-no-hover">
 								<div class="row">
 									<div class="col-lg-6 padding-0">
-										<div class="form-group flat-glass-no-hover margin-5 dummy">
+										<div id="infoDiv"  class="form-group flat-glass-no-hover margin-5 dummy">
 											<!-- todo: Set default value to Club's link -->
 											<div class="row">
 												<div style="width: 20px;"></div>
@@ -208,9 +208,9 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 		$('.dummy').matchHeight();
 		// todo: You can put this line in the init section of your js if you want to make 
 		// further changes to editor / get its value using built in methods
-		var simplemde = new SimpleMDE(document.getElementById('inputDescription'));
+
 		//todo: to enable edit, make this false
-		simplemde.codemirror.options.readOnly = true;
+
 	</script>
 </body>
 </html>
