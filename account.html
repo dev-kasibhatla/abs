@@ -120,7 +120,16 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 					<div class="col-md-4 padding-0">
 						<a href="help.html" class="a-kill">
 							<div class="margin-5 flat-glass">
-								<h4>Help</h4><hr>
+								<table cellspacing="0" cellpadding="0">
+									<tr>
+										<td><h4 style="margin:0;">Help</h4></td>
+										<!-- todo: hide this when total notifications are 0. Also ensure
+										that count doesn't exceed 99 -->
+										<td><div class="notification-badge" id="notifications">5</div></td>
+									</tr>
+								</table>
+								
+								<hr>						
 								<div class="text-description">
 									Contact the website's administration for doubts or reporting problems.
 								</div>
