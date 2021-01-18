@@ -211,6 +211,18 @@ a {
 	cursor: pointer;
 }
 
+.notification-badge{
+	height: 20px;
+	width: 20px;
+	border-radius: 15px;
+	background-color: #1000a0;
+	color: white;
+	font-size: small;
+	text-align: center;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
 @media screen and (max-width: 1000px) {
   
