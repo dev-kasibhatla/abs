@@ -1,17 +1,16 @@
 function initialize() {
     getSchools();
+    $("#emailHelp").html("");
+    $("#errorMentor").html("");
+    $("#errorGroupDetails").html("");
+    $("#errorPassword").html("");
+
 }
-
-
-
-
-
 var request;
 var a  =  $("input");
 $(a).focus(function() {
    $(this).css('border',"none"); 
 });
-
 function getSchools(){
    
     request = $.ajax({
@@ -47,13 +46,11 @@ function getSchools(){
     });
 
 }
-
-
-
 $("#btnSubmit").click(function(){
     var abort=0
     // $("#login_message").hide();
     $("#emailHelp").html("");
+    $("#phoneHelp").html("");
     $("#errorMentor").html("");
     $("#errorGroupDetails").html("");
     $("#errorPassword").html("");
@@ -112,9 +109,15 @@ $("#btnSubmit").click(function(){
                         $($inputs[i]).css('border',"2px solid red");
                         abort = 1;  
                     }
-                    else if(($inputs[i].value.length < 8))
+                    if(($inputs[i].value.length < 8))
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\"> Password has to have more than eight characters </strong>");
+                        $($inputs[i]).css('border',"2px solid red");
+                        abort = 1;
+                    }
+                    if($inputs[i].value!==$("#inputPassword2").val())
+                    {
+                        $("#errorPassword").html("<strong class=\"text-danger\"> Both the passswords should match </strong>");
                         $($inputs[i]).css('border',"2px solid red");
                         abort = 1;
                     }
@@ -131,7 +134,7 @@ $("#btnSubmit").click(function(){
                             $($inputs[i]).css('border',"2px solid red");
                              abort = 1;
                         }
-                        else if(($inputs[i].value.length < 7))
+                        if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorGroupDetails").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
@@ -147,7 +150,7 @@ $("#btnSubmit").click(function(){
                             $($inputs[i]).css('border',"2px solid red");
                             abort = 1;
                         }
-                        else if(($inputs[i].value.length < 7))
+                        if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorMentor").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
