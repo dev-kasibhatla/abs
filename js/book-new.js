@@ -26,13 +26,8 @@ function initialize(){
 
     // further changes to editor / get its value using built in methods
     console.log("Loading simplemde");
-    try{
-        simplemde = new SimpleMDE({ element: $("#simplemde")});
-        throw e;
-    }
-    catch (e) {
-        console.error(e);
-    }
+    simplemde = new SimpleMDE(document.getElementById('simplemde'));
+
     console.log("yo");
 
     converter = new showdown.Converter();
@@ -108,7 +103,7 @@ function getSlots (){
     req.done(function(response, textStatus, jqXHR){
         if(response==0)
         {
-            console.log("Error occurred");
+            console.error("Error occurred");
         }
         else
         {
