@@ -13,9 +13,6 @@ $("document").ready(initialize);
 function initialize(){
     $('.dummy').matchHeight();
 
-    // further changes to editor / get its value using built in methods
-    console.log("Loading simplemde");
-    simplemde = new SimpleMDE({ element: $("#simplemde")});
     let now = new Date();
     let day = ("0" + now.getDate()).slice(-2);
     let month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -24,6 +21,12 @@ function initialize(){
     $('#inputDate').val(today);
     getDate();
     $("#outputDay").val(date.toLocaleDateString('default',{weekday:'long'}));
+    displaySlots(now);
+
+    // further changes to editor / get its value using built in methods
+    console.log("Loading simplemde");
+    simplemde = new SimpleMDE({ element: $("#simplemde")});
+
 
 
 }
@@ -173,47 +176,52 @@ function displaySlots(currDate) {
     let today = new Date(currDate);
     let key = getSlotKey(today);
     console.log({slotData});
-    slotData[key].forEach(e=>{
-        let s = new slot(e['st'],e['et'],e['av']);
-        console.log({s});
-        let rn = (new Date).getTime();
-        today.setHours(e['st'],0,0,0);
-        let slotid = today.getTime();
+    if(key in slotData) {
+        slotData[key].forEach(e => {
+            let s = new slot(e['st'], e['et'], e['av']);
+            console.log({s});
+            let rn = (new Date).getTime();
+            today.setHours(e['st'], 0, 0, 0);
+            let slotid = today.getTime();
 
-        console.log(slotid,(new Date).getTime());
-        if(slotid > (new Date).getTime()) {
-            console.log("in");
-            switch (s.av) {
-                case -1: {
-                    let html = "<div class=\"col-md-6 padding-0\"><div id=\""+slotid+"\" data-value='"+e['st']+"' class=\"slot-div red-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
-                    $("#slotContainer").append(html);
-                    break;
-                }
-                case 0: {
-                    let html = "<div class=\"col-md-6 padding-0\"><div id=\""+slotid+"\" data-value='"+e['st']+"' class=\"slot-div grey-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
-                    $("#slotContainer").append(html);
-                    break;
-                }
-                case 1: {
-                    let html = "<div class=\"col-md-6 padding-0\"><div id=\""+slotid+"\" data-value='"+e['st']+"' class=\"slot-div green-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
-                    $("#slotContainer").append(html);
-                    break;
-                }
-                default: {
-                    console.log("unknown slot:-->");
-                    console.log({e});
-                    break;
-                }
+            console.log(slotid, (new Date).getTime());
+            if (slotid > (new Date).getTime()) {
+                console.log("in");
+                switch (s.av) {
+                    case -1: {
+                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div red-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
+                        $("#slotContainer").append(html);
+                        break;
+                    }
+                    case 0: {
+                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div grey-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
+                        $("#slotContainer").append(html);
+                        break;
+                    }
+                    case 1: {
+                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div green-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
+                        $("#slotContainer").append(html);
+                        break;
+                    }
+                    default: {
+                        console.log("unknown slot:-->");
+                        console.log({e});
+                        break;
+                    }
 
+                }
+                console.log("Element with slot id " + slotid + "was created");
+                if (tempSelect.includes(`${slotid}`)) {
+                    console.log('Helloo');
+                    $(`#${slotid}`).addClass('slot-div-selected');
+                }
             }
-            if(tempSelect.includes(slotid))
-            {
-                console.log('Heloo');
-                $(`#${slotid}`).addClass('slot-div-selected');
-            }
-        }
-    });
-
+        });
+    }
+    else
+    {
+        $("#slotContainer").html("<p>Sorry there are no slots available for this day</p>")
+    }
 }
 $("#inputDate").change(()=>{
 
@@ -232,6 +240,7 @@ $("#inputDate").change(()=>{
 
 var selectedSlots;
 var tempSelect = [];
+var availability = {};
 $('#slotContainer').on('click','.green-ball, .grey-ball', function(){
     $("#slotContainer").css('border','none');
     console.log($(this));
@@ -240,11 +249,17 @@ $('#slotContainer').on('click','.green-ball, .grey-ball', function(){
     {
         console.log('has selected class');
         tempSelect.push($(this).attr('id'));
+        if($(this).hasClass('green-ball'))
+            availability[$(this).attr('id')] = 1;
+        else
+            availability[$(this).attr('id')] = 0;
+
     }
     else
     {
         console.log('no selected class');
-        tempSelect.filter(item => item !== ($(this).attr('id')));
+        tempSelect = tempSelect.filter(item => item !== ($(this).attr('id')));
+        delete availability[$(this).attr('id')];
     }
 
     $("#dateHelp").addClass('text-muted');
@@ -316,7 +331,7 @@ function validate(){
     }
 
     //validate slots
-    if($(".slot-div-selected").length<=0)
+    if(tempSelect.length<=0)
     {
         let text = "Atleast one slot must be selected";
         $("#dateHelp").removeClass('text-muted');
@@ -326,17 +341,17 @@ function validate(){
         $("#slotContainer").css('border','red solid 2px');
         return 0;
     }
-    $(".slot-div-selected").each(function(){
-        if($(this).attr('id') < (new Date()).getTime())
+    tempSelect.forEach(function(e){
+        if(e < (new Date()).getTime())
         {
-            let text = "Cannot select the slot " + (new Date($(this).attr('id'))).getHours() + " to " + ((new Date($(this).attr('id'))).getHours()+1);
+            let text = "Cannot select the slot " + (new Date(e)).getHours() + " to " + ((new Date(e)).getHours()+1);
             $("#dateHelp").removeClass('text-muted');
             $("#dateHelp").html('<strong>'+text+'</strong>');
             $("#dateHelp").css('color',"red");
             $("#inputDate").css('border','red solid 2px');
             return 0;
         }
-        if(!($(this).hasClass('green-ball') || $(this).hasClass('grey-ball')))
+        if(availability[e]!==1|| availability[e]!==0)
         {
             // noinspection JSJQueryEfficiency
             $("#dateHelp").removeClass('text-muted');
@@ -360,23 +375,15 @@ function submitData(){
         finalData.eventName =  $('#inputName').val();
         finalData.eventDescription =  simplemde.value();
         finalData.selectedSlots = new Object();
-        $(".slot-div-selected").each(function(){
-            if($(this).attr('id') < (new Date()).getTime())
+        tempSelect.forEach(function(e){
+            if(e < (new Date()).getTime())
             {
-                let text = "Cannot select the slot " + (new Date($(this).attr('id'))).getHours() + " to " + ((new Date($(this).attr('id'))).getHours()+1);
+                let text = "Cannot select the slot " + (new Date(e)).getHours() + " to " + ((e).getHours()+1);
                 $("#dateHelp").text(text);
                 return 0;
             }
-            let slotid = $(this).attr('id');
-            if($(this).hasClass('green-ball'))
-                finalData.selectedSlots[slotid] = 1;
-            else if($(this).hasClass('grey-ball'))
-                finalData.selectedSlots[slotid] = 0;
-            else
-            {
-                console.log("nlha");
-                return;
-            }
+            let slotid = e;
+            finalData.selectedSlots[slotid] = availability[slotid];
 
         });
         console.log(JSON.stringify(finalData));
