@@ -6,3 +6,5 @@ start-server.cmd
 logs/log.txt
 
 artboards/*
+
+.idea/*
