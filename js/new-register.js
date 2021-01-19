@@ -22,7 +22,7 @@ $(a).focus(function() {
 function getSchools(){
    
     request = $.ajax({
-        url: "../scripts/register-data.php",
+        url: "../api/getschools.php",
         type: "post",
         data: {event:"schoolData"}
     });
@@ -30,11 +30,12 @@ function getSchools(){
         // Log a message to the console
         console.log(response);
         if(response.length > 0){
-            var schools = JSON.parse(response);
+            var schools = response;
             var select = $("#inputSchool");
-            for(var i=0;i<schools.length;i++)
+            for(let i=0;i<schools.length;i++)
             {
-                $(select).append("<option value=\"i+1\">"+schools[i]+"</option>")
+                let id = schools[i]['id'];
+                $(select).append("<option value=\"i+1\">"+schools[i]['name']+"</option>")
             }
 
         }else{
