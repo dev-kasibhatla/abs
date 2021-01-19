@@ -1,10 +1,9 @@
 <?php
 require_once 'auth.php';
-denyauth();
+initauth();
 
 $email=$_POST['email']??NULL;
 if( !is_string($email) ||
-	empty($email=trim($email)) ||
 	strlen($email)>A_EMAIL_MAX ||
 	!boolval($email=filter_var($email,FILTER_VALIDATE_EMAIL))
 )
@@ -24,4 +23,3 @@ $_SESSION=$q;
 // To-do: Remove useless data, add and validate login timestamp
 session_commit();
 sexit("Welcome ".$q['name']);
-

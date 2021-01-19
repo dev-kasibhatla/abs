@@ -57,13 +57,13 @@ if(
 	!is_string($_POST['password']??null) ||
 	strlen($_POST['password'])<8 ||
 	preg_match('/.*\d+.*/',$_POST['password'])!==1 ||
-	$_POST['password']=password_hash($_POST['password'],PASSWORD_BCRYPT)
+	empty($_POST['password']=password_hash($_POST['password'],PASSWORD_BCRYPT))
 )
 	throw new Exception("Password should be a string of length at least 8 and must contain at least one digit",400);
 
 $db=my_sqli_connect();
-$q=$db->query("INSERT IGNORE INTO `clubs`".
-"(`name`,`email,`password`,`phone`,`rname`,`rdept`,`remail`,`ename`,`eschool`,`enabled`) VALUES(".
+$q=$db->query("INSERT IGNORE INTO `club`".
+"(`name`,`email`,`password`,`phone`,`rname`,`rdept`,`remail`,`ename`,`eschool`,`enabled`) VALUES(".
 	"'".$db->escape_string($_POST['name'])."',".
 	"'".$db->escape_string($_POST['email'])."',".
 	"'".$db->escape_string($_POST['password'])."',".
