@@ -1,5 +1,12 @@
 var scale = 'scale(0.90)';
+function jQFormSerializeArrToJson(formSerializeArr){
+    var jsonObj = {};
+    jQuery.map( formSerializeArr, function( n, i ) {
+        jsonObj[n.name] = n.value;
+    });
 
+    return jsonObj;
+}
 //start
 $(document).ready(initialize);
 function initialize(){
@@ -78,7 +85,9 @@ $("#btnSubmit").click(function(event){
     return;
 
     // Serialize the data in the form
-    var serializedData = $form.serializeArray();
+    var serializedArr = $form.serializeArray();
+    console.log(serializedArr);
+    let serializedData = jQFormSerializeArrToJson(serializedArr);
     console.log(serializedData);
     // Let's disable the inputs for the duration of the Ajax request.
     // Disabled form elements will not be serialized.
@@ -86,9 +95,9 @@ $("#btnSubmit").click(function(event){
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "../scripts/login-validate.php",
+        url: "../api/auth/login.php",
         type: "post",
-        data: serializedData
+        data: JSON.stringify(serializedData)
     });
 
     // Callback handler that will be called on success

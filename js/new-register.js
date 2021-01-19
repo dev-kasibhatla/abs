@@ -6,6 +6,14 @@ function initialize() {
     $("#errorPassword").html("");
 
 }
+function jQFormSerializeArrToJson(formSerializeArr){
+    var jsonObj = {};
+    jQuery.map( formSerializeArr, function( n, i ) {
+        jsonObj[n.name] = n.value;
+    });
+
+    return jsonObj;
+}
 var request;
 var a  =  $("input");
 $(a).focus(function() {
@@ -176,7 +184,9 @@ $("#btnSubmit").click(function(){
     
 	
     // Serialize the data in the form
-    var serializedData = $('#form1,#form2,#form3,#form4').serializeArray();
+    let serializedArr = $('#form1,#form2,#form3,#form4').serializeArray();
+    console.log(serializedArr);
+    let serializedData = jQFormSerializeArrToJson(serializedArr);
     console.log(serializedData);
     // Let's disable the inputs for the duration of the Ajax request.
     // Disabled form elements will not be serialized.
@@ -184,9 +194,9 @@ $("#btnSubmit").click(function(){
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "../scripts/login-validate.php",
+        url: "../api/auth/reg-club.php",
         type: "post",
-        data: serializedData
+        data: JSON.stringify(serializedData)
     });
 
     // Callback handler that will be called on success
