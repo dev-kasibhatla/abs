@@ -2,6 +2,7 @@
 define('A_NAME_MAX',50);
 define('A_EMAIL_MAX',320);
 define('A_CR_ERR',"Your account creation request could not be processed due to an unknown error, please retry or contact the support team if the issue persists");
+define('A_NM_ERR',"Name must be a string with 1-".A_NAME_MAX." characters");
 define('A_EM_ERR',"Email must be valid with 1-".A_EMAIL_MAX." characters");
 
 function initauth($lock=true) {

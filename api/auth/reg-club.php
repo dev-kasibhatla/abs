@@ -18,37 +18,62 @@ if(
 	empty($_POST['name']=trim($_POST['name'])) ||
 	strlen($_POST['name'])>A_NAME_MAX
 )
-	throw new Exception("Name must be a string with 1-".A_NAME_MAX." characters",400);
+	throw new Exception(A_NM_ERR,400);
+
+if(
+	!is_string($_POST['inputMentorName']??null) ||
+	empty($_POST['inputMentorName']=trim($_POST['inputMentorName'])) ||
+	strlen($_POST['inputMentorName'])>A_NAME_MAX
+)
+	throw new Exception("Mentor ".A_NM_ERR,400);
 
 if(
 	!is_string($_POST['rname']??null) ||
 	empty($_POST['rname']=trim($_POST['rname'])) ||
 	strlen($_POST['rname'])>A_NAME_MAX
 )
-	throw new Exception("Representative name must be a string with 1-".A_NAME_MAX." characters",400);
+	throw new Exception("Representative ".A_NM_ERR,400);
 
 if(
-	!filter_var($_POST['remail']??null,FILTER_VALIDATE_EMAIL) ||
-	strlen($_POST['remail'])>A_EMAIL_MAX
+	!ctype_digit($_POST['inputSchool']??null) ||
+	intval($_POST['inputSchool'])>127
 )
-	throw new Exception("Representative ".A_EM_ERR,400);
+	throw new Exception("Representative school identifier is invalid",400);
+
+if(
+	!filter_var($_POST['inputMentorEmail']??null,FILTER_VALIDATE_EMAIL) ||
+	strlen($_POST['inputMentorEmail'])>A_EMAIL_MAX
+)
+	throw new Exception("Mentor ".A_EM_ERR,400);
+
+if(
+	!is_string($_POST['inputMentorDept']??null) ||
+	empty($_POST['inputMentorDept']=trim($_POST['inputMentorDept'])) ||
+	strlen($_POST['inputMentorDept'])>A_NAME_MAX
+)
+	throw new Exception("Mentor Department ".A_NM_ERR,400);
 
 if(
 	!is_string($_POST['password']??null) ||
 	strlen($_POST['password'])<8 ||
-	// At least one digit
-	empty($_POST['password']=password_hash($_POST['password'],PASSWORD_BCRYPT))
+	preg_match('/.*\d+.*/',$_POST['password'])!==1 ||
+	$_POST['password']=password_hash($_POST['password'],PASSWORD_BCRYPT)
 )
-	throw new Exception("Password should be a non-empty string",400);
+	throw new Exception("Password should be a string of length at least 8 and must contain at least one digit",400);
 
 $db=my_sqli_connect();
-$q=$db->query("INSERT IGNORE INTO `clubs`(`name`,`email,`password`,`phone`,`rname`,`remail`,`enabled`) VALUES".
-	"('".$db->escape_string($_POST['name'])."',".
+$q=$db->query("INSERT IGNORE INTO `clubs`".
+"(`name`,`email,`password`,`phone`,`rname`,`rdept`,`remail`,`ename`,`eschool`,`enabled`) VALUES(".
+	"'".$db->escape_string($_POST['name'])."',".
 	"'".$db->escape_string($_POST['email'])."',".
 	"'".$db->escape_string($_POST['password'])."',".
-	$db->escape_string($_POST['phone']).",".
+	$_POST['phone'].",".
+	"'".$db->escape_string($_POST['inputMentorName'])."',".
+	"'".$db->escape_string($_POST['inputMentorDept'])."',".
+	"'".$db->escape_string($_POST['inputMentorEmail'])."',".
 	"'".$db->escape_string($_POST['rname'])."',".
-	"'".$db->escape_string($_POST['remail'])."',1)"
+	$_POST['inputSchool'].",".
+	"1)"
 );
 
 if(!$q)
