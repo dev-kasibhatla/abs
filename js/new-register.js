@@ -207,7 +207,8 @@ $("#btnSubmit").click(function(){
         if("success" in response){
             //user is logged in
 			//redirect to account page
-			window.location.replace("login.html");
+            window.localStorage.setItem('clubName',$("#inputClubName").val());
+			window.location.replace("account.php");
 
         }else if("error" in response){
             //user not logged in. Redirect to login
