@@ -1,15 +1,26 @@
 var scale = 'scale(0.90)';
-
-//start
-function initialize(){
-	$(document).ready(function(){
-        $("#login_message").hide();
+function jQFormSerializeArrToJson(formSerializeArr){
+    var jsonObj = {};
+    jQuery.map( formSerializeArr, function( n, i ) {
+        jsonObj[n.name] = n.value;
     });
+
+    return jsonObj;
+}
+//start
+$(document).ready(initialize);
+function initialize(){
+
+        $("#login_message").hide();
+        $("#errorDiv").html("");
+
 }
 
 var a  =  $("input");
 $(a).focus(function() {
-   $(this).css('border',"none"); 
+   $(this).css('border',"none");
+   $("#errorDiv").html("");
+   $("#emailHelp").html("");
 });
 
 //jquery code to submit login form:
@@ -49,7 +60,7 @@ $("#btnSubmit").click(function(event){
         {
             const repass = /^(([^<>\'(=)\[\]\\.,;:\s"]+(\.[^<>()\[\]\\.,;:\s"]+)*)|(".+"))$/;
             if(!repass.test($(e).value)){
-                $("#errorDiv").html("<strong class=\"text-danger\">The password is wrong</strong>");
+                $("#errorDiv").html("<strong class=\"text-danger\">The password doesnt meet requirements </strong>");
                 $(e).css('border',"2px solid red");
                 abort = 1;
             }
@@ -74,17 +85,19 @@ $("#btnSubmit").click(function(event){
     return;
 
     // Serialize the data in the form
-    var serializedData = $form.serializeArray();
-
+    var serializedArr = $form.serializeArray();
+    console.log(serializedArr);
+    let serializedData = jQFormSerializeArrToJson(serializedArr);
+    console.log(serializedData);
     // Let's disable the inputs for the duration of the Ajax request.
     // Disabled form elements will not be serialized.
     $inputs.prop("disabled", true);
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "../scripts/login-validate.php",
+        url: "../api/auth/login.php",
         type: "post",
-        data: serializedData
+        data: JSON.stringify(serializedData)
     });
 
     // Callback handler that will be called on success
