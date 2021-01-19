@@ -1,6 +1,6 @@
 <?php
 // Import database connection constants from file
-require 'db_creds.php';
+require_once 'db_creds.php';
 
 // Function to connect to database and set some defaults
 function my_sqli_connect(){
@@ -13,6 +13,7 @@ function my_sqli_connect(){
 	)) {
 		// Set default options for all DB connections here
 		$db->query("SET time_zone='".$db->escape_string(date('P'))."'");
+		$db->autocommit(false);
 	}
 	return $db??NULL;
 }
