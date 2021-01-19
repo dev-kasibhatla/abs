@@ -404,8 +404,9 @@ function submitData(){
     {
         //start the submit
         let finalData = new Object();
-        finalData.eventName =  $('#inputName').val();
-        finalData.eventDescription =  converter.makeHtml(simplemde.value());
+        finalData.ename =  $('#inputName').val();
+        finalData.edesc =  converter.makeHtml(simplemde.value());
+        finalData.elink = $("#inputLink").val();
         finalData.selectedSlots = new Object();
         let template = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         tempSelect.forEach(function(e){
@@ -436,9 +437,9 @@ function submitData(){
         if(req)
             req.abort();
         req = $.ajax({
-            url:"../abs/scripts/book.php",
+            url:"../api/auth/book.php",
             type:'post',
-            data:{'event':'submitSlots','eventdata':(JSON.stringify(finalData))},
+            data:(JSON.stringify(finalData)),
             error:(e)=>{
                 console.error(e);
             },
