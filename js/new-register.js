@@ -35,7 +35,7 @@ function getSchools(){
             for(let i=0;i<schools.length;i++)
             {
                 let id = schools[i]['id'];
-                $(select).append("<option value=\"i+1\">"+schools[i]['name']+"</option>")
+                $(select).append(`<option value=${id}>${schools[i]['name']}</option>`);
             }
 
         }else{
