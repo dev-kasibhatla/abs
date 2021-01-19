@@ -30,6 +30,8 @@ ErrorDocument 505 "HTTP Version Not Supported"
 
 # PHP: General options
 php_flag html_errors off
+php_flag log_errors off
+php_flag display_errors on
 
 # PHP: Include the includes
 php_value auto_prepend_file "includes.php"

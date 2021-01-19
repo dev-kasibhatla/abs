@@ -69,15 +69,20 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 					<div class="row">
 						<div class="col-md-3">
 							<div class="margin-5">
-								<div class="-2 dp-parent">
-									<!-- todo: set src -->
-									<img width="150" height="150" class="dp">
+								<div class="dp-parent ">
+									<div class="upload-btn-wrapper">
+										<input type="file" name="inputDp" id="inputDp" 
+										accept="image/png, image/jpeg" onchange="fileFunction()" />
+										<!-- todo: set src -->
+										<img width="150" height="150" class="dp" src="data:image/png;base64,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">
+									</div>
+									<div class="div-20"></div>					
+									<div class="dp-text">
+										Remove
+									</div>	
 								</div>
-								<div class="div-20"></div>
-								<div class="dp-text">
-									Remove
-								</div>						
 							</div>
+							<div class="div-20"></div>					
 						</div>
 						<div class="col-md-7">
 							<div class="form-group margin-top-20">
@@ -113,6 +118,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 												<div class="col-11">
 													<input type="url" class="form-control " id="inputLink" name="inputLink" aria-describedby="linkHelp"
 											  placeholder="Link to club's website" disabled>
+											  <small id="linkHelp" class="form-text text-danger"></small>
 												</div>
 											</div>
 	
@@ -126,6 +132,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 												<div class="col-11">
 													<input type="text" class="form-control " id="inputTag" name="inputTag" aria-describedby="linkHelp"
 											  placeholder="Club's tag line" disabled>
+											  <small id="tagHelp" class="form-text text-danger"></small>
 												</div>
 											</div>
 	
@@ -145,6 +152,7 @@ integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ
 												<div class="col-11">
 													<input type="email" class="form-control " id="inputRepEmail" name="inputRepEmail" aria-describedby="linkHelp"
 											  placeholder="Representative's e-mail" disabled>
+											  <small id="repHelp" class="form-text text-danger"></small>
 												</div>
 											</div>
 										</div>
