@@ -1,24 +1,17 @@
 function initialize() {
     getSchools();
-    $("#emailHelp").html("");
-    $("#errorMentor").html("");
-    $("#errorGroupDetails").html("");
-    $("#errorPassword").html("");
-
 }
-function jQFormSerializeArrToJson(formSerializeArr){
-    var jsonObj = {};
-    jQuery.map( formSerializeArr, function( n, i ) {
-        jsonObj[n.name] = n.value;
-    });
 
-    return jsonObj;
-}
+
+
+
+
 var request;
 var a  =  $("input");
 $(a).focus(function() {
    $(this).css('border',"none"); 
 });
+
 function getSchools(){
    
     request = $.ajax({
@@ -55,11 +48,13 @@ function getSchools(){
     });
 
 }
+
+
+
 $("#btnSubmit").click(function(){
     var abort=0
     // $("#login_message").hide();
     $("#emailHelp").html("");
-    $("#phoneHelp").html("");
     $("#errorMentor").html("");
     $("#errorGroupDetails").html("");
     $("#errorPassword").html("");
@@ -118,15 +113,9 @@ $("#btnSubmit").click(function(){
                         $($inputs[i]).css('border',"2px solid red");
                         abort = 1;  
                     }
-                    if(($inputs[i].value.length < 8))
+                    else if(($inputs[i].value.length < 8))
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\"> Password has to have more than eight characters </strong>");
-                        $($inputs[i]).css('border',"2px solid red");
-                        abort = 1;
-                    }
-                    if($inputs[i].value!==$("#inputPassword2").val())
-                    {
-                        $("#errorPassword").html("<strong class=\"text-danger\"> Both the passswords should match </strong>");
                         $($inputs[i]).css('border',"2px solid red");
                         abort = 1;
                     }
@@ -143,7 +132,7 @@ $("#btnSubmit").click(function(){
                             $($inputs[i]).css('border',"2px solid red");
                              abort = 1;
                         }
-                        if(($inputs[i].value.length < 7))
+                        else if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorGroupDetails").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
@@ -159,7 +148,7 @@ $("#btnSubmit").click(function(){
                             $($inputs[i]).css('border',"2px solid red");
                             abort = 1;
                         }
-                        if(($inputs[i].value.length < 7))
+                        else if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorMentor").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
@@ -185,9 +174,7 @@ $("#btnSubmit").click(function(){
     
 	
     // Serialize the data in the form
-    let serializedArr = $('#form1,#form2,#form3,#form4').serializeArray();
-    console.log(serializedArr);
-    let serializedData = jQFormSerializeArrToJson(serializedArr);
+    var serializedData = $('#form1,#form2,#form3,#form4').serializeArray();
     console.log(serializedData);
     // Let's disable the inputs for the duration of the Ajax request.
     // Disabled form elements will not be serialized.
@@ -195,9 +182,9 @@ $("#btnSubmit").click(function(){
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "../api/auth/reg-club.php",
+        url: "../scripts/login-validate.php",
         type: "post",
-        data: JSON.stringify(serializedData)
+        data: serializedData
     });
 
     // Callback handler that will be called on success

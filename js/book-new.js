@@ -80,10 +80,10 @@ Date.prototype.addDays = function(days) {
     return date;
 }
 function getSlotKey(z){
-    return z.getFullYear().toString()  + "/" + (((z.getMonth() + 1)).toLocaleString('en-US', {
+    return z.getDate().toString() + "/" + (((z.getMonth() + 1)).toLocaleString('en-US', {
         minimumIntegerDigits: 2,
         useGrouping: false
-    })).toString() + "/" +z.getDate().toString() ;
+    })).toString() + "/" + z.getFullYear().toString();
 }
 function getDate() {
     date = new Date($("#inputDate").val());
@@ -120,140 +120,112 @@ function getSlots (){
 
 }
 function displaySlots(currDate) {
-
     let a = {
-        0: {"st": 7, "et": 8},
-        1: {"st": 8, "et": 9},
-        2: {"st": 9, "et": 10},
-        3: {"st": 10, "et": 11},
-        4: {"st": 11, "et": 12},
-        5: {"st": 12, "et": 13},
-        6: {"st": 13, "et": 14},
-        7: {"st": 14, "et": 15},
-        8: {"st": 15, "et": 16},
-        9: {"st": 16, "et": 17},
-        10: {"st": 17, "et": 18},
-        11: {"st": 18, "et": 19},
-        12: {"st": 19, "et": 20},
-        13: {"st": 20, "et": 21},
-        14: {"st": 21, "et": 22},
-        15: {"st": 22, "et": 23},
+        "17/01/2021":
+            [
+                {"st":5,"et":6,"av":1},
+                {"st":6,"et":7,"av":0},
+                {"st":7,"et":8,"av":1},
+                {"st":8,"et":9,"av":1},
+                {"st":9,"et":10,"av":0},
+                {"st":10,"et":11,"av":1},
+                {"st":11,"et":12,"av":0},
+                {"st":12,"et":13,"av":1},
+                {"st":13,"et":14,"av":1},
+                {"st":14,"et":15,"av":0},
+                {"st":16,"et":17,"av":-1},
+                {"st":17,"et":18,"av":0},
+                {"st":19,"et":20,"av":1},
+                {"st":20,"et":21,"av":-1}
+            ],
+        "18/01/2021":
+            [
+                {"st":5,"et":6,"av":1},
+                {"st":6,"et":7,"av":0},
+                {"st":7,"et":8,"av":1},
+                {"st":8,"et":9,"av":1},
+                {"st":9,"et":10,"av":0},
+                {"st":10,"et":11,"av":1},
+                {"st":11,"et":12,"av":0},
+                {"st":12,"et":13,"av":1},
+                {"st":13,"et":14,"av":1},
+                {"st":14,"et":15,"av":0},
+                {"st":16,"et":17,"av":-1},
+                {"st":17,"et":18,"av":0},
+                {"st":19,"et":20,"av":1},
+                {"st":20,"et":21,"av":-1}
+            ],
+        "19/01/2021":
+            [
+                {"st":5,"et":6,"av":1},
+                {"st":6,"et":7,"av":0},
+                {"st":7,"et":8,"av":1},
+                {"st":8,"et":9,"av":1},
+                {"st":9,"et":10,"av":0},
+                {"st":10,"et":11,"av":1},
+                {"st":11,"et":12,"av":0},
+                {"st":12,"et":13,"av":1},
+                {"st":13,"et":14,"av":1},
+                {"st":14,"et":15,"av":0},
+                {"st":16,"et":17,"av":-1},
+                {"st":17,"et":18,"av":0},
+                {"st":19,"et":20,"av":1},
+                {"st":20,"et":21,"av":-1}
+            ],
+        "size":1
     };
-
-    slotData = {"2021/01/19":[1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1],
-        "2021/01/20":[1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1]};
+    slotData = JSON.parse(JSON.stringify(a));
     //todo- delete upper 2 lines after Mandu starts giving slot data
 
-    let keyslots = getSlotKey(currDate);
-    console.log(currDate);
-
-    // let keyslots = (Object.keys(slotData)[0]);
-
-    console.log(keyslots);
-
+    let today = new Date(currDate);
+    let key = getSlotKey(today);
     console.log({slotData});
-    for(let i=0;i<Object.keys(slotData).length;i++)
-    {
-        if(keyslots in slotData){
-            for(let z=0;z<slotData[keyslots].length;z++)
-            {
-                let s;
-                let slotid  = (new Date(keyslots));
-                let rn = new Date();
-                rn.setHours(0,0,0,0);
-                slotid.getTime();
-                if(slotid < rn.getTime())
-                {
-                    s = new slot(a[z]['st'], a[z]['et'], -1);
-                    console.log({s});
-                }
-                else
-                {
-                    console.log(slotData[keyslots][z])
-                    s = new slot(a[z]['st'], a[z]['et'], slotData[keyslots][z]);
-                }
-                slotid  = (new Date(keyslots));
-                slotid.setHours(a[z]['st'],0,0,0);
-                slotid = slotid.getTime();
+    if(key in slotData) {
+        slotData[key].forEach(e => {
+            let s = new slot(e['st'], e['et'], e['av']);
+            console.log({s});
+            let rn = (new Date).getTime();
+            today.setHours(e['st'], 0, 0, 0);
+            let slotid = today.getTime();
+
+            console.log(slotid, (new Date).getTime());
+            if (slotid > (new Date).getTime()) {
+                console.log("in");
                 switch (s.av) {
                     case -1: {
-                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div red-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div red-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
                         $("#slotContainer").append(html);
                         break;
                     }
                     case 0: {
-                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div grey-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div grey-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
                         $("#slotContainer").append(html);
                         break;
                     }
                     case 1: {
-                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div green-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div green-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
                         $("#slotContainer").append(html);
                         break;
                     }
                     default: {
                         console.log("unknown slot:-->");
-                        console.log({s});
+                        console.log({e});
                         break;
                     }
 
                 }
+                console.log("Element with slot id " + slotid + "was created");
                 if (tempSelect.includes(`${slotid}`)) {
                     console.log('Helloo');
                     $(`#${slotid}`).addClass('slot-div-selected');
                 }
             }
-        }
-        else
-        {
-            $("#slotContainer").html("<p>Sorry there are no slots available for this day</p>");
-        }
-
+        });
     }
-    if(slotData.length<=0)
+    else
     {
         $("#slotContainer").html("<p>Sorry there are no slots available for this day</p>")
     }
-
-    // if(keyslots in slotData) {
-    //     slotData[keyslots].forEach(e => {
-    //         let s = new slot(e['st'], e['et'], e['av']);
-    //         console.log({s});
-    //         let rn = (new Date).getTime();
-    //         today.setHours(e['st'], 0, 0, 0);
-    //         let slotid = today.getTime();
-    //
-    //         console.log(slotid, (new Date).getTime());
-    //         if (slotid > (new Date).getTime()) {
-    //             console.log("in");
-    //             switch (s.av) {
-    //                 case -1: {
-    //                     let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div red-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
-    //                     $("#slotContainer").append(html);
-    //                     break;
-    //                 }
-    //                 case 0: {
-    //                     let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div grey-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
-    //                     $("#slotContainer").append(html);
-    //                     break;
-    //                 }
-    //                 case 1: {
-    //                     let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + e['st'] + "' class=\"slot-div green-ball\">" + e['st'] + " to " + e['et'] + "</div></div>";
-    //                     $("#slotContainer").append(html);
-    //                     break;
-    //                 }
-    //                 default: {
-    //                     console.log("unknown slot:-->");
-    //                     console.log({e});
-    //                     break;
-    //                 }
-    //
-    //             }
-    //             console.log("Element with slot id " + slotid + "was created");
-    //         }
-    //     });
-    // }
-
 }
 $("#inputDate").change(()=>{
 
@@ -407,7 +379,6 @@ function submitData(){
         finalData.eventName =  $('#inputName').val();
         finalData.eventDescription =  converter.makeHtml(simplemde.value());
         finalData.selectedSlots = new Object();
-        let template = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         tempSelect.forEach(function(e){
             if(e < (new Date()).getTime())
             {
@@ -416,19 +387,7 @@ function submitData(){
                 return 0;
             }
             let slotid = e;
-            console.log(slotid);
-
-            let slotkey = getSlotKey(new Date(parseInt(slotid)));
-            console.log(slotkey);
-            if(slotkey in finalData.selectedSlots){
-                finalData.selectedSlots[slotkey][new Date(parseInt(slotid)).getHours()-7] = 1;
-            }
-            else
-            {
-                finalData.selectedSlots[slotkey] = template;
-                finalData.selectedSlots[slotkey][new Date(parseInt(slotid)).getHours()-7] = 1;
-            }
-            console.log(finalData.selectedSlots)
+            finalData.selectedSlots[slotid] = availability[slotid];
 
         });
         console.log(JSON.stringify(finalData));
