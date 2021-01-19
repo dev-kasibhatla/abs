@@ -19,7 +19,7 @@ if(!$q || $db->affected_rows!==1)
 $q=$db->insert_id;
 
 require_once 'slots.php';
-foreach($_POST['slots'] as $date=>$slots) {
+foreach($_POST['selectedSlots'] as $date=>$slots) {
 	if(!is_array($slots) || empty($slots))
 		continue;
 	for($i=SL_MIN;$i<SL_MAX;++$i)
