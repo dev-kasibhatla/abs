@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 var req;
 var event;
 var simplemde;
@@ -22,6 +15,7 @@ function initialize(){
     $('#inputDate').val(today);
     getDate();
     $("#outputDay").val(date.toLocaleDateString('default',{weekday:'long'}));
+    getSlots();
     displaySlots(now);
 
     // further changes to editor / get its value using built in methods
@@ -96,7 +90,7 @@ function getSlots (){
     }
 
     req = $.ajax({
-        url:"../scripts/book.php",
+        url:"../api/auth/book.php",
         type:'post',
         data:{'event':event,'date':date}
     });
