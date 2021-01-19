@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditorium - Profile</title>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link href="css/login.css" rel="stylesheet" type="text/css">
+<link href="css/index.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark2 shadow-sm nav">
+		<a class="navbar-brand" href="#">Auditorium Booking System</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+	
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  <ul class="navbar-nav mr-auto"></ul>
+		  <ul class="navbar-nav my-2 my-lg-0">
+			<!-- <li class="nav-item">
+			  <a href="login.html" class="active nav-link">Already have an account? Go to login</a>
+			</li> -->
+	
+			<li class="nav-item active">
+			  <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+			</li>
+	
+			<li class="nav-item dropdown">
+			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false" name="clubName">
+				Account
+			  </a>
+			  <div class="dropdown-menu dropdown-menu-right" style="right:0" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item " href="account.html">Account settings</a>
+				<a class="dropdown-item" href="events.html">My events</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Logout</a>
+			  </div>
+			</li>
+			<!-- <li class="nav-item">
+				  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+				</li> -->
+		  </ul>
+		</div>
+	  </nav>
+	  <div style="height: 75px;"></div>
+	  <section>
+		  <div class="main-margin">
+			<form id="form">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 flat-glass-no-hover margin-5">
+							<h1>Profile</h1><hr>
+							<div class="text-description">
+								Edit your club's profile. This is what other people see.
+							</div>
+							<div class="div-10"></div>
+							<!-- todo: replace this and all occurences of club name in a loop-->
+							<h4 name="clubName" class="color-purple">Club Name</h4>
+						</div>
+					</div>
+					<div class="div-20"></div>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="margin-5">
+								<div class="dp-parent ">
+									<div class="upload-btn-wrapper">
+										<input type="file" name="inputDp" id="inputDp" 
+										accept="image/png, image/jpeg" onchange="fileFunction()" />
+										<!-- todo: set src -->
+										<img width="150" height="150" class="dp" src="data:image/png;base64,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">
+									</div>
+									<div class="div-20"></div>					
+									<div class="dp-text">
+										Remove
+									</div>	
+								</div>
+							</div>
+							<div class="div-20"></div>					
+						</div>
+						<div class="col-md-7">
+							<div class="form-group margin-top-20">
+								<!-- todo: Set default value to Club's name -->
+								<h4>Club name</h4><hr>
+								<div class="row">
+									<div class="col-11">
+										<input type="text" class="form-control " id="inputClubName" name="inputClubName" aria-describedby="linkHelp"
+								  placeholder="Club Name" disabled>
+								  
+									</div>
+									<div class="col-1  edit-icon" id="btnEditClubName"></div>
+								</div>
+								<small id="clubNameHelp" class="form-text text-danger">Changing the club's name requires admin's approval</small>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 ">
+							<div class="container-fluid  flat-glass-no-hover">
+								<div class="row">
+									<div class="col-lg-6 padding-0">
+										<div id="infoDiv"  class="form-group flat-glass-no-hover margin-5 dummy">
+											<!-- todo: Set default value to Club's link -->
+											<div class="row">
+												<div style="width: 20px;"></div>
+												<h4 style="width: 85%;">Link</h4>
+												<div class="col-1  edit-icon" id="btnEditInfo"></div>
+											</div>
+											<hr>
+											<!-- <label for="inputLink">Registration Link</label> -->
+											<div class="row">
+												<div class="col-11">
+													<input type="url" class="form-control " id="inputLink" name="inputLink" aria-describedby="linkHelp"
+											  placeholder="Link to club's website" disabled>
+											  <small id="linkHelp" class="form-text text-danger"></small>
+												</div>
+											</div>
+	
+											<div class="div-20"></div>
+											<div class="div-20"></div>
+	
+											<h4>Tag line</h4>										
+											<hr>
+											<!-- <label for="inputLink">Registration Link</label> -->
+											<div class="row">
+												<div class="col-11">
+													<input type="text" class="form-control " id="inputTag" name="inputTag" aria-describedby="linkHelp"
+											  placeholder="Club's tag line" disabled>
+											  <small id="tagHelp" class="form-text text-danger"></small>
+												</div>
+											</div>
+	
+											<div class="div-20"></div>
+											<div class="div-20"></div>
+	
+											<h4>Student representative</h4>
+											<hr>
+											<div class="row">
+												<div class="col-11">
+													<input type="text" class="form-control " id="inputRepName" name="inputRepName" aria-describedby="linkHelp"
+											  placeholder="Representative's name" disabled>
+												</div>
+											</div>
+											<div class="div-10"></div>
+											<div class="row">
+												<div class="col-11">
+													<input type="email" class="form-control " id="inputRepEmail" name="inputRepEmail" aria-describedby="linkHelp"
+											  placeholder="Representative's e-mail" disabled>
+											  <small id="repHelp" class="form-text text-danger"></small>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 padding-0">
+										<div class="form-group flat-glass-no-hover margin-5 dummy">
+											<!-- todo: Set default value to Club's link -->
+											<div class="row">
+												<div style="width: 20px;"></div>
+												<h4 style="width: 85%;">Description</h4>
+												<div class="col-1  edit-icon" id="btnEditDescription"></div>
+											</div>
+											<hr>
+											<!-- <label for="inputLink">Registration Link</label> -->
+											<div class="row">
+												<div class="col-11">
+													<textarea class="form-control" 
+											  placeholder="Enter club description" disabled rows="10" id="inputDescription" name="inputDescription" maxlength="5000"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+					<div class="div-20"></div>
+					<div class="row">
+						<div class="col-md-9"></div>
+						<div class="col-md-3">
+							<button class="btn btn-purple" type = "submit" id="btnSubmit">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="div-20"></div>
+
+		  </div>
+		<div class="div-20"></div>
+		<div class="div-20"></div>
+		<div class="div-20"></div>
+
+	  </section>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+
+	<script src="js/profile.js"></script>
+
+	<script>
+		// note: using this class as a reference can be dangerous in the future
+		$('.flat-glass').matchHeight();
+		$('.dummy').matchHeight();
+		// todo: You can put this line in the init section of your js if you want to make 
+		// further changes to editor / get its value using built in methods
+
+		//todo: to enable edit, make this false
+
+	</script>
+</body>
+</html>

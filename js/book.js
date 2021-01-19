@@ -1,7 +1,6 @@
 var request;
 var grpemail;
 $("document").ready(initialize);
-
 function initialize(){
     //check if the user is logged in
     if(request){
@@ -52,11 +51,9 @@ function initialize(){
     }
 
 }
-
 function onDateChanged(){
     clearSlots();
 }
-
 function clearSlots(){
 
     $.each($("input[name='slot_input']:checked"), function(){            
@@ -75,7 +72,6 @@ var slots = new Array();
 //b is queued booking
 var slota = new Array();
 var slotb = new Array();
-
 function loadData(){
     //visual indicators to show that the page is loading
     $("#date_confirm").html("Loading");
@@ -142,7 +138,6 @@ function loadData(){
     });
 
 }
-
 function setSlotsOnScreen(){
 
     //sample html code
@@ -164,7 +159,7 @@ function setSlotsOnScreen(){
     */
 
 
-    //Each button will have 2 unnique values: Name (slot timing), value (slot id)
+    //Each button will have 2 unique values: Name (slot timing), value (slot id)
     //Check if a slot is booked and set the button colour accordingly
 
     //date container id is date_confirm
