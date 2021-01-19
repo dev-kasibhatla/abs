@@ -17,10 +17,10 @@ function jQFormSerializeArrToJson(formSerializeArr){
 var request;
 var a  =  $("input");
 $(a).focus(function() {
-   $(this).css('border',"none"); 
+    $(this).css('border',"none");
 });
 function getSchools(){
-   
+
     request = $.ajax({
         url: "../api/getschools.php",
         type: "post",
@@ -49,9 +49,9 @@ function getSchools(){
         // Log the error to the console
         console.error(
             "The following error occurred: "+
-            textStatus, errorThrown
+            jqXHR,textStatus, errorThrown
         );
-        
+
     });
 
 }
@@ -63,10 +63,10 @@ $("#btnSubmit").click(function(){
     $("#errorMentor").html("");
     $("#errorGroupDetails").html("");
     $("#errorPassword").html("");
-    
 
-    
-	console.log("Submitting register data now");
+
+
+    console.log("Submitting register data now");
     // Prevent default posting of form - put here to work in case of errors
     event.preventDefault();
 
@@ -80,7 +80,7 @@ $("#btnSubmit").click(function(){
 
     // Let's select and cache all the fields
     Array.prototype.forEach.call($f,form => {
-        
+
         $inputs = $(form).find("input, select, button, textarea");
         const re = /^(([^<\*>\'(=)\[\]\\.,;:\s"0-9@]+(\.[^<>()\[\]\\.,;:\s"]+)*)|(".+"))$/;
         const repass = /^(([^<>\'(=)\[\]\\.,;:\s"]+(\.[^<>()\[\]\\.,;:\s"]+)*)|(".+"))$/;
@@ -107,7 +107,7 @@ $("#btnSubmit").click(function(){
                             abort = 1;
                         }
                     }
-                        
+
                     break;
                 }
                 case "password":
@@ -116,7 +116,7 @@ $("#btnSubmit").click(function(){
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\">Please enter a valid password with the appropriate characters</strong>");
                         $($inputs[i]).css('border',"2px solid red");
-                        abort = 1;  
+                        abort = 1;
                     }
                     if(($inputs[i].value.length < 8))
                     {
@@ -130,11 +130,11 @@ $("#btnSubmit").click(function(){
                         $($inputs[i]).css('border',"2px solid red");
                         abort = 1;
                     }
-                    break;     
-                }        
-                case "text":   
+                    break;
+                }
+                case "text":
                 {
-                	if($($inputs[i]).parent().parent().attr('id')=="form2")    
+                    if($($inputs[i]).parent().parent().attr('id')=="form2")
                     {
 
 
@@ -155,11 +155,11 @@ $("#btnSubmit").click(function(){
                             $("#errorMentor").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
                             $($inputs[i]).css('border',"2px solid red");
                             abort = 1;
-                        }    
-                    }        
+                        }
+                    }
                     break;
                 }
-                case "tel":   
+                case "tel":
                 {
                     if($inputs[i].value.length<10)
                     {
@@ -172,8 +172,8 @@ $("#btnSubmit").click(function(){
             }
         }
     });
-    
-	
+
+
     // Serialize the data in the form
     let serializedArr = $('#form1,#form2,#form3,#form4').serializeArray();
     console.log(serializedArr);
@@ -187,7 +187,8 @@ $("#btnSubmit").click(function(){
     request = $.ajax({
         url: "../api/auth/reg-club.php",
         type: "post",
-        data: JSON.stringify(serializedData)
+        data: serializedData
+
     });
 
     // Callback handler that will be called on success
@@ -196,24 +197,24 @@ $("#btnSubmit").click(function(){
         console.log(response);
         if("success" in response){
             //user is logged in
-			//redirect to account page
-            window.localStorage.setItem('clubName',$("#inputClubName").val());
-			window.location.replace("account.php");
+            //redirect to account page
+            window.location.href = "login.html";
 
         }else if("error" in response){
             //user not logged in. Redirect to login
-			alert(response['error']);
+            alert(response['error']);
         }
     });
 
+
     // Callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
+    request.fail(function (jqXHR, textStatus, error){
         // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-        
+
+        alert( JSON.parse(jqXHR.responseText)['error']);
+        window.location.reload();
+
+
     });
 
     // Callback handler that will be called regardless
