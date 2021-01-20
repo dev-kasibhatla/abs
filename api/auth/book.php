@@ -7,10 +7,11 @@ if(!is_array($_POST['slots']) || empty($_POST['slots']))
 	throw new Exception("At least one valid slot must be selected for the provided event",400);
 
 $db=my_sqli_connect();
-$q=$db->query("INSERT INTO `event`(`name`,`detail`,`link`) VALUES(".
+$q=$db->query("INSERT INTO `event`(`name`,`detail`,`link`,`club`) VALUES(".
 	"'".$db->escape_string($_POST['ename'])."',".
 	"'".$db->escape_string($_POST['edesc'])."',".
-	"'".$db->escape_string($_POST['elink'])."')"
+	"'".$db->escape_string($_POST['elink'])."',".
+	$db->escape_string($_SESSION['id']).")"
 );
 
 if(!$q || $db->affected_rows!==1)
