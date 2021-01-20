@@ -35,7 +35,7 @@ function getSchools(){
             for(let i=0;i<schools.length;i++)
             {
                 let id = schools[i]['id'];
-                $(select).append("<option value=\"i+1\">"+schools[i]['name']+"</option>")
+                $(select).append(`<option value=${id}>${schools[i]['name']}</option>`);
             }
 
         }else{
@@ -137,12 +137,7 @@ $("#btnSubmit").click(function(){
                 	if($($inputs[i]).parent().parent().attr('id')=="form2")    
                     {
 
-                        if(!repass.test($inputs[i].value))
-                        {
-                            $("#errorGroupDetails").html("<strong class=\"text-danger\">Please enter valid group details</strong>")  ;
-                            $($inputs[i]).css('border',"2px solid red");
-                             abort = 1;
-                        }
+
                         if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
@@ -153,12 +148,7 @@ $("#btnSubmit").click(function(){
                     }
                     else
                     {
-                        if(!repass.test($inputs[i].value))
-                        {
-                            $("#errorMentor").html("<strong class=\"text-danger\">Please enter valid mentor details</strong>")  ;
-                            $($inputs[i]).css('border',"2px solid red");
-                            abort = 1;
-                        }
+
                         if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
