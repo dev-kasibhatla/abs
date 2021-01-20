@@ -3,8 +3,36 @@ var req;
 var event;
 var simplemde;
 var converter;
+
+
+function checkLogin() {
+    if(request)
+        request.abort();
+    request = $.ajax({
+        url:"../api/auth/login.php",
+        type:"get"
+    });
+    request.done(function (response, textstatus,jqXHR){
+        console.log(JSON.parse(jqXHR.responseText));
+        if("success" in response) {
+           
+           console.log("user is logged in");
+        }
+        else
+        {
+            console.log("User not logged in ");
+            window.location.replace('login.html');
+        }
+    });
+	request.fail(function(jqXHR, textstatus,errorThrown){
+    	console.log(JSON.parse(jqXHR.responseText));
+    });
+}
+
+
 $("document").ready(initialize);
 function initialize(){
+    checkLogin();
     $('.dummy').matchHeight();
 
     let now = new Date();
