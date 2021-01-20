@@ -1,3 +1,24 @@
+
+function checkLogin() {
+    if(request)
+        request.abort();
+    request = $.ajax({
+        url:"../api/auth/login.php",
+        type:"get"
+    });
+    request.done(function (response, textstatus,jqXHR){
+        if("success" in response) {
+           console.log("user is logged in");
+        }
+        else
+        {
+            console.log("User not logged in ");
+            window.location.replace('login.html');
+        }
+    });
+
+}
+//-----------------------------------------------------------------------------------------------------------//
 var simplemde;
 var converter;
 console.log("hello");

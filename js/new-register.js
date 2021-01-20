@@ -14,6 +14,9 @@ function jQFormSerializeArrToJson(formSerializeArr){
 
     return jsonObj;
 }
+
+
+
 var request;
 var a  =  $("input");
 $(a).focus(function() {

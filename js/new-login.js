@@ -104,25 +104,22 @@ $("#btnSubmit").click(function(event){
     request.done(function (response, textStatus, jqXHR){
         // Log a message to the console
         console.log(response);
-        if(response == 1){
+        if("success" in response){
             //user is logged in
 			//redirect to account page
-			window.location.replace("account.php");
+			window.location.replace("account.html");
 
         }else{
             //user not logged in. Redirect to login
 			console.log("Invalid login");
-			$("#login_message").show();        }
+			$("#login_message").show();
+        }
     });
 
     // Callback handler that will be called on failure
     request.fail(function (jqXHR, textStatus, errorThrown){
         // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-        
+        console.error(JSON.parse(jqXHR.responseText)['error']);
     });
 
     // Callback handler that will be called regardless
