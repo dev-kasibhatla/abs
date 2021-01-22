@@ -1,4 +1,4 @@
-
+var clubData;
 function checkLogin() {
     if(request)
         request.abort();
@@ -7,14 +7,15 @@ function checkLogin() {
         type:"get"
     });
     request.done(function (response, textstatus,jqXHR){
-        if("success" in response) {
-           console.log("user is logged in");
-        }
-        else
-        {
-            console.log("User not logged in ");
-            window.location.replace('login.html');
-        }
+        console.log(response);
+        clubData = response;
+        $("[name=clubName]").text(clubData['name']);
+
+    });
+    request.fail(function (jqXHR, textStatus, error){
+        // Log the error to the console
+        window.location.replace('login.html');
+
     });
 
 }
@@ -24,6 +25,7 @@ var converter;
 console.log("hello");
 $("document").ready(initialize);
 function initialize(){
+    checkLogin();
     $('.dummy').matchHeight();
     // further changes to editor / get its value using built in methods
     console.log("Loading simplemde");
@@ -32,7 +34,7 @@ function initialize(){
     simplemde.codemirror.options.readOnly = true;
     console.log("yo");
     converter = new showdown.Converter();
-    getClubData();
+    // getClubData();
 
 
 }
