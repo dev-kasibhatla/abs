@@ -104,16 +104,8 @@ $("#btnSubmit").click(function(event){
     request.done(function (response, textStatus, jqXHR){
         // Log a message to the console
         console.log(response);
-        if("success" in response){
-            //user is logged in
-			//redirect to account page
-			window.location.replace("account.html");
-
-        }else{
-            //user not logged in. Redirect to login
-			console.log("Invalid login");
-			$("#login_message").show();
-        }
+        //user is logged in
+        window.location.replace("account.html");
     });
 
     // Callback handler that will be called on failure
