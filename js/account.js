@@ -17,14 +17,12 @@ function checkLogin() {
            
            console.log("user is logged in");
         }
-        else
-        {
-            console.log("User not logged in ");
-            window.location.replace('login.html');
-        }
+
     });
 	request.fail(function(jqXHR, textstatus,errorThrown){
     	console.log(JSON.parse(jqXHR.responseText));
+		console.log("User not logged in ");
+		window.location.replace('login.html');
     });
 }
 
