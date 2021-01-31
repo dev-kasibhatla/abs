@@ -97,7 +97,7 @@ $("#btnSubmit").click(function(event){
     request = $.ajax({
         url: "../api/auth/login.php",
         type: "post",
-        data: JSON.stringify(serializedData)
+        data: (serializedData)
     });
 
     // Callback handler that will be called on success
