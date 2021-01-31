@@ -9,9 +9,9 @@ if(
 
 if(
 	!ctype_digit($_POST['phone']??null) ||
-	strlen($_POST['phone'])!==10
+	strlen($_POST['phone'])!==A_PHN_EXT
 )
-	throw new Exception("Phone must be exactly 10 digits",400);
+	throw new Exception(A_PH_ERR,400);
 
 if(
 	!is_string($_POST['name']??null) ||
@@ -36,9 +36,9 @@ if(
 
 if(
 	!ctype_digit($_POST['inputSchool']??null) ||
-	intval($_POST['inputSchool'])>127
+	intval($_POST['inputSchool'])>A_SCL_MAX
 )
-	throw new Exception("Representative school identifier is invalid",400);
+	throw new Exception(A_SC_ERR,400);
 
 if(
 	!filter_var($_POST['inputMentorEmail']??null,FILTER_VALIDATE_EMAIL) ||
@@ -57,13 +57,13 @@ if(
 	!is_string($_POST['password']??null) ||
 	strlen($_POST['password'])<8 ||
 	preg_match('/.*\d+.*/',$_POST['password'])!==1 ||
-	$_POST['password']=password_hash($_POST['password'],PASSWORD_BCRYPT)
+	empty($_POST['password']=password_hash($_POST['password'],PASSWORD_BCRYPT))
 )
 	throw new Exception("Password should be a string of length at least 8 and must contain at least one digit",400);
 
 $db=my_sqli_connect();
-$q=$db->query("INSERT IGNORE INTO `clubs`".
-"(`name`,`email,`password`,`phone`,`rname`,`rdept`,`remail`,`ename`,`eschool`,`enabled`) VALUES(".
+$q=$db->query("INSERT IGNORE INTO `club`".
+"(`name`,`email`,`password`,`phone`,`rname`,`rdept`,`remail`,`ename`,`eschool`,`enabled`) VALUES(".
 	"'".$db->escape_string($_POST['name'])."',".
 	"'".$db->escape_string($_POST['email'])."',".
 	"'".$db->escape_string($_POST['password'])."',".
