@@ -67,7 +67,7 @@ function fileFunction()
     request = $.ajax( {
         url:"../auth/api/profile.php",
         type:'post',
-        data:{'event':event,'data':dpData}
+        data:{event:event,data:dpData}
     });
     request.done(function (response,textstatus ,jqXHR){
         console.log(response);
