@@ -1,0 +1,94 @@
+.reset-btn {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    color: #1000a0;
+    font-weight: bold;
+}
+/*todo: add arrow svgs*/
+.btn-arrow {
+/*    glass effect*/
+    border-radius: 5px;
+    background-color: rgba(57, 86, 234,1);
+    padding: 10px;
+    backdrop-filter: blur(5px);
+    /*margin: 10px;*/
+    cursor: pointer;
+    display: inline-block;
+    z-index: 10;
+    position: absolute;
+}
+
+.btn-arrow:hover{
+    box-shadow:  .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.btn-arrow-left{
+    background: url("../images/arrow-left.svg") no-repeat center;
+}
+.btn-arrow-right{
+    background: url("../images/arrow-right.svg")  no-repeat center;
+}
+
+.cal-body-parent {
+    overflow-x: visible;
+    overflow-y: hidden;
+}
+
+.cal-body {
+    position: relative;
+    top: 0;
+    left: 0;
+    /*background-color: yellow;*/
+    overflow-y: hidden;
+    overflow-style: marquee-line;
+    overflow-x: visible;
+    width: 2000px;
+    display:list-item;
+
+    /*border-radius: 5px;*/
+    /*background-color: rgba(255, 255, 255, .15);*/
+    /*backdrop-filter: blur(5px);*/
+}
+
+.cal-element {
+    display: inline-block;
+    cursor:pointer;
+    margin: 2px;
+    text-align: center;
+    text-overflow:fade;
+    font-weight: normal;
+    /*background-color: white;*/
+    width: auto;
+
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+}
+
+.cal-element:hover {
+    color: #1000a0;
+    box-shadow:  .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.selected-cal-element {
+    background-color: rgba(57, 86, 234,0.2);
+}
+
+.cal-badge {
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: darkgreen;
+    margin-top: 5px;
+}
+
+.show-badge{
+    border-bottom: 5px;
+    border-bottom-color: #1000a0;
+    border-bottom-style: solid;
+}
