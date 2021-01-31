@@ -13,6 +13,9 @@ function checkLogin() {
         clubData = response;
         $("[name=clubName]").text(clubData['name']);
         $("#inputClubName").val(clubData["name"]);
+        $("#inputLink").val(clubData['url']);
+        if(clubData['detail']!=null)
+        simplemde.value(clubData['detail']);    
 
     });
     request.fail(function (jqXHR, textStatus, error){
@@ -35,7 +38,9 @@ function initialize(){
     console.log("Loading simplemde");
     simplemde = new SimpleMDE(document.getElementById('inputDescription'));
     console.log(simplemde);
+
     simplemde.codemirror.options.readOnly = true;
+    
     console.log("yo");
     converter = new showdown.Converter();
 //     getClubData();
@@ -142,16 +147,17 @@ function validate() {
         console.log("change1");
         changedInputs['inputClubName'] = 1;
     }
-    //todo: uncomment when msvamp starts sending data.
+    //todo: comment nextline when msvamp starts sending tagdata data.
+    
+    if($("#inputLink").val()!=clubData['url'] && $("#inputLink").val().length > 0 )
+    {
+        changedInputs['inputLink'] = 1;
+    }
 
-//     if($("#inputLink").val()!=clubData['link'] && $("#inputLink").val().length > 0 )
-//     {
-//         changedInputs['inputLink'] = 1;
-//     }
-//     if($("#inputTag").val()!=clubData['clubTag'] && $("#inputTag").val().length>0 )
-//     {
-//         changedInputs['inputTag'] = 1;
-//     }
+    if($("#inputTag").val()!=clubData['clubTag'] && $("#inputTag").val().length>0 )
+    {
+        changedInputs['inputTag'] = 1;
+    }
 
     if($("#inputRepName").val()!=clubData['ename'] && $("#inputRepName").val().length>0 )
     {
@@ -165,10 +171,10 @@ function validate() {
         changedInputs['inputRepEmail'] = 1;
 
     }
-//     if(simplemde.value()!==clubData['description'] && simplemde.value().length>0 )
-//     {
-//         changedInputs['clubDescription'] = 1;
-//     }
+    if(simplemde.value()!==clubData['detail'] && simplemde.value().length>0 )
+    {
+        changedInputs['clubDescription'] = 1;
+    }
 
     if(Object.keys(changedInputs).length)
         return 1;
@@ -181,6 +187,7 @@ function validate() {
 
 }
 function sendData(){
+//     e.preventDefault();
     console.log("in1");
     if(validate()==1 )
     {
@@ -198,26 +205,67 @@ function sendData(){
                     finalChanges[`${key}`] = converter.makeHtml(simplemde.value());
                 console.log({finalChanges});
             }
+            for(let key in finalChanges)
+            {
+                if(key=='inputLink')
+                {
+                    finalChanges['url'] = finalChanges['inputLink'];
+                    delete finalChanges['inputLink'];
+
+                }
+                else if(key=='inputTag')
+                {
+                    finalChanges['tagline'] = finalChanges['inputTag'];
+                    delete finalChanges['inputTag'];
+                    
+                }
+                else if(key=='inputRepName')
+                {
+                    finalChanges['ename'] = finalChanges['inputRepName'];
+                    delete finalChanges['inputLink'];
+                    
+                }
+                else if(key=='inputClubName')
+                {
+                    finalChanges['name'] = finalChanges['inputClubName'];
+                    delete finalChanges['inputLink'];
+                    
+                }
+                else if(key=='inputRepEmail')
+                {
+                    finalChanges['email'] = finalChanges['inputRepEmail'];
+                    delete finalChanges['inputLink'];
+                    
+                }
+                console.log(finalChanges);
+            }
+            
+
+
             let event = 'dataChange';
             let data = finalChanges;
             console.log(data);
             if(request)
                 request.abort();
             request = $.ajax({
-                url:'../auth/api/profile.php',
+                url:'../api/auth/profile.php',
                 type:'post',
-                data:{event: event,data:data}
+                data:data
 
             });
             request.done(function (response,textstatus,jqXHR ) {
                 alert("Your data has been saved");
             });
             request.fail(function(jqXHR,textStatustatus,error){
-                alert(JSON.parse(jqXHR.responseText)['error']);
+                console.log((jqXHR.responseText));
             });
 
         }
     }
 }
 
-$("#btnSubmit").click(sendData);
+$("#btnSubmit").click(function(){
+//     this.preventDefault();
+    sendData();
+
+});
