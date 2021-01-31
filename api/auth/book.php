@@ -23,21 +23,21 @@ if(!$q || $db->affected_rows!==1)
 $q=$db->insert_id;
 
 require_once 'slots.php';
-foreach($_POST['selectedSlots'] as $date=>$slots) {
+foreach($_POST['slots'] as $date=>$slots) {
 	if(!is_array($slots) || empty($slots))
 		continue;
 	for($i=SL_MIN;$i<SL_MAX;++$i)
 	if(boolval($slots[$i]??false)) {
 		$r=$db->query("SELECT `id` FROM `booking` WHERE `bdate`='".$db->escape_string($date)."' AND `tslot`=$i");
 		if($r && $r->num_rows===0)
-			$db->query("INSERT INTO `booking`(`club`,`bdate`,`tslot`) VALUES(".
+			$db->query("INSERT INTO `booking`(`club`,`bdate`,`tslot`,`event`) VALUES(".
 				"{$_SESSION['id']},'".$db->escape_string($date)."',$i".
-			")");
+			",".$db->escape_string($q).")");
 		elseif($r && $r->num_rows===1) {
 			$r=$r->fetch_assoc();
-			$db->query("INSERT INTO `booking`(`club`,`bdate`,`tslot`,`approved`) VALUES(".
+			$db->query("INSERT INTO `booking`(`club`,`bdate`,`tslot`,`approved`,`event`) VALUES(".
 				"{$_SESSION['id']},'".$db->escape_string($date)."',$i,".intval(!boolval($r['approved']??false)).
-			")");
+			",".$db->escape_string($q).")");
 		}
 		else if($r && $r->num_rows===2)
 			throw new Exception("One or more selected slots are no longer available, please reload and try again.",400);

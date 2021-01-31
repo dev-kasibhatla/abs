@@ -16,22 +16,23 @@ foreach($p as $r) {
 	end($result);
 	$event=key($result);
 	$result[$event]['tslot']=[];
+	unset($result[$event]['id']);
 
 	if(!$q=$db->query("SELECT `bdate`,`tslot`,`approved`
 		FROM `booking`
 		WHERE `event`=".$db->escape_string($r['id'])
 	)) throw new Exception(SL_ERR,500);
 	$q=$q->fetch_all(MYSQLI_ASSOC);
-	
+
 	//	0 - not booked,	1 - booking confirmed,	2 - booking queued
 	foreach($q as $s) {
 		if(empty($result[$event]['tslot'][$s['bdate']]))
 			$result[$event]['tslot'][$s['bdate']]=array_fill(SL_MIN,SL_MAX+1,0);
 		if($result[$event]['tslot'][$s['bdate']][$s['tslot']]===1)
 			continue;
-		if($s['approved']===1)
+		if($s['approved']==1)
 			$result[$event]['tslot'][$s['bdate']][$s['tslot']]=1;
-		elseif($s['approved']===0)
+		elseif($s['approved']==0)
 			$result[$event]['tslot'][$s['bdate']][$s['tslot']]=2;
 	}
 }

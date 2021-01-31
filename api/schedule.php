@@ -2,7 +2,7 @@
 if(($sdate=date_create_from_format("!Y#n#j",$_POST['sdate']??null))===FALSE)
 	throw new Exception("Invalid start date provided",400);
 if(($edate=date_create_from_format("!Y#n#j",$_POST['edate']??null))===FALSE)
-	$edate=$sdate/*->add(new DateInterval("P1D"))*/;
+	$edate=clone $sdate/*->add(new DateInterval("P1D"))*/;
 if(date_diff($sdate,$edate,1)->days>31)
 	throw new Exception("Too long date range",400);
 
@@ -15,6 +15,7 @@ $q=$db->query("SELECT `bdate`,`tslot`,`approved`
 	WHERE `booking`.`bdate`>='".$db->escape_string($sdatef)."'
 	AND `booking`.`bdate`<='".$db->escape_string($edatef)."'
 ");
+$db->close();
 
 require_once 'slots.php';
 if(!$q)
@@ -29,9 +30,9 @@ while($sdate<=$edate) {
 		if($v['bdate']===$sdatef) {
 			if($result[$sdatef][$v['tslot']]===-1)
 				return false;
-			if($v['approved']===1)
+			if($v['approved']==1)
 				$result[$sdatef][$v['tslot']]=0;
-			elseif($v['approved']===0)
+			elseif($v['approved']==0)
 				$result[$sdatef][$v['tslot']]=-1;
 			return false;
 		}
