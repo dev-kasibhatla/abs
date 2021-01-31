@@ -3,6 +3,29 @@ var req;
 var event;
 var simplemde;
 var converter;
+var clubData;
+function checkLogin() {
+    if(request)
+        request.abort();
+    request = $.ajax({
+        url:"../api/auth/login.php",
+        type:"get"
+    });
+    request.done(function (response, textstatus,jqXHR){
+        console.log(response);
+        clubData = response;
+        $("[name=clubName]").text(clubData['name']);
+
+    });
+    request.fail(function (jqXHR, textStatus, error){
+        // Log the error to the console
+        window.location.replace('login.html');
+
+    });
+
+}
+
+
 $("document").ready(initialize);
 function initialize(){
     $('.dummy').matchHeight();
@@ -16,7 +39,6 @@ function initialize(){
     getDate();
     $("#outputDay").val(date.toLocaleDateString('default',{weekday:'long'}));
     getSlots();
-    displaySlots(now);
 
     // further changes to editor / get its value using built in methods
     console.log("Loading simplemde");
@@ -74,10 +96,10 @@ Date.prototype.addDays = function(days) {
     return date;
 }
 function getSlotKey(z){
-    return z.getFullYear().toString()  + "/" + (((z.getMonth() + 1)).toLocaleString('en-US', {
+    return z.getFullYear().toString()  + "-" + (((z.getMonth() + 1)).toLocaleString('en-US', {
         minimumIntegerDigits: 2,
         useGrouping: false
-    })).toString() + "/" +z.getDate().toString() ;
+    })).toString() + "-" +z.getDate().toString() ;
 }
 function getDate() {
     date = new Date($("#inputDate").val());
@@ -88,26 +110,25 @@ function getSlots (){
     {
         req.abort();
     }
+    let sdate = new Date(date);
+    console.log("sdate is ",getSlotKey(sdate));
+    let edate = new Date(date);
+    edate.setDate(edate.getDate()+15);
+    console.log("edate is ",getSlotKey(edate));
 
     req = $.ajax({
-        url:"../api/auth/book.php",
+        url:"../api/schedule.php",
         type:'post',
-        data:{'event':event,'date':date}
+        data:{'edate':getSlotKey(edate),'sdate':getSlotKey(sdate)}
     });
     req.done(function(response, textStatus, jqXHR){
-        if(response==0)
-        {
-            console.error("Error occurred");
-        }
-        else
-        {
-            console.log('got a response');
 
-            slotData = JSON.parse(response);
-            let clubname = slotData['clubname'];
-            $("[name='clubName']").text(clubname);
-            displaySlots(new Date());
-        }
+
+        console.log('got a response');
+        console.log(response);
+        slotData = (response);
+        displaySlots(new Date());
+
 
     });
 
@@ -134,8 +155,8 @@ function displaySlots(currDate) {
         15: {"st": 22, "et": 23},
     };
 
-    slotData = {"2021/01/19":[1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1],
-        "2021/01/20":[1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1]};
+//     slotData = {"2021/01/19":[1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1],
+//         "2021/01/20":[1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1]};
     //todo- delete upper 2 lines after Mandu starts giving slot data
 
     let keyslots = getSlotKey(currDate);
@@ -144,69 +165,71 @@ function displaySlots(currDate) {
     // let keyslots = (Object.keys(slotData)[0]);
 
     console.log(keyslots);
+    console.log(slotData);
+    let slotDataSize = Object.keys(slotData).length
 
-    console.log({slotData});
-    for(let i=0;i<Object.keys(slotData).length;i++)
-    {
-        if(keyslots in slotData){
-            for(let z=0;z<slotData[keyslots].length;z++)
+    if(keyslots in slotData){
+        for(let z=0;z<slotData[keyslots].length;z++)
+        {
+            let s;
+            let slotid  = (new Date(keyslots));
+            slotid.setHours((z+7),0,0,0);
+            let rn = new Date();
+
+            slotid.getTime();
+            console.log(slotid);
+            console.log(rn);
+            if(slotid < rn.getTime())
             {
-                let s;
-                let slotid  = (new Date(keyslots));
-                let rn = new Date();
-                rn.setHours(0,0,0,0);
-                slotid.getTime();
-                if(slotid < rn.getTime())
-                {
-                    s = new slot(a[z]['st'], a[z]['et'], -1);
+                s = new slot(a[z]['st'], a[z]['et'], -1);
+                console.log({s});
+            }
+            else
+            {
+                console.log(slotData[keyslots][z])
+                s = new slot(a[z]['st'], a[z]['et'], slotData[keyslots][z]);
+            }
+            slotid  = (new Date(keyslots));
+            slotid.setHours(a[z]['st'],0,0,0);
+            slotid = slotid.getTime();
+            switch (s.av) {
+                case -1: {
+                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div red-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                    $("#slotContainer").append(html);
+                    break;
+                }
+                case 0: {
+                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div grey-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                    $("#slotContainer").append(html);
+                    break;
+                }
+                case 1: {
+                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div green-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                    $("#slotContainer").append(html);
+                    break;
+                }
+                default: {
+                    console.log("unknown slot:-->");
                     console.log({s});
+                    break;
                 }
-                else
-                {
-                    console.log(slotData[keyslots][z])
-                    s = new slot(a[z]['st'], a[z]['et'], slotData[keyslots][z]);
-                }
-                slotid  = (new Date(keyslots));
-                slotid.setHours(a[z]['st'],0,0,0);
-                slotid = slotid.getTime();
-                switch (s.av) {
-                    case -1: {
-                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div red-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
-                        $("#slotContainer").append(html);
-                        break;
-                    }
-                    case 0: {
-                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div grey-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
-                        $("#slotContainer").append(html);
-                        break;
-                    }
-                    case 1: {
-                        let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div green-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
-                        $("#slotContainer").append(html);
-                        break;
-                    }
-                    default: {
-                        console.log("unknown slot:-->");
-                        console.log({s});
-                        break;
-                    }
 
-                }
-                if (tempSelect.includes(`${slotid}`)) {
-                    console.log('Helloo');
-                    $(`#${slotid}`).addClass('slot-div-selected');
-                }
+            }
+            if (tempSelect.includes(`${slotid}`)) {
+                console.log('Helloo');
+                $(`#${slotid}`).addClass('slot-div-selected');
             }
         }
-        else
-        {
-            $("#slotContainer").html("<p>Sorry there are no slots available for this day</p>");
-        }
-
     }
+    else
+    {
+        $("#slotContainer").html("<p>No slot data available for this day</p>");
+    }
+
+
     if(slotData.length<=0)
     {
-        $("#slotContainer").html("<p>Sorry there are no slots available for this day</p>")
+        $("#slotContainer").html("<p>No slot data available for this day</p>")
     }
 
     // if(keyslots in slotData) {
@@ -377,7 +400,7 @@ function validate(){
             $("#inputDate").css('border','red solid 2px');
             return 0;
         }
-        if(availability[e]!==1|| availability[e]!==0)
+        if(availability[e]!==1 && availability[e]!==0)
         {
             // noinspection JSJQueryEfficiency
             $("#dateHelp").removeClass('text-muted');
@@ -401,7 +424,7 @@ function submitData(){
         finalData.ename =  $('#inputName').val();
         finalData.edesc =  converter.makeHtml(simplemde.value());
         finalData.elink = $("#inputLink").val();
-        finalData.selectedSlots = new Object();
+        finalData.slots = new Object();
         let template = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         tempSelect.forEach(function(e){
             if(e < (new Date()).getTime())
@@ -415,28 +438,25 @@ function submitData(){
 
             let slotkey = getSlotKey(new Date(parseInt(slotid)));
             console.log(slotkey);
-            if(slotkey in finalData.selectedSlots){
-                finalData.selectedSlots[slotkey][new Date(parseInt(slotid)).getHours()-7] = 1;
+            if(slotkey in finalData.slots){
+                finalData.slots[slotkey][new Date(parseInt(slotid)).getHours()-7] = 1;
             }
             else
             {
-                finalData.selectedSlots[slotkey] = template;
-                finalData.selectedSlots[slotkey][new Date(parseInt(slotid)).getHours()-7] = 1;
+                finalData.slots[slotkey] = template;
+                finalData.slots[slotkey][new Date(parseInt(slotid)).getHours()-7] = 1;
             }
-            console.log(finalData.selectedSlots)
+            console.log(finalData.slots)
 
         });
         console.log(JSON.stringify(finalData));
-        //todo - add ajax request and response after mandu starts accepting requests
+
         if(req)
             req.abort();
         req = $.ajax({
             url:"../api/auth/book.php",
             type:'post',
-            data:(JSON.stringify(finalData)),
-            error:(e)=>{
-                console.error(e);
-            },
+            data:(finalData),
             beforeSend: function(){
                 console.log("sending now");
                 $(".btn").toggleClass('disabled');
@@ -445,14 +465,18 @@ function submitData(){
         req.done(function (response, textStatus, jqXHR){
             $(".btn").toggleClass('disabled');
             console.log(response);
-            let finalResponse = JSON.parse(response);
+            let finalResponse = (response);
             console.log(finalResponse);
-            if(finalResponse['status']=="done")
+            if("success" in finalResponse)
             {
                 $("#slotContainer").html("");
                 $("#slotContainer").html("<strong> Your slots were successfully submitted and a confirmation mail has been sent to your account</strong>");
 
             }
+        });
+        req.fail(function (jqXHR, textStatus, errorThrown){
+            // Log the error to the console
+            console.error(JSON.parse(jqXHR.responseText)['error']);
         });
     }
 
