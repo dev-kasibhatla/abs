@@ -54,6 +54,11 @@ function getEvents() {
     request.done(function (response, textstatus,jqXHR){
         console.log(response);
         clubEvents = response;
+        if(Object.keys(clubEvents).length<=0)
+            $("#eventContainer").append("<h5> Your club does not have any registered events <h5>");
+        else{
+
+        
         for(let i=0;i<Object.keys(clubEvents).length;i++){
            for (keys in clubEvents[i]['tslot']){
 //                console.log(new Date(keys));
@@ -72,6 +77,7 @@ function getEvents() {
 
                 
             }
+        }
         }
         
 
