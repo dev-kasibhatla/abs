@@ -471,12 +471,13 @@ function submitData(){
             {
                 $("#slotContainer").html("");
                 $("#slotContainer").html("<strong> Your slots were successfully submitted and a confirmation mail has been sent to your account</strong>");
-
+                location = location;
             }
         });
         req.fail(function (jqXHR, textStatus, errorThrown){
             // Log the error to the console
             console.error(JSON.parse(jqXHR.responseText)['error']);
+            
         });
     }
 
