@@ -194,17 +194,17 @@ function displaySlots(currDate) {
             slotid = slotid.getTime();
             switch (s.av) {
                 case -1: {
-                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div red-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div red-ball\">" + a[z]['st'] + " hrs to " + a[z]['et'] + " hrs </div></div>";
                     $("#slotContainer").append(html);
                     break;
                 }
                 case 0: {
-                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div grey-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div grey-ball\">" + a[z]['st'] + " hrs to " + a[z]['et'] + " hrs</div></div>";
                     $("#slotContainer").append(html);
                     break;
                 }
                 case 1: {
-                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div green-ball\">" + a[z]['st'] + " to " + a[z]['et'] + "</div></div>";
+                    let html = "<div class=\"col-md-6 padding-0\"><div id=\"" + slotid + "\" data-value='" + a[z]['st'] + "' class=\"slot-div green-ball\">" + a[z]['st'] + " hrs to " + a[z]['et'] + " hrs </div></div>";
                     $("#slotContainer").append(html);
                     break;
                 }
