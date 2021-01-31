@@ -9,18 +9,18 @@ if(date_diff($sdate,$edate,1)->days>31)
 $sdatef=$sdate->format("Y-m-d");
 $edatef=$edate->format("Y-m-d");
 
-$db->my_sqli_connect();
+$db=my_sqli_connect();
 $q=$db->query("SELECT `bdate`,`tslot`,`approved`
 	FROM `booking`
 	WHERE `booking`.`bdate`>='".$db->escape_string($sdatef)."'
 	AND `booking`.`bdate`<='".$db->escape_string($edatef)."'
 ");
 
+require_once 'slots.php';
 if(!$q)
-	throw new Exception("An unexpected error occurred",500);
+	throw new Exception(SL_ERR,500);
 $q=$q->fetch_all(MYSQLI_ASSOC);
 
-require_once 'slots.php';
 $result=[];
 while($sdate<=$edate) {
 	$sdatef=$sdate->format("Y-m-d");
@@ -31,7 +31,7 @@ while($sdate<=$edate) {
 				return false;
 			if($v['approved']===1)
 				$result[$sdatef][$v['tslot']]=0;
-			else if($v['approved']===0)
+			elseif($v['approved']===0)
 				$result[$sdatef][$v['tslot']]=-1;
 			return false;
 		}
