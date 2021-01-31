@@ -43,7 +43,8 @@ if( $q->num_rows===0 || !(($q=$q->fetch_assoc())['enabled']) ||
 	throw new Exception("Invalid credentials or account disabled",401);
 
 $db->autocommit(true);
-$db->query("UPDATE `club` SET `lastlogin`=NOW(),`lastloginip`=INET6_ATON('".
+// Our database server requires a bloody upgrade for God's sake!
+$db->query("UPDATE `club` SET `lastlogin`=NOW(),`lastloginip`=INET_ATON('".//INET6_ATON('".
 	$db->escape_string($_SERVER['REMOTE_ADDR'])
 ."') WHERE `id`=".$q['id']);
 
