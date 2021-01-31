@@ -1,6 +1,5 @@
 <?php
 require_once 'auth.php';
-$x=initauth(true);
 
 function getuser() {
 if(empty($_SESSION)) return [];
@@ -13,15 +12,19 @@ else return [
 	'rdept'=>$_SESSION['rdept'],
 	'ename'=>$_SESSION['ename'],
 	'eschool'=>$_SESSION['eschool'],
+	'url'=>$_SESSION['url'],
+	'detail'=>$_SESSION['detail'],
 	'registered'=>$_SESSION['registered'],
 	'lastlogin'=>$_SESSION['lastlogin'],
 	'lastloginip'=>$_SESSION['lastloginip']
 ];}
 
-if($x && empty($_GET) && empty($_POST)) {
+if(empty($_GET) && empty($_POST)) {
+	requireauth();
 	header('Content-Type: application/json');
 	exit(json_encode(getuser()));
 }
+denyauth();
 
 $email=$_POST['email']??NULL;
 if( !is_string($email) ||
@@ -42,7 +45,7 @@ if( $q->num_rows===0 || !(($q=$q->fetch_assoc())['enabled']) ||
 $db->autocommit(true);
 $db->query("UPDATE `club` SET `lastlogin`=NOW(),`lastloginip`=INET6_ATON('".
 	$db->escape_string($_SERVER['REMOTE_ADDR'])
-."')");
+."') WHERE `id`=".$q['id']);
 
 session_start();
 $_SESSION=$q;
