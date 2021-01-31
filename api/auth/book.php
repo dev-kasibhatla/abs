@@ -3,6 +3,9 @@ require_once 'auth.php';
 requireauth();
 
 //To-do: Input validation
+if(!empty($_POST['edesc']) && strlen($_POST['edesc'])>DESC_MAX)
+	throw new Exception("Event ".DESC_MAX,400);
+
 if(!is_array($_POST['slots']) || empty($_POST['slots']))
 	throw new Exception("At least one valid slot must be selected for the provided event",400);
 

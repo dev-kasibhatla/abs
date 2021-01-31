@@ -9,9 +9,9 @@ if(
 
 if(
 	!ctype_digit($_POST['phone']??null) ||
-	strlen($_POST['phone'])!==10
+	strlen($_POST['phone'])!==A_PHN_EXT
 )
-	throw new Exception("Phone must be exactly 10 digits",400);
+	throw new Exception(A_PH_ERR,400);
 
 if(
 	!is_string($_POST['name']??null) ||
@@ -36,9 +36,9 @@ if(
 
 if(
 	!ctype_digit($_POST['inputSchool']??null) ||
-	intval($_POST['inputSchool'])>127
+	intval($_POST['inputSchool'])>A_SCL_MAX
 )
-	throw new Exception("Representative school identifier is invalid",400);
+	throw new Exception(A_SC_ERR,400);
 
 if(
 	!filter_var($_POST['inputMentorEmail']??null,FILTER_VALIDATE_EMAIL) ||

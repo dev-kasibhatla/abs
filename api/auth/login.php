@@ -49,7 +49,7 @@ $_SESSION=$q;
 //$_SESSION['lastlogin']=date('Y-m-d H:i:s');
 //$_SESSION['lastloginip']=$_SERVER['REMOTE_ADDR'];
 
-// To-do: Remove useless data, add and validate login timestamp
+// To-do: ~Remove useless data~, add and validate login timestamp
 session_commit();
 
 exit(json_encode(getuser()));
