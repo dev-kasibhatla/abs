@@ -1,21 +1,31 @@
 function initialize() {
     getSchools();
+    $("#emailHelp").html("");
+    $("#errorMentor").html("");
+    $("#errorGroupDetails").html("");
+    $("#errorPassword").html("");
+
 }
+function jQFormSerializeArrToJson(formSerializeArr){
+    var jsonObj = {};
+    jQuery.map( formSerializeArr, function( n, i ) {
+        jsonObj[n.name] = n.value;
+    });
 
-
+    return jsonObj;
+}
 
 
 
 var request;
 var a  =  $("input");
 $(a).focus(function() {
-   $(this).css('border',"none"); 
+    $(this).css('border',"none");
 });
-
 function getSchools(){
-   
+
     request = $.ajax({
-        url: "../scripts/register-data.php",
+        url: "../api/getschools.php",
         type: "post",
         data: {event:"schoolData"}
     });
@@ -23,11 +33,12 @@ function getSchools(){
         // Log a message to the console
         console.log(response);
         if(response.length > 0){
-            var schools = JSON.parse(response);
+            var schools = response;
             var select = $("#inputSchool");
-            for(var i=0;i<schools.length;i++)
+            for(let i=0;i<schools.length;i++)
             {
-                $(select).append("<option value=\"i+1\">"+schools[i]+"</option>")
+                let id = schools[i]['id'];
+                $(select).append(`<option value=${id}>${schools[i]['name']}</option>`);
             }
 
         }else{
@@ -41,26 +52,24 @@ function getSchools(){
         // Log the error to the console
         console.error(
             "The following error occurred: "+
-            textStatus, errorThrown
+            jqXHR,textStatus, errorThrown
         );
-        
+
     });
 
 }
-
-
-
 $("#btnSubmit").click(function(){
     var abort=0
     // $("#login_message").hide();
     $("#emailHelp").html("");
+    $("#phoneHelp").html("");
     $("#errorMentor").html("");
     $("#errorGroupDetails").html("");
     $("#errorPassword").html("");
-    
 
-    
-	console.log("Submitting register data now");
+
+
+    console.log("Submitting register data now");
     // Prevent default posting of form - put here to work in case of errors
     event.preventDefault();
 
@@ -74,7 +83,7 @@ $("#btnSubmit").click(function(){
 
     // Let's select and cache all the fields
     Array.prototype.forEach.call($f,form => {
-        
+
         $inputs = $(form).find("input, select, button, textarea");
         const re = /^(([^<\*>\'(=)\[\]\\.,;:\s"0-9@]+(\.[^<>()\[\]\\.,;:\s"]+)*)|(".+"))$/;
         const repass = /^(([^<>\'(=)\[\]\\.,;:\s"]+(\.[^<>()\[\]\\.,;:\s"]+)*)|(".+"))$/;
@@ -101,7 +110,7 @@ $("#btnSubmit").click(function(){
                             abort = 1;
                         }
                     }
-                        
+
                     break;
                 }
                 case "password":
@@ -110,28 +119,29 @@ $("#btnSubmit").click(function(){
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\">Please enter a valid password with the appropriate characters</strong>");
                         $($inputs[i]).css('border',"2px solid red");
-                        abort = 1;  
+                        abort = 1;
                     }
-                    else if(($inputs[i].value.length < 8))
+                    if(($inputs[i].value.length < 8))
                     {
                         $("#errorPassword").html("<strong class=\"text-danger\"> Password has to have more than eight characters </strong>");
                         $($inputs[i]).css('border',"2px solid red");
                         abort = 1;
                     }
-                    break;     
-                }        
-                case "text":   
+                    if($inputs[i].value!==$("#inputPassword2").val())
+                    {
+                        $("#errorPassword").html("<strong class=\"text-danger\"> Both the passswords should match </strong>");
+                        $($inputs[i]).css('border',"2px solid red");
+                        abort = 1;
+                    }
+                    break;
+                }
+                case "text":
                 {
-                	if($($inputs[i]).parent().parent().attr('id')=="form2")    
+                    if($($inputs[i]).parent().parent().attr('id')=="form2")
                     {
 
-                        if(!repass.test($inputs[i].value))
-                        {
-                            $("#errorGroupDetails").html("<strong class=\"text-danger\">Please enter valid group details</strong>")  ;
-                            $($inputs[i]).css('border',"2px solid red");
-                             abort = 1;
-                        }
-                        else if(($inputs[i].value.length < 7))
+
+                        if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorGroupDetails").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
@@ -141,23 +151,18 @@ $("#btnSubmit").click(function(){
                     }
                     else
                     {
-                        if(!repass.test($inputs[i].value))
-                        {
-                            $("#errorMentor").html("<strong class=\"text-danger\">Please enter valid mentor details</strong>")  ;
-                            $($inputs[i]).css('border',"2px solid red");
-                            abort = 1;
-                        }
-                        else if(($inputs[i].value.length < 7))
+
+                        if(($inputs[i].value.length < 7))
                         {
                             var a = $("label[for='"+$($inputs[0]).attr('id')+"']").text()
                             $("#errorMentor").html("<strong class=\"text-danger\">"+ a +" should have atleast 7 characters  </strong>");
                             $($inputs[i]).css('border',"2px solid red");
                             abort = 1;
-                        }    
-                    }        
+                        }
+                    }
                     break;
                 }
-                case "tel":   
+                case "tel":
                 {
                     if($inputs[i].value.length<10)
                     {
@@ -170,10 +175,12 @@ $("#btnSubmit").click(function(){
             }
         }
     });
-    
-	
+
+
     // Serialize the data in the form
-    var serializedData = $('#form1,#form2,#form3,#form4').serializeArray();
+    let serializedArr = $('#form1,#form2,#form3,#form4').serializeArray();
+    console.log(serializedArr);
+    let serializedData = jQFormSerializeArrToJson(serializedArr);
     console.log(serializedData);
     // Let's disable the inputs for the duration of the Ajax request.
     // Disabled form elements will not be serialized.
@@ -181,34 +188,36 @@ $("#btnSubmit").click(function(){
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "../scripts/login-validate.php",
+        url: "../api/auth/reg-club.php",
         type: "post",
         data: serializedData
+
     });
 
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR){
         // Log a message to the console
         console.log(response);
-        if(response == 1){
+        if("success" in response){
             //user is logged in
-			//redirect to account page
-			window.location.replace("account.php");
+            //redirect to account page
+            window.location.href = "login.html";
 
-        }else{
+        }else if("error" in response){
             //user not logged in. Redirect to login
-			console.log("Invalid login");
-			$("#login_message").show();        }
+            alert(response['error']);
+        }
     });
 
+
     // Callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
+    request.fail(function (jqXHR, textStatus, error){
         // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-        
+
+        alert( JSON.parse(jqXHR.responseText)['error']);
+        window.location.reload();
+
+
     });
 
     // Callback handler that will be called regardless
