@@ -97,32 +97,21 @@ $("#btnSubmit").click(function(event){
     request = $.ajax({
         url: "../api/auth/login.php",
         type: "post",
-        data: JSON.stringify(serializedData)
+        data: serializedData
     });
 
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR){
         // Log a message to the console
         console.log(response);
-        if(response == 1){
-            //user is logged in
-			//redirect to account page
-			window.location.replace("account.php");
-
-        }else{
-            //user not logged in. Redirect to login
-			console.log("Invalid login");
-			$("#login_message").show();        }
+        //user is logged in
+        window.location.replace("account.html");
     });
 
     // Callback handler that will be called on failure
     request.fail(function (jqXHR, textStatus, errorThrown){
         // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-        
+        console.error(JSON.parse(jqXHR.responseText)['error']);
     });
 
     // Callback handler that will be called regardless

@@ -1,8 +1,35 @@
+var clubData;
+var dpData;
+
+function checkLogin() {
+    if(request)
+        request.abort();
+    request = $.ajax({
+        url:"../api/auth/login.php",
+        type:"get"
+    });
+    request.done(function (response, textstatus,jqXHR){
+        console.log(response);
+        clubData = response;
+        $("[name=clubName]").text(clubData['name']);
+        $("#inputClubName").val(clubData["name"]);
+
+    });
+    request.fail(function (jqXHR, textStatus, error){
+        // Log the error to the console
+        window.location.replace('login.html');
+
+    });
+
+}
+
+
 var simplemde;
 var converter;
 console.log("hello");
 $("document").ready(initialize);
 function initialize(){
+    checkLogin();
     $('.dummy').matchHeight();
     // further changes to editor / get its value using built in methods
     console.log("Loading simplemde");
@@ -11,9 +38,31 @@ function initialize(){
     simplemde.codemirror.options.readOnly = true;
     console.log("yo");
     converter = new showdown.Converter();
-    getClubData();
+//     getClubData();
 
 
+}
+
+
+function fileFunction()
+{
+    if(!isImage($("#inputDp")[0].files[0]))
+    {
+        alert("Only images can be uploaded as Profile Picture");
+        $("#inputDp").val('');
+    }
+    changedInputs['inputDp'] = 1;
+    let file = $("#inputDp")[0].files[0];
+    let reader = new FileReader();
+    reader.addEventListener("load", function () {
+        // convert image file to base64 string
+        dpData = reader.result;
+        $(".dp").attr('src', reader.result);
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 }
 //---------------------------------------------Input Enable/Disable----------------------------------------//
 function enableInputsInfo() {
@@ -63,102 +112,99 @@ function getClubData(){
     });
 }
 //---------------------------------------------Send Data----------------------------------------//
+
+
+
+function isImage(file){
+
+    return !!file.type.match('image.*');
+
+}
+
 var changedInputs = {};
 function validate() {
-    if($("#inputClubName").val()!=parsedResponse['clubName'] && $("#inputClubName").val().length>0 )
+    if($("#inputClubName").val()!=clubData['name'] && $("#inputClubName").val().length>0 )
     {
+        console.log("change1");
         changedInputs['inputClubName'] = 1;
     }
-    else
-    {
-        alert('Enter valid club Name');
-        return 0;
+    console.log("change1");
+    //todo: uncomment when msvamp starts sending data.
 
-    }
-    if($("#inputLink").val()!=parsedResponse['clubLink'] && $("#inputLink").val().length > 0 )
-    {
-        changedInputs['inputLink'] = 1;
-    }
-    else
-    {
-        alert('Enter valid link');
-        return 0;
+//     if($("#inputLink").val()!=clubData['link'] && $("#inputLink").val().length > 0 )
+//     {
+//         changedInputs['inputLink'] = 1;
+//     }
+//     if($("#inputTag").val()!=clubData['clubTag'] && $("#inputTag").val().length>0 )
+//     {
+//         changedInputs['inputTag'] = 1;
+//     }
 
-    }
-
-    if($("#inputTag").val()!=parsedResponse['clubTag'] && $("#inputTag").val().length>0 )
+    if($("#inputRepName").val()!=clubData['ename'] && $("#inputRepName").val().length>0 )
     {
-        changedInputs['inputTag'] = 1;
-    }
-    else
-    {
-        alert('Enter valid tag');
-        return 0;
-
-    }
-    if($("#inputRepName").val()!=parsedResponse['clubRepName'] && $("#inputRepName").val().length>0 )
-    {
+        console.log("change2");
         changedInputs['inputRepName'] = 1;
     }
-    else
-    {
-        alert('Enter valid Representative Name');
-        return 0;
 
-    }
-    if($("#inputRepEmail").val()!==parsedResponse['clubRepName'] && $("#inputRepName").val().length>0 )
+    if($("#inputRepEmail").val()!==clubData['email'] && $("#inputRepName").val().length>0 )
     {
+        console.log("change3");
         changedInputs['inputRepEmail'] = 1;
 
     }
+//     if(simplemde.value()!==clubData['description'] && simplemde.value().length>0 )
+//     {
+//         changedInputs['clubDescription'] = 1;
+//     }
+
+    if(Object.keys(changedInputs).length)
+        return 1;
     else
     {
-        alert('Enter validate rep email');
+        alert("No changes");
         return 0;
     }
-    if(simplemde.value()!==parsedResponse['clubDescription'] && simplemde.value().length>0 )
-    {
-        changedInputs['clubDescription'] = 1;
-    }
-    else
-    {
-        alert("enter valid description");
-        return 0;
-    }
-    return 1;
+
 
 }
 function sendData(){
-    if(validate()==1)
+    console.log("in1");
+    if(validate()==1 )
     {
+        console.log("in2");
         let finalChanges={};
-        if(changedInputs.length>0){
+        if(Object.keys(changedInputs).length>0){
             for(let key in changedInputs)
             {
-                if(key!=='clubDescription')
+                console.log("in3");
+                if(key ==='inputDp')
+                    finalChanges[`${key}`] =  dpData;
+                else if(key!=='clubDescription')
                     finalChanges[`${key}`] = $(`#${key}`).val();
                 else
                     finalChanges[`${key}`] = converter.makeHtml(simplemde.value());
                 console.log({finalChanges});
             }
             let event = 'dataChange';
+            let data = JSON.stringify(finalChanges);
+            console.log(data);
             if(request)
                 request.abort();
             request = $.ajax({
-                url:'../abs/scripts/profile.php',
+                url:'../auth/api/login.php',
                 type:'post',
-                data:{event: event,data:JSON.stringify(finalChanges)}
+                data:{event: event,data:data}
 
             });
             request.done(function (response,textstatus,jqXHR ) {
-                if(response==0)
-                    console.error("Some error while communicating to servers");
-                else
-                {
-                    //todo After Mandu starts sending data add response filtering here
-                    console.log("sucess");
-                }
+                alert("Your data has been saved");
             });
+            request.fail(function(jqXHR,textStatustatus,error){
+                alert(JSON.parse(jqXHR.responseText)['error']);
+            });
+
         }
     }
 }
+
+$("#btnSubmit").click(sendData);
