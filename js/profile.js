@@ -18,6 +18,7 @@ function checkLogin() {
             simplemde.value(clubData['detail']);
         $("#inputRepName").val(clubData['ename']);
         $("#inputRepEmail").val(clubData['email']);
+        $("#inputTag").val(clubData['tagline']);
 
     });
     request.fail(function (jqXHR, textStatus, error){
