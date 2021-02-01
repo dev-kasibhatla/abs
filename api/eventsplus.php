@@ -1,13 +1,22 @@
 <?php
-require_once 'auth.php';
-requireauth();
+if(($sdate=date_create_from_format("!Y#n#j",$_POST['sdate']??null))===FALSE)
+	throw new Exception("Invalid start date provided",400);
+if(!ctype_digit($limit=$_POST['limit']??null) || $limit>30)
+	$limit=10;
 require_once 'slots.php';
+if(!ctype_digit($sslot=$_POST['sslot']??null) || $sslot<SL_MIN || $sslot>SL_MAX)
+	throw new Exception("Invalid start slot provided",400);
 
+$sdatef=$sdate->format("Y-m-d");
 $db=my_sqli_connect();
-if(!$p=$db->query("SELECT `id`,`name`,`detail`,`link`
-	FROM `event`
-	WHERE `club`=".$db->escape_string($_SESSION['id'])
-)) throw new Exception(SL_ERR,500);
+
+if(!$p=$db->query("SELECT `event`.`id` AS `id`, `event`.`name` AS `name`, `event`.`detail` AS `detail`, `event`.`link` AS `link`
+	FROM `event` RIGHT JOIN `booking` ON `event`.`id`=`booking`.`event` WHERE
+	(`booking`.`bdate`>='".$db->escape_string($sdatef)."' AND `booking`.`tslot`>=$sslot) OR
+	`booking`.`bdate`>'".$db->escape_string($sdatef)."'
+	LIMIT $limit"
+))
+	throw new Exception(SL_ERR,500);
 $p=$p->fetch_all(MYSQLI_ASSOC);
 
 $result=[];
