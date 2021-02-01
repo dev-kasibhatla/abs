@@ -15,7 +15,7 @@ function checkLogin() {
         $("#inputClubName").val(clubData["name"]);
         $("#inputLink").val(clubData['url']);
         if(clubData['detail']!=null)
-        simplemde.value(clubData['detail']);    
+            simplemde.value(clubData['detail']);
 
     });
     request.fail(function (jqXHR, textStatus, error){
@@ -40,7 +40,7 @@ function initialize(){
     console.log(simplemde);
 
     simplemde.codemirror.options.readOnly = true;
-    
+
     console.log("yo");
     converter = new showdown.Converter();
 //     getClubData();
@@ -148,7 +148,7 @@ function validate() {
         changedInputs['inputClubName'] = 1;
     }
     //todo: comment nextline when msvamp starts sending tagdata data.
-    
+
     if($("#inputLink").val()!=clubData['url'] && $("#inputLink").val().length > 0 )
     {
         changedInputs['inputLink'] = 1;
@@ -217,29 +217,29 @@ function sendData(){
                 {
                     finalChanges['tagline'] = finalChanges['inputTag'];
                     delete finalChanges['inputTag'];
-                    
+
                 }
                 else if(key=='inputRepName')
                 {
                     finalChanges['ename'] = finalChanges['inputRepName'];
                     delete finalChanges['inputLink'];
-                    
+
                 }
                 else if(key=='inputClubName')
                 {
                     finalChanges['name'] = finalChanges['inputClubName'];
                     delete finalChanges['inputLink'];
-                    
+
                 }
                 else if(key=='inputRepEmail')
                 {
                     finalChanges['email'] = finalChanges['inputRepEmail'];
                     delete finalChanges['inputLink'];
-                    
+
                 }
                 console.log(finalChanges);
             }
-            
+
 
 
             let event = 'dataChange';
@@ -264,8 +264,25 @@ function sendData(){
     }
 }
 
-$("#btnSubmit").click(function(){
-//     this.preventDefault();
+$("#btnSubmit").click(function(event){
+    event.preventDefault();
     sendData();
 
 });
+
+function logout(){
+    if(request)
+        request.abort();
+    request = $.ajax({
+        url:'../api/auth/logout.php',
+        type:'get'
+
+    });
+    request.done(function (response,textstatus,jqXHR ) {
+        location = location;
+    });
+    request.fail(function(jqXHR,textStatustatus,error){
+        console.log((jqXHR.responseText));
+        alert("Login failed");
+    });
+}
