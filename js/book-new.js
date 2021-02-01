@@ -96,10 +96,15 @@ Date.prototype.addDays = function(days) {
     return date;
 }
 function getSlotKey(z){
-    return z.getFullYear().toString()  + "-" + (((z.getMonth() + 1)).toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-    })).toString() + "-" +z.getDate().toString() ;
+	return z.getFullYear().toString() + "-" +
+	(z.getMonth() + 1).toLocaleString('en-US', {
+		minimumIntegerDigits: 2,
+		useGrouping: false
+	}) + "-" +
+	z.getDate().toLocaleString('en-US', {
+		minimumIntegerDigits: 2,
+		useGrouping: false
+	})
 }
 function getDate() {
     date = new Date($("#inputDate").val());
