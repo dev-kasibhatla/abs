@@ -2,7 +2,6 @@
 /* CSS Document */
 * {box-sizing: border-box;}
 
-
 a {
 	color: blue;
 	text-decoration: none;
@@ -13,7 +12,6 @@ a {
 .top-div{
 	margin-left: 5%;
 	margin-top: 7%;
-	margin-left: 5%;
 	width: 90%;
 	/* background-color: red; */
 }
@@ -21,7 +19,11 @@ a {
 .cal-div{
 	height: 150px;
 	width: 100%;
-	background-color: blue;
+	/*background-color: blue;*/
+	overflow: hidden;
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, .15);
+	backdrop-filter: blur(5px);
 }
 
 .flat-glass:hover{
@@ -377,8 +379,10 @@ a {
 @media screen and (max-width: 1000px) {
   
 }
-@media screen and (max-height: 500px){
-
+@media screen and (max-width: 500px){
+	.cal-div{
+		margin-top: 50px;
+	}
 }
 @media screen and (max-width: 768px) {
   .dp-text{
@@ -420,6 +424,10 @@ a {
 	.chat-input {
 		height: auto;	
 	}
+
+	.cal-div{
+		margin-bottom: 20px;
+	}
 }
 /* 
 @media screen and (max-width: 800px) {
@@ -427,3 +435,8 @@ a {
 		background-size: 55%;
 	}
 } */
+
+::-webkit-scrollbar {
+	width: 0;
+	background: transparent; /* make scrollbar transparent */
+}
