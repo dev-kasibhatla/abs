@@ -13,6 +13,7 @@ else return [
 	'ename'=>$_SESSION['ename'],
 	'eschool'=>$_SESSION['eschool'],
 	'url'=>$_SESSION['url'],
+	'tagline'=>$_SESSION['tagline'],
 	'detail'=>$_SESSION['detail'],
 	'registered'=>$_SESSION['registered'],
 	'lastlogin'=>$_SESSION['lastlogin'],
