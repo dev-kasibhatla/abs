@@ -102,7 +102,7 @@ function initialize() {
     //length should be Math.floor(range*1.5)
 // 		console.log([0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,0,0,0,1,0,0,1,1].length);
     tinySchedule();
-    calendar.render();
+// 		calendar.render();
 
     calDiv.addEventListener('calendarSelect',
         function(){
