@@ -1,15 +1,26 @@
 var scale = 'scale(0.90)';
-
-//start
-function initialize(){
-	$(document).ready(function(){
-        $("#login_message").hide();
+function jQFormSerializeArrToJson(formSerializeArr){
+    var jsonObj = {};
+    jQuery.map( formSerializeArr, function( n, i ) {
+        jsonObj[n.name] = n.value;
     });
+
+    return jsonObj;
+}
+//start
+$(document).ready(initialize);
+function initialize(){
+
+        $("#login_message").hide();
+        $("#errorDiv").html("");
+
 }
 
 var a  =  $("input");
 $(a).focus(function() {
-   $(this).css('border',"none"); 
+   $(this).css('border',"none");
+   $("#errorDiv").html("");
+   $("#emailHelp").html("");
 });
 
 //jquery code to submit login form:
@@ -49,7 +60,7 @@ $("#btnSubmit").click(function(event){
         {
             const repass = /^(([^<>\'(=)\[\]\\.,;:\s"]+(\.[^<>()\[\]\\.,;:\s"]+)*)|(".+"))$/;
             if(!repass.test($(e).value)){
-                $("#errorDiv").html("<strong class=\"text-danger\">The password is wrong</strong>");
+                $("#errorDiv").html("<strong class=\"text-danger\">The password doesnt meet requirements </strong>");
                 $(e).css('border',"2px solid red");
                 abort = 1;
             }
@@ -74,15 +85,17 @@ $("#btnSubmit").click(function(event){
     return;
 
     // Serialize the data in the form
-    var serializedData = $form.serializeArray();
-
+    var serializedArr = $form.serializeArray();
+    console.log(serializedArr);
+    let serializedData = jQFormSerializeArrToJson(serializedArr);
+    console.log(serializedData);
     // Let's disable the inputs for the duration of the Ajax request.
     // Disabled form elements will not be serialized.
     $inputs.prop("disabled", true);
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "../scripts/login-validate.php",
+        url: "../api/auth/login.php",
         type: "post",
         data: serializedData
     });
@@ -91,25 +104,14 @@ $("#btnSubmit").click(function(event){
     request.done(function (response, textStatus, jqXHR){
         // Log a message to the console
         console.log(response);
-        if(response == 1){
-            //user is logged in
-			//redirect to account page
-			window.location.replace("account.php");
-
-        }else{
-            //user not logged in. Redirect to login
-			console.log("Invalid login");
-			$("#login_message").show();        }
+        //user is logged in
+        window.location.replace("account.html");
     });
 
     // Callback handler that will be called on failure
     request.fail(function (jqXHR, textStatus, errorThrown){
         // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-        
+        console.error(JSON.parse(jqXHR.responseText)['error']);
     });
 
     // Callback handler that will be called regardless

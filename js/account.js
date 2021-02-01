@@ -2,8 +2,34 @@ var scale = 'scale(0.90)';
 var globalAccountData;
 var deleteTime;
 //start
+
+
+function checkLogin() {
+    if(request)
+        request.abort();
+    request = $.ajax({
+        url:"../api/auth/login.php",
+        type:"get"
+    });
+    request.done(function (response, textstatus,jqXHR){
+        console.log(JSON.parse(jqXHR.responseText));
+        if("success" in response) {
+           
+           console.log("user is logged in");
+        }
+
+    });
+	request.fail(function(jqXHR, textstatus,errorThrown){
+    	console.log(JSON.parse(jqXHR.responseText));
+		console.log("User not logged in ");
+		window.location.replace('login.html');
+    });
+}
+
+
 function initialize(){
 	hideStuff(true);
+	checkLogin();
 	$('.modal').hide();
 	$(document).ready(function(){
 		//hide everything
