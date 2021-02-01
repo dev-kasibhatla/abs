@@ -112,7 +112,7 @@ class Calendar{
                 if(this.bArr[i] === 1) showBadge=true;
             }catch(e){}
             let e = this.getElement(temp.date,showBadge,this.geth(65).toString()+"px", elementWidth.toString()+"px",
-                this.geth(32).toString()+"px");
+                this.geth(32).toString()+"px", dates[i]);
             e.addEventListener("click",function (){
                 calendar.selectDate(i);
                 calendar.parent.dispatchEvent(event);
@@ -200,15 +200,22 @@ class Calendar{
      * @param height
      * @param width
      * @param fontSize
+     * @param calTime
      * @returns {HTMLDivElement}
      */
-    getElement (text, showBadge,height, width, fontSize) {
+    getElement (text, showBadge,height, width, fontSize, calTime) {
         let e = document.createElement("div");
         e.classList.add("cal-element");
         e.style.height = height;
         e.style.fontSize = fontSize;
         e.innerHTML = text;
         e.style.width = width;
+        let f = document.createElement("div");
+        try{
+            f.innerHTML = calTime.month;
+            f.style.fontSize = "15px";
+            e.appendChild(f);
+        }catch (e){}
         if(showBadge){
            /* let b = document.createElement("div");
             b.classList.add("cal-badge");
