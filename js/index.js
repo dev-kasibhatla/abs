@@ -109,6 +109,22 @@ function initialize() {
             //todo: this is how you get the date
             //I am using my own calendartime object, read the structure in console
             console.log(calendar.selectionDate);
+            if(request)
+                request.abort();
+
+            request = $.ajax({
+                url:"../api/eventsplus.php",
+                type:"post",
+                data:{sdate:calendar.selectionDate['parseString'],sslot:0,limit:16}
+            });
+            request.done(function (response, textstatus,jqXHR){
+                console.log(response);
+
+            });
+            request.fail(function (jqXHR, textStatus, error){
+
+            });
+
 
         }
     );
