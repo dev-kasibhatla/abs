@@ -283,6 +283,6 @@ function logout(){
     });
     request.fail(function(jqXHR,textStatustatus,error){
         console.log((jqXHR.responseText));
-        alert("Login failed");
+        alert("Logout failed");
     });
 }
