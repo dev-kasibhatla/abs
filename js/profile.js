@@ -63,6 +63,19 @@ function fileFunction()
     if (file) {
         reader.readAsDataURL(file);
     }
+    let event = "dpChange"
+    request = $.ajax( {
+        url:"../auth/api/profile.php",
+        type:'post',
+        data:{event:event,data:dpData}
+    });
+    request.done(function (response,textstatus ,jqXHR){
+        console.log(response);
+    });
+    request.fail(function(jqXHR,textStatustatus,error){
+        alert(JSON.parse(jqXHR.responseText)['error']);
+    });
+
 }
 //---------------------------------------------Input Enable/Disable----------------------------------------//
 function enableInputsInfo() {
@@ -110,6 +123,7 @@ function getClubData(){
 
         }
     });
+
 }
 //---------------------------------------------Send Data----------------------------------------//
 
@@ -128,7 +142,6 @@ function validate() {
         console.log("change1");
         changedInputs['inputClubName'] = 1;
     }
-    console.log("change1");
     //todo: uncomment when msvamp starts sending data.
 
 //     if($("#inputLink").val()!=clubData['link'] && $("#inputLink").val().length > 0 )
@@ -186,12 +199,12 @@ function sendData(){
                 console.log({finalChanges});
             }
             let event = 'dataChange';
-            let data = JSON.stringify(finalChanges);
+            let data = finalChanges;
             console.log(data);
             if(request)
                 request.abort();
             request = $.ajax({
-                url:'../auth/api/login.php',
+                url:'../auth/api/profile.php',
                 type:'post',
                 data:{event: event,data:data}
 

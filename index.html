@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Auditorium - Home</title>
@@ -8,10 +8,10 @@
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link href="css/login.css" rel="stylesheet" type="text/css">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
+	<link href="css/calendar.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark2 shadow-sm nav">
 		<a class="navbar-brand" href="#">Auditorium Booking System</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -52,17 +52,17 @@
 			  </form> -->
 		</div>
 	  </nav>
-
+	  <div class="div-20"></div>
+	  <div class="div-20"></div>
 	  <section>
 		  <div class="container-fluid top-div">
 			  <div class="row">
-				  <div class="col-md-6">
-					<div class="cal-div round">
-
+				  <div class="col-md-6 padding-0" style="overflow: hidden">
+					<div class="cal-div round align-middle margin-5" id="divCal">
 					</div>
 				  </div>
-				  <div class="col-md-6">
-					<div class="flat-glass round align-items-center" style="height: 150px;">
+				  <div class="col-md-6 padding-0">
+					<div class="flat-glass round align-items-center margin-5" style="height: 150px;">
 						<div class="row">
 							<h4>Next event</h4>
 						</div>
@@ -89,7 +89,7 @@
 			  <div>
 				  <div class="container-fluid">
 					  <div class="row" id = "upcomingDiv">
-						  <div class="col-md-4 flat-glass margin-5">
+						 <!-- <div class="col-md-4 flat-glass margin-5">
 							<div>
 								<h5>%event_title</h5>
 							</div>
@@ -99,7 +99,7 @@
 							<div>
 								%slot
 							</div>
-						  </div>
+						  </div>-->
 
 						  <div class="col-md-4 flat-glass margin-5">
 							<div>
@@ -127,6 +127,29 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
+	<script src="js/calendar.js"></script>
+
+	<script>
+		$('.dummy').matchHeight();
+
+		//todo: calendar starts
+		let calDiv = document.getElementById("divCal");
+		let calendar = new Calendar(calDiv, new Date().getTime(),20,"Pick a date");
+		//todo: to get date range
+		console.log(calendar.getLimits());
+		//todo: supply a badge array
+		//length should be Math.floor(range*1.5)
+		console.log([0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,0,0,0,1,0,0,1,1].length);
+		calendar.setBadges([0,0,0,0,0,0,0,0,1,1.0,0,0,1,1,0,0,0,0,0,1,1,1,0,0,0,1,0,0,1,1]);
+		calendar.render();
+		calDiv.addEventListener('calendarSelect',
+				function(){
+					//todo: this is how you get the date
+					//I am using my own calendartime object, read the structure in console
+					console.log(calendar.selectionDate);
+				}
+		);
+	</script>
 
 	<script src="js/index.js"></script>
 
