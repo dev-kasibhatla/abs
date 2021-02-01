@@ -96,6 +96,7 @@ function initialize() {
     //todo: calendar starts
     let calDiv = document.getElementById("divCal");
     calendar = new Calendar(calDiv, new Date().getTime(),20,"Pick a date");
+    calendar.render();
     //todo: to get date range
     console.log(calendar.getLimits());
     //todo: supply a badge array
