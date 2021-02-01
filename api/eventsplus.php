@@ -46,5 +46,6 @@ foreach($p as $r) {
 	}
 }
 
+
 header('Content-Type: application/json');
-exit(json_encode($result));
+exit(json_encode(array_unique($result,SORT_REGULAR)));
