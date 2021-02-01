@@ -10,7 +10,7 @@ $sdatef=$sdate->format("Y-m-d");
 $edatef=$edate->format("Y-m-d");
 
 $db=my_sqli_connect();
-$q=$db->query("SELECT `bdate`,`tslot`,`approved` FROM `booking`
+$q=$db->query("SELECT `bdate` FROM `booking`
 	WHERE `bdate`>='".$db->escape_string($sdatef)."'
 	AND `bdate`<='".$db->escape_string($edatef)."'
 ");
@@ -24,17 +24,11 @@ $q=$q->fetch_all(MYSQLI_ASSOC);
 $result=[];
 while($sdate<=$edate) {
 	$sdatef=$sdate->format("Y-m-d");
-	$result[$sdatef]=array_fill(SL_MIN,SL_MAX+1,1);
+	$result[$sdatef]=false;
 	array_filter($q,function($v) use(&$result,$sdatef){
-		if($v['bdate']===$sdatef) {
-			if($result[$sdatef][$v['tslot']]===-1)
-				return false;
-			if($v['approved']==1)
-				$result[$sdatef][$v['tslot']]=0;
-			elseif($v['approved']==0)
-				$result[$sdatef][$v['tslot']]=-1;
-			return false;
-		}
+		if($v['bdate']===$sdatef)
+			return !($result[$sdatef]=true);
+		return true;
 	},0);
 	$sdate->add(new DateInterval("P1D"));
 }
