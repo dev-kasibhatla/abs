@@ -75,13 +75,16 @@ $_POST['eschool']=$_POST['inputSchool']??null;		unset($_POST['inputSchool']);
 $_POST=array_filter(array_diff_key($_POST,array_flip([
 	'name','url','phone','ename','eschool','rname','remail','rdept','detail'
 ])),function($v){return !empty($v);});
+$newsess=array_replace($_SESSION,$_POST);
 
 $db=my_sqli_connect();
-array_walk($_POST,function(&$v,$k) use(&$db){$v="$k='".$db->escape_string($v)."'";});
+array_walk($_POST,function(&$v,$k) use(&$db){$v="`$k`='".$db->escape_string($v)."'";});
 
 $q=$db->query("UPDATE `club` SET ".implode(',',$_POST)." WHERE `id`=".$db->escape_string($_SESSION['id']));
 
-if(!$q || $db->affected_rows!==1 || !$db->commit())
+if(!$q /*|| $db->affected_rows!==1*/ || !$db->commit())
 	throw new Exception("Your account was not updated",500);
 
+$_SESSION=$newsess;
+session_commit();
 sexit('Your account has been successfully updated.');

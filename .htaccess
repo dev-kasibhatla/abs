@@ -28,11 +28,17 @@ ErrorDocument 503 "Service Unavailable"
 ErrorDocument 504 "Gateway Timeout"
 ErrorDocument 505 "HTTP Version Not Supported"
 
+# Server options
+ExpiresActive off
+Header unset Server
+
 # PHP: General options
 php_flag html_errors off
 php_flag log_errors off
 php_flag display_errors on
 php_flag ignore_user_abort on
+php_value session.cookie_lifetime 60000
+php_value session.gc_maxlifetime 120000
 php_value max_execution_time 60
 
 # PHP: Include the includes
