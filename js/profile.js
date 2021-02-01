@@ -16,6 +16,8 @@ function checkLogin() {
         $("#inputLink").val(clubData['url']);
         if(clubData['detail']!=null)
             simplemde.value(clubData['detail']);
+        $("#inputRepName").val(clubData['ename']);
+        $("#inputRepEmail").val(clubData['email']);
 
     });
     request.fail(function (jqXHR, textStatus, error){
@@ -99,37 +101,37 @@ $("#btnEditClubName").click(function () {
 //---------------------------------------------Get Data and Fill Inputs----------------------------------------//
 var request;
 var parsedResponse;
-function getClubData(){
-    let event = 'getClubData';
-    if(request)
-        request.abort();
-    request = $.ajax( {
-        url:"../abs/scripts/profile.php",
-        type:'post',
-        data:{'event':event}
-    });
-    request.done(function (response,textstatus ,jqXHR){
-        console.log(response);
-        if(response==0)
-        {
-            console.error("Some error occurred while communicatining wiht the servers");
-        }
-        else
-        {
-            console.log('got a response');
-            parsedResponse = JSON.parse(response);
-            $("#inputClubName").val(parsedResponse['clubName']);
-            $("#inputLink").val(parsedResponse['clubLink']);
-            $("#inputTag").val(parsedResponse['clubTag']);
-            $("#inputRepName").val(parsedResponse['clubRepName']);
-            $("#inputRepEmail").val(parsedResponse['clubRepEmail']);
-            simplemde.value(parsedResponse['clubDescription']);
-            simplemde.togglePreview();
+// function getClubData(){
+//     let event = 'getClubData';
+//     if(request)
+//         request.abort();
+//     request = $.ajax( {
+//         url:"../abs/scripts/profile.php",
+//         type:'post',
+//         data:{'event':event}
+//     });
+//     request.done(function (response,textstatus ,jqXHR){
+//         console.log(response);
+//         if(response==0)
+//         {
+//             console.error("Some error occurred while communicatining wiht the servers");
+//         }
+//         else
+//         {
+//             console.log('got a response');
+//             parsedResponse = JSON.parse(response);
+//             $("#inputClubName").val(parsedResponse['clubName']);
+//             $("#inputLink").val(parsedResponse['clubLink']);
+//             $("#inputTag").val(parsedResponse['clubTag']);
+//             $("#inputRepName").val(parsedResponse['clubRepName']);
+//             $("#inputRepEmail").val(parsedResponse['clubRepEmail']);
+//             simplemde.value(parsedResponse['clubDescription']);
+//             simplemde.togglePreview();
 
-        }
-    });
+//         }
+//     });
 
-}
+// }
 //---------------------------------------------Send Data----------------------------------------//
 
 
@@ -240,8 +242,6 @@ function sendData(){
                 console.log(finalChanges);
             }
 
-
-
             let event = 'dataChange';
             let data = finalChanges;
             console.log(data);
@@ -283,6 +283,6 @@ function logout(){
     });
     request.fail(function(jqXHR,textStatustatus,error){
         console.log((jqXHR.responseText));
-        alert("Logout failed");
+        alert("Login failed");
     });
 }
