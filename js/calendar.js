@@ -165,8 +165,9 @@ class Calendar{
         bCalParent.scrollLeft +=( (elementMargin+elementWidth)*this.range/2 + Math.floor(offset/2));
 
         //select initial
-        this.selectionChild = this.dateChildren[Math.floor(this.range/2)];
-        this.selectionChild.classList.add("selected-cal-element");
+        // this.selectionChild = this.dateChildren[Math.floor(this.range/2)];
+        // this.selectionChild.classList.add("selected-cal-element");
+        this.selectDate(Math.floor(this.range/2));
     }
 
     selectDate(i) {
